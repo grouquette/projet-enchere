@@ -1,5 +1,6 @@
 package fr.eni.projet_enchere.bo;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class ArticleVendu {
@@ -8,20 +9,20 @@ public class ArticleVendu {
 	private String nomArticle;
 	private String description; 
 	private int dateDebutEncheres;
-	private int dateFinEncheres;
+	private LocalDateTime dateFinEncheres;
 	private int miseAPrix;
-	private int priVente;
+	private int prixVente;
 	private String etatVente;
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, int dateDebutEncheres,
-			int dateFinEncheres, int miseAPrix, int priVente, String etatVente) {
+			LocalDateTime dateFinEncheres, int miseAPrix, int priVente, String etatVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
-		this.priVente = priVente;
+		this.prixVente = priVente;
 		this.etatVente = etatVente;
 	}
 	
@@ -57,11 +58,11 @@ public class ArticleVendu {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 	
-	public int getDateFinEncheres() {
+	public LocalDateTime getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 	
-	public void setDateFinEncheres(int dateFinEncheres) {
+	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 	
@@ -73,12 +74,12 @@ public class ArticleVendu {
 		this.miseAPrix = miseAPrix;
 	}
 	
-	public int getPriVente() {
-		return priVente;
+	public int getPrixVente() {
+		return prixVente;
 	}
 	
-	public void setPriVente(int priVente) {
-		this.priVente = priVente;
+	public void setPrixVente(int priVente) {
+		this.prixVente = priVente;
 	}
 	
 	public String getEtatVente() {
@@ -93,12 +94,12 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", priVente=" + priVente + ", etatVente=" + etatVente + "]";
+				+ miseAPrix + ", priVente=" + prixVente + ", etatVente=" + etatVente + "]";
 	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(dateDebutEncheres, dateFinEncheres, description, etatVente, miseAPrix, noArticle,
-				nomArticle, priVente);
+				nomArticle, prixVente);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -112,9 +113,6 @@ public class ArticleVendu {
 		return dateDebutEncheres == other.dateDebutEncheres && dateFinEncheres == other.dateFinEncheres
 				&& Objects.equals(description, other.description) && Objects.equals(etatVente, other.etatVente)
 				&& miseAPrix == other.miseAPrix && noArticle == other.noArticle
-				&& Objects.equals(nomArticle, other.nomArticle) && priVente == other.priVente;
+				&& Objects.equals(nomArticle, other.nomArticle) && prixVente == other.prixVente;
 	}
-	
-	
-	
 }

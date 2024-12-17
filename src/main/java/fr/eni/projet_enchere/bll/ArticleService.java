@@ -6,7 +6,7 @@ import fr.eni.projet_enchere.bo.ArticleVendu;
 
 public interface ArticleService {
 
-	ArticleVendu creerArticle();
-	
+	void remove(ArticleVendu articleVendu);
+	List<ArticleVendu> add(ArticleVendu articleAVendre);
 	
 }
