@@ -20,7 +20,7 @@ public class Utilisateur {
 	
 	
 	public Utilisateur() {
-		this.setCredit(100);
+		this.setCredit(0);
 		this.setAdministrateur(false);
 	}
 
