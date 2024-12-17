@@ -6,6 +6,8 @@ import fr.eni.projet_enchere.bo.Utilisateur;
 
 public interface UtilisateurService {
 	
+	void creerUtilisateur(Utilisateur utilisateur);
+	
 	Enchere encherir(Utilisateur utilisateur, ArticleVendu articleAEncherir);
 	ArticleVendu mettreEnVente(ArticleVendu article);
 }

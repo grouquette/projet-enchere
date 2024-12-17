@@ -9,16 +9,23 @@ public class Utilisateur {
 	private String nom;
 	private String prenom;
 	private String email;
-	private int telephone;
+	private String telephone;
 	private String rue;
-	private short codePostal;
+	private String codePostal;
 	private String ville;
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
 	
-	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone,
-			String rue, short codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+	
+	
+	public Utilisateur() {
+		this.setCredit(100);
+		this.setAdministrateur(false);
+	}
+
+	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -73,11 +80,11 @@ public class Utilisateur {
 		this.email = email;
 	}
 
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
@@ -89,11 +96,11 @@ public class Utilisateur {
 		this.rue = rue;
 	}
 
-	public short getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(short codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
