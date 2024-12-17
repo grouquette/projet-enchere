@@ -35,7 +35,7 @@ CREATE TABLE UTILISATEURS (
     pseudo           VARCHAR(30) NOT NULL,
     nom              VARCHAR(30) NOT NULL,
     prenom           VARCHAR(30) NOT NULL,
-    email            VARCHAR(20) NOT NULL,
+    email            VARCHAR(30) NOT NULL,
     telephone        VARCHAR(15),
     rue              VARCHAR(30) NOT NULL,
     code_postal      VARCHAR(10) NOT NULL,
@@ -50,7 +50,7 @@ ALTER TABLE UTILISATEURS ADD constraint utilisateur_pk PRIMARY KEY (no_utilisate
 
 CREATE TABLE ARTICLES_VENDUS (
     no_article                    INTEGER IDENTITY(1,1) NOT NULL,
-    nom_article                   VARCHAR(30) NOT NULL,
+    nom_article                   VARCHAR(50) NOT NULL,
     description                   VARCHAR(300) NOT NULL,
 	date_debut_encheres           DATE NOT NULL,
     date_fin_encheres             DATE NOT NULL,

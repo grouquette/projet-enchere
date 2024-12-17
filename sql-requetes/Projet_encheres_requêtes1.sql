@@ -2,6 +2,8 @@
 
 DROP TABLE RETRAITS;
 
+DROP TABLE ROLES;
+
 DROP TABLE ENCHERES;
 
 DROP TABLE ARTICLES_VENDUS
@@ -26,7 +28,19 @@ INSERT INTO [ROLES] ([ROLE],[IS_ADMIN]) VALUES ('ROLE_ADMIN',1);
 -- Email unique pour ne pas avoir plusieurs utilisateurs identiques--
 ALTER TABLE UTILISATEURS ADD CONSTRAINT UN_mot_de_passe UNIQUE (email);
 
+-- Email de la bonne forme
 
+ALTER TABLE UTILISATEURS ADD CONSTRAINT CK_email CHECK (email like '%@%.%');
+
+-- code postal du bon format--
+
+ALTER TABLE UTILISATEURS ADD CONSTRAINT CK_code_postal CHECK(code_postal BETWEEN '01000' AND '95999');
+
+-- Prix initial ne doit pas être inférieur à 0 et prix de vente ne doit pas être inférieur à prix initial --
+
+ALTER TABLE ARTICLES_VENDUS ADD CONSTRAINT CK_prix_initial CHECK(prix_initial >= 0);
+
+ALTER TABLE ARTICLES_VENDUS ADD CONSTRAINT CK_prix_vente CHECK(prix_vente >= prix_initial);
 
 
 -- Insertion de données dans utilisateurs--
@@ -43,3 +57,22 @@ VALUES
     ('cdupuis', 'Dupuis', 'Charles', 'charles.dupuis@example.com', '0623456789', '30 rue Lafayette', '59000', 'Lille', '{bcrypt}$2y$10$baKiSoOwM/YQ8e1ucdl3fOFPpWr3JLOksGYcY4J.3ayzDOPS39RMq', 400.00, 1)/*Mot de Passe = CharlesPass*/,
     ('abrown', 'Brown', 'Alice', 'alice.brown@example.com', '0676543210', '45 avenue Carnot', '21000', 'Dijon', '{bcrypt}$2y$10$qZA6p/y3klGTcu9GyW8PeueiT.NbPaIQV0WtA37MoTgXQGrsOaxVK', 180.00, 0)/*Mot de Passe = BrownAlice*/,
     ('tlee', 'Lee', 'Tom', 'tom.lee@example.com', '0612340987', '78 allée des Pins', '06000', 'Nice', '{bcrypt}$2y$10$bTxvz/x2gyD35PYSoBc2vuFGU550UbaD.IieQQMObfY9E49Bz1hjq', 120.00, 0)/*Mot de Passe = Tom2023$*/;
+
+
+-- Insertion de données dans categories--
+
+INSERT INTO Categories (libelle)
+VALUES
+('informatique'),
+('jouets'),
+('outils'),
+('téléphones');
+
+-- Insertion de données dans categories--
+
+INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)
+VALUES
+('Ordinateur Acer Aspire 1 A115-32-C3AK', 'Ordinateur portable de marque Acer 15,6 pouces gris. 128 Go de mémoire, processeur Intel Celeron B830 4Go de mémoire vive Windows 11 S', GETDATE(), GETDATE()+3, 5, 5, 1, 1),
+('Cuisine bon appétit 23 accessoires', 'Cuisine contemporaine avec nombreuses fonctionnalités. Module électronique. Four, frigo, évier, machine à espresso. 23 accessoires inclus. Hauteur plan de travail : 48.5cm.', GETDATE(), GETDATE()+5, 2, 2, 3,2),
+('Perceuse-visseuse sans fil 18V', 'Perceuse visseuse Makita 18V neuve. Modèle DDF453SYE, Moteur brushless sans charbon plus durable et performant, Vendu avec une batterie et chargeur', GETDATE(), GETDATE()+10, 6, 6, 3, 3),
+('SAMSUNG Galaxy A15 4GB+128GB (Bleu Nuit)', 'Samsung Galaxy A15 4G 4Go de RAM, 128 Go de mémoire, écran 6,5 pouces avec une résolution de 1080 x 1920. Bon état', GETDATE(), GETDATE()+4, 4, 4, 5,4); 
