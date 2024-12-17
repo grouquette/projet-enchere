@@ -5,14 +5,26 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.stereotype.Service;
+
 import fr.eni.projet_enchere.bo.ArticleVendu;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
+import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
+@Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
+	private UtilisateurDAO utilisateurDAO; 
 	private ArticleService articleService;
 	private EnchereServiceImpl enchereService;
+
+	
+	
+	public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO, ArticleService articleService) {
+		this.utilisateurDAO = utilisateurDAO;
+		this.articleService = articleService;
+	}
 
 	@Override
 	public ArticleVendu mettreEnVente(ArticleVendu article) {
@@ -42,5 +54,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	
 	public Enchere saveEnchere() {
 		//TODO
+	}
+
+	@Override
+	public void creerUtilisateur(Utilisateur utilisateur) {
+		utilisateurDAO.creer(utilisateur);
+		
 	}
 }

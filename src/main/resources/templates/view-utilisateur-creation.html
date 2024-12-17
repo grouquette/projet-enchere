@@ -8,17 +8,43 @@
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<form action="/utilisateurs/signin" method="post">
+	<form th:action="@{/utilisateurs/signin}" method="post" th:object="${utilisateur}">
 		<h1>Création du compte</h1>
 		<ul>
-			<li><label for="idPrenom">Prenom</label> <input id="idPrenom"
-				type="text" /></li>
-			<li><label for="idNom">Nom</label> <input id="idNom" type="text" />
+			<li><label for="idPseudo">Pseudo : </label>
+				<input id="idPseudo" type="text" th:field="*{pseudo}" />
 			</li>
-			<li><label for="idEmail">Email</label> <input id="idEmail"
-				type="email" /></li>
+			<li><label for="idNom">Nom : </label>
+				<input id="idNom" type="text" th:field="*{nom}" />
+			</li>
+			<li><label for="idPrenom">Prenom : </label>
+				<input id="idPrenom" type="text" th:field="*{prenom}" />
+			</li>
+			<li><label for="idEmail">Email : </label>
+				<input id="idEmail"	type="email" th:field="*{email}" />
+			</li>
+			<li><label for="idTelephone">Telephone : </label>
+				<input id="idTelephone" type="text" th:field="*{telephone}" />
+			</li>
+			<li><label for="idRue">Rue : </label>
+				<input id ="idRue" type="text" th:field="*{rue}" />		
+			</li>
+			<li><label for="idCodePostal">Code Postal : </label>
+				<input id="idCodePostal" type="text" th:field="*{codePostal}" />
+			</li>
+			<li><label for="idVille">Ville : </label>
+				<input id="idVille" type="text" th:field="*{ville}" />
+			</li>
+			<li><label for="idMotDePasse">Mot de passe : </label>
+				<input  id="idMotDePasse" type="password" th:field="*{motDePasse}" />
+			</li>
+			
 			<li>
-				<button type="submit">Valider</button>
+				<button type="submit">Creer</button>
+				
+				<a th:href="@{/encheres}">
+					<button type ="button">Annuler</button>
+				</a>
 			</li>
 		</ul>
 	</form>

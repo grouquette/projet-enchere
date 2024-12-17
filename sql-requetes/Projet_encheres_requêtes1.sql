@@ -25,12 +25,17 @@ INSERT INTO [ROLES] ([ROLE],[IS_ADMIN]) VALUES ('ROLE_ADMIN',1);
 
 
 
--- Email unique pour ne pas avoir plusieurs utilisateurs identiques--
-ALTER TABLE UTILISATEURS ADD CONSTRAINT UN_mot_de_passe UNIQUE (email);
+-- Email et pseudo uniques pour ne pas avoir plusieurs utilisateurs identiques--
+ALTER TABLE UTILISATEURS ADD CONSTRAINT UN_email UNIQUE (email);
 
--- Email de la bonne forme
+ALTER TABLE UTILISATEURS ADD CONSTRAINT UN_pseudo UNIQUE (pseudo);
+
+
+-- Email et pseudo de la bonne forme
 
 ALTER TABLE UTILISATEURS ADD CONSTRAINT CK_email CHECK (email like '%@%.%');
+
+ALTER TABLE UTILISATEURS ADD CONSTRAINT CK_pseudo CHECK (pseudo not like '%[^A-Za-Z0-9]%');
 
 -- code postal du bon format--
 
