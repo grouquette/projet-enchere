@@ -1,5 +1,6 @@
 package fr.eni.projet_enchere.bll;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,11 @@ public class EnchereServiceImpl implements EnchereService {
 		return encheres;
 	}
 	
-	public String etatVente(ArticleVendu article) {
+	public String etatVente(ArticleVendu articleAEncherir) {
+		if (LocalDateTime.now().isBefore(articleAEncherir.getDateFinEncheres())) {
+		//TODO définir les règles etats de vente 	
+		}
 		return null;
-		if (LocalDateTime.now().isBefore(articleAEncherir.getDateFinEncheres())
+
 	}
 }

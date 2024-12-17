@@ -53,12 +53,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 	
 	public Enchere saveEnchere() {
+		return null;
 		//TODO
 	}
 
-	@Override
-	public void creerUtilisateur(Utilisateur utilisateur) {
-		utilisateurDAO.creer(utilisateur);
-		
-	}
+
 }

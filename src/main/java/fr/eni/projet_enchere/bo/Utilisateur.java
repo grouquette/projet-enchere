@@ -17,25 +17,12 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
-<<<<<<< HEAD
 	private List<Enchere> encheres;
-	private List<ArticleVendu> articles; 
-
-	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone,
-			String rue, short codePostal, String ville, String motDePasse, int credit, boolean administrateur,
-			List<Enchere> encheres, List<ArticleVendu> articles) {
-=======
-	
-	
-	
-	public Utilisateur() {
-		this.setCredit(0);
-		this.setAdministrateur(false);
-	}
+	private List<ArticleVendu> articles;
 
 	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
->>>>>>> 0eaf2b7a526aab5d79e1cfec8f62a4d59e5d3e52
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
+			List<Enchere> encheres, List<ArticleVendu> articles) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
