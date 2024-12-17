@@ -1,5 +1,6 @@
 package fr.eni.projet_enchere.bo;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Utilisateur {
@@ -16,9 +17,12 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
-	
+	private List<Enchere> encheres;
+	private List<ArticleVendu> articles; 
+
 	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone,
-			String rue, short codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, short codePostal, String ville, String motDePasse, int credit, boolean administrateur,
+			List<Enchere> encheres, List<ArticleVendu> articles) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -31,6 +35,8 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
+		this.encheres = encheres;
+		this.articles = articles;
 	}
 
 	public long getNoUtilisateur() {
@@ -128,19 +134,35 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
-	
+
+	public List<Enchere> getEncheres() {
+		return encheres;
+	}
+
+	public void setEncheres(List<Enchere> encheres) {
+		this.encheres = encheres;
+	}
+
+	public List<ArticleVendu> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<ArticleVendu> articles) {
+		this.articles = articles;
+	}
+
 	@Override
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + "]";
+				+ ", administrateur=" + administrateur + ", encheres=" + encheres + ", articles=" + articles + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(administrateur, codePostal, credit, email, motDePasse, noUtilisateur, nom, prenom, pseudo,
-				rue, telephone, ville);
+		return Objects.hash(administrateur, articles, codePostal, credit, email, encheres, motDePasse, noUtilisateur,
+				nom, prenom, pseudo, rue, telephone, ville);
 	}
 
 	@Override
@@ -152,13 +174,11 @@ public class Utilisateur {
 		if (getClass() != obj.getClass())
 			return false;
 		Utilisateur other = (Utilisateur) obj;
-		return administrateur == other.administrateur && codePostal == other.codePostal && credit == other.credit
-				&& Objects.equals(email, other.email) && Objects.equals(motDePasse, other.motDePasse)
+		return administrateur == other.administrateur && Objects.equals(articles, other.articles)
+				&& codePostal == other.codePostal && credit == other.credit && Objects.equals(email, other.email)
+				&& Objects.equals(encheres, other.encheres) && Objects.equals(motDePasse, other.motDePasse)
 				&& noUtilisateur == other.noUtilisateur && Objects.equals(nom, other.nom)
 				&& Objects.equals(prenom, other.prenom) && Objects.equals(pseudo, other.pseudo)
 				&& Objects.equals(rue, other.rue) && telephone == other.telephone && Objects.equals(ville, other.ville);
 	}
-	
-	
-	
 }

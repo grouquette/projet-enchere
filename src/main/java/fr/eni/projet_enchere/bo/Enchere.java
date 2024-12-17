@@ -6,11 +6,11 @@ import java.util.Objects;
 public class Enchere {
 	
 	private LocalDateTime dateEnchere;
-	private int montant_enchere;
+	private int montantEnchere;
 	
-	public Enchere(LocalDateTime dateEnchere, int montant_enchere) {
+	public Enchere(LocalDateTime dateEnchere, int montantEnchere) {
 		this.dateEnchere = dateEnchere;
-		this.montant_enchere = montant_enchere;
+		this.montantEnchere = montantEnchere;
 	}
 
 	public LocalDateTime getDateEnchere() {
@@ -21,22 +21,22 @@ public class Enchere {
 		this.dateEnchere = dateEnchere;
 	}
 	
-	public int getMontant_enchere() {
-		return montant_enchere;
+	public int getMontantEnchere() {
+		return montantEnchere;
 	}
 	
-	public void setMontant_enchere(int montant_enchere) {
-		this.montant_enchere = montant_enchere;
+	public void setMontantEnchere(int montant_enchere) {
+		this.montantEnchere = montant_enchere;
 	}
 	
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montant_enchere + "]";
+		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montantEnchere + "]";
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateEnchere, montant_enchere);
+		return Objects.hash(dateEnchere, montantEnchere);
 	}
 	
 	@Override
@@ -48,7 +48,7 @@ public class Enchere {
 		if (getClass() != obj.getClass())
 			return false;
 		Enchere other = (Enchere) obj;
-		return dateEnchere == other.dateEnchere && montant_enchere == other.montant_enchere;
+		return dateEnchere == other.dateEnchere && montantEnchere == other.montantEnchere;
 	}
 	
 	
