@@ -24,8 +24,8 @@ public class UtilisateurController {
 	}
 
 	@GetMapping
-	public String afficherUtilisateur() {
-		return "view-utilisateur";
+	public String afficherUtilisateurs() {
+		return "view-utilisateurs";
 	}
 	
 	@GetMapping("/detail")
@@ -38,16 +38,20 @@ public class UtilisateurController {
 		return "redirect:/utilisateurs";
 	}
 	
+//	@GetMapping("/signin")
+//	public String afficherCreationUtilisateur(Model model) {
+//		model.addAttribute("utilisateur", new Utilisateur());
+//		return "view-utilisateur-creation";
+//	}
+	
 	@GetMapping("/signin")
-	public String afficherCreationUtilisateur(Model model) {
-		model.addAttribute("utilisateur", new Utilisateur());
-		
+	public String afficherCreationUtilisateur() {
 		return "view-utilisateur-creation";
 	}
 	
 	@PostMapping("/signin")
 	public String creerUtilisateur(@ModelAttribute Utilisateur utilisateur) {
-		this.utilisateurService.creerUtilisateur(utilisateur);
+//		this.utilisateurService.creerUtilisateur(utilisateur);
 		
 		return "redirect:/utilisateurs";
 	}

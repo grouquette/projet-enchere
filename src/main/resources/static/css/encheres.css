@@ -1,72 +1,92 @@
 @charset "UTF-8";
 
-form {
-	background-color: #f2f2f2;
-}
-
-form h1 {
-	margin: 15px;
-}
-
-.flex-outer li {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	margin: 5px;
-}
-
-.flex-outer>li>label {
-	flex: 1 0 120px;
-	max-width: 220px;
-}
-
-.flex-outer>li>label+* {
-	flex: 1 0 220px;
-}
-
-.flex-outer li button {
-	margin-left: auto;
-	margin-bottom: 5px; padding : 8px 16px;
-	border: none;
-	background: #333;
-	color: #f2f2f2;
-	text-transform: uppercase;
-	letter-spacing: .09em;
-	border-radius: 2px;
-	padding: 8px 16px
-}
-
 /* Navbar avec Flexbox */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: #c0c0c0;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .navbar .logo {
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-        }
-        .navbar ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar ul li {
-            margin: 0 15px;
-        }
-        .navbar ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        .navbar ul li a:hover {
-            color: #d1e7fd;
-        }
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 20px;
+	background-color: #c0c0c0;
+	color: white;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	color: white;
+}
+
+.navbar ul {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar ul li {
+	margin: 0 15px;
+}
+
+.navbar ul li a {
+	text-decoration: none;
+	color: white;
+	font-size: 16px;
+	transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+	color: #d1e7fd;
+}
+
+button {
+	all: unset; /* Réinitialise tous les styles par défaut du navigateur */
+	display: inline-block; /* Redéfinir le comportement */
+	cursor: pointer; /* Curseur en pointeur pour l'interactivité */
+}
+
+.btn {
+	display: inline-block;
+	/* Le bouton se comporte comme un élément en ligne avec bloc */
+	padding: 1px 6px; /* Marges internes (souvent petites) */
+	background-color: ButtonFace; /* Couleur par défaut du système */
+	color: ButtonText; /* Couleur du texte par défaut du système */
+	font-family: inherit; /* Hérite de la police définie sur le parent */
+	font-size: 100%; /* Taille de police par défaut */
+	text-align: center; /* Centre le texte horizontalement */
+	text-decoration: none; /* Pas de soulignement */
+	cursor: pointer; /* Pointeur en mode clic */
+	line-height: normal; /* Hauteur de ligne par défaut */
+	white-space: nowrap; /* Pas de retour à la ligne */
+	-webkit-appearance: button;
+	/* Style natif de bouton (dans les navigateurs Webkit) */
+	-moz-appearance: button;
+	/* Style natif de bouton (dans les navigateurs Mozilla) */
+	appearance: button; /* Style natif de bouton */
+	/* 10% de la hauteur de la fenêtre (viewport) */
+}
+
+.cncl {
+	padding: 10px; /* 10px en haut/bas, 20px à gauche/droite */
+	width: 90%; /* Prend 50% de la largeur de son conteneur parent */
+	height: 10vh;
+	margin: 2vh;
+}
+
+.cncl:hover {
+	background-color: #d32f2f; /* Rouge foncé */
+	text-decoration: none;
+}
+
+.go {
+	padding: 10px; /* 10px en haut/bas, 20px à gauche/droite */
+	width: 90%; /* Prend 50% de la largeur de son conteneur parent */
+	height: 10vh;
+	margin: 2vh;
+}
+
+.go:hover {
+	background-color: #0080ff; /* Rouge foncé */
+	text-decoration: none;
+}
