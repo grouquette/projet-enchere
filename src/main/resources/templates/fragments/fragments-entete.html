@@ -1,0 +1,11 @@
+
+<nav class="navbar" th:fragment="entete">
+	<a href="/" class="logo">ENI-Encheres</a>
+
+	<ul>
+		<li><a th:href="@{/encheres}">Liste des enchères</a></li>
+
+		<li><a sec:authorize="!isAuthenticated()" th:href="@{/utilisateurs/signin}">S'inscrire</a></li>
+		<li><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Se connecter</a></li>
+		</ul>
+</nav> 

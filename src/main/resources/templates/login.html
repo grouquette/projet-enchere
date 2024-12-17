@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Connection</title>
+<link rel="stylesheet" href="/css/encheres.css" />
+<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+	<form th:action="@{/login}" method="POST">
+		<ul th:if="${param.error}">
+			<li>Erreur de saisie</li>
+		</ul>
+		<ul>
+			<li><label for="">Pseudo</label><input type="text"
+				name="username" /></li>
+			<li><label for="">Mot de passe</label><input type="password"
+				name="password" /></li>
+			<li><button type="submit">Connection</button></li>
+		</ul>
+	</form>
+
+</body>
+</html>
