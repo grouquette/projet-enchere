@@ -51,7 +51,7 @@ public class UtilisateurController {
 			throws BusinessException {
 		if (bindingResult.hasErrors()) {
 			// Retourne la vue avec les erreurs affichées
-			return "view-utilisateurs";
+			return "view-utilisateur-creation";
 		} else {
 			try {
 				this.utilisateurService.creerUtilisateur(utilisateur);
@@ -62,7 +62,7 @@ public class UtilisateurController {
 					ObjectError error = new ObjectError("globalError", m);
 					bindingResult.addError(error);
 				});
-				return "view-utilisateurs";
+				return "view-utilisateur-creation";
 			}
 		}
 	}
