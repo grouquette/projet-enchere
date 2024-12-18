@@ -36,12 +36,12 @@ public class EnchereServiceImpl implements EnchereService {
 					&& montantEnchere > getMaximumMontantEnchere(articleAEncherir.getArticleId())) {
 				Enchere enchere = new Enchere(LocalDateTime.now(), montantEnchere);
 				utilisateur.getEncheres().add(enchere);
-				enchereDAO.creerEnchere(enchere, articleAEncherir.getArticleId(), utilisateur.getUtilisateurId());
+				enchereDAO.creerEnchere(enchere, articleAEncherir.getArticleId(), utilisateur.getNoUtilisateur());
 			}
 			
 		}
 
-		public int getMaximumMontantEnchere(int articleId) {
+		public int getMaximumMontantEnchere(long noArticle) {
 			List<Enchere> encheres = List.of(); // a la place du list of, récuperer la liste d'enchere pour un article de
 												// depuis la DAO
 

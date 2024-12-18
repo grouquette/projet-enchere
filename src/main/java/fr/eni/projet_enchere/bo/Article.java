@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Article {
 
-	private int articleId;
+	private long noArticle;
 	private String nomArticle;
 	private String description; 
 	private LocalDateTime dateDebutEncheres;
@@ -18,16 +18,15 @@ public class Article {
 	private List<Enchere> encheres;
 	private Categorie categorie;
 	private Utilisateur utilisateur;
-	private int utilisateurId;
-	private int categorieId;
+	private long utilisateurId;
+	private long categorieId;
 	
 
 
-	public Article(int articleId, String nomArticle, String description, LocalDateTime dateDebutEncheres,
+	public Article(long noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait,
-			List<Enchere> encheres, Categorie categorie, Utilisateur utilisateur, int utilisateurId, int categorieId) {
-		super();
-		this.articleId = articleId;
+			List<Enchere> encheres, Categorie categorie, Utilisateur utilisateur, long utilisateurId, long categorieId) {
+		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
@@ -46,12 +45,12 @@ public class Article {
 	public Article() {
 	}
 
-	public int getArticleId() {
-		return articleId;
+	public long getArticleId() {
+		return noArticle;
 	}
 
-	public void setArticleId(int articleId) {
-		this.articleId = articleId;
+	public void setArticleId(int noArticle) {
+		this.noArticle = noArticle;
 	}
 
 	public String getNomArticle() {
@@ -142,7 +141,7 @@ public class Article {
 		this.utilisateur = utilisateur;
 	}
 	
-	public int getUtilisateurId() {
+	public long getUtilisateurId() {
 		return utilisateurId;
 	}
 
@@ -150,7 +149,7 @@ public class Article {
 		this.utilisateurId = utilisateurId;
 	}
 
-	public int getCategorieId() {
+	public long getCategorieId() {
 		return categorieId;
 	}
 
@@ -160,7 +159,7 @@ public class Article {
 
 	@Override
 	public String toString() {
-		return "Article [articleId=" + articleId + ", nomArticle=" + nomArticle + ", description=" + description
+		return "Article [articleId=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + lieuRetrait
 				+ ", encheres=" + encheres + ", categorie=" + categorie + ", utilisateur=" + utilisateur
@@ -169,7 +168,7 @@ public class Article {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(articleId, categorie, categorieId, dateDebutEncheres, dateFinEncheres, description,
+		return Objects.hash(noArticle, categorie, categorieId, dateDebutEncheres, dateFinEncheres, description,
 				encheres, etatVente, lieuRetrait, miseAPrix, nomArticle, prixVente, utilisateur, utilisateurId);
 	}
 
@@ -182,7 +181,7 @@ public class Article {
 		if (getClass() != obj.getClass())
 			return false;
 		Article other = (Article) obj;
-		return articleId == other.articleId && Objects.equals(categorie, other.categorie)
+		return noArticle == other.noArticle && Objects.equals(categorie, other.categorie)
 				&& categorieId == other.categorieId && Objects.equals(dateDebutEncheres, other.dateDebutEncheres)
 				&& Objects.equals(dateFinEncheres, other.dateFinEncheres)
 				&& Objects.equals(description, other.description) && Objects.equals(encheres, other.encheres)

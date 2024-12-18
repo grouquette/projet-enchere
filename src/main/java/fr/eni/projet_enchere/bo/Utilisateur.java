@@ -9,13 +9,10 @@ import jakarta.validation.constraints.Pattern;
 
 public class Utilisateur {
 
-<<<<<<< HEAD
-	private int utilisateurId;
-=======
+
 	private long noUtilisateur;
 	@NotBlank(message = "le pseudo ne doit pas être vide.")
 	@Pattern(regexp = "^[a-zA-Z0-9_]{3,30}$", message = "Le pseudo doit contenir entre 3 et 30 caractères, sans caractères spéciaux.")
->>>>>>> 81d5eebc0a5de5aca5d5e9d22a1bca3bcf2baa70
 	private String pseudo;
 	@NotBlank(message = "le nom ne doit pas être vide.")
 //	@Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ\\-\\s']+$", message = "Le nom ne doit contenir que des lettres, des espaces ou des traits d'union.")
@@ -47,19 +44,16 @@ public class Utilisateur {
 	private List<Enchere> encheres;
 	private List<Article> articles;
 
-<<<<<<< HEAD
-	public Utilisateur(int utilisateurId, String pseudo, String nom, String prenom, String email, String telephone,
-=======
 	public Utilisateur() {
 		this.setCredit(0);
 		this.setAdministrateur(false);
 	}
 
 	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
->>>>>>> 81d5eebc0a5de5aca5d5e9d22a1bca3bcf2baa70
+
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
 			List<Enchere> encheres, List<Article> articles) {
-		this.utilisateurId = utilisateurId;
+		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -75,16 +69,12 @@ public class Utilisateur {
 		this.articles = articles;
 	}
 
-
-	public Utilisateur() {
+	public long getNoUtilisateur() {
+		return noUtilisateur;
 	}
 
-	public long getUtilisateurId() {
-		return utilisateurId;
-	}
-
-	public void setUtilisateurId(int noUtilisateur) {
-		this.utilisateurId = noUtilisateur;
+	public void setNoUtilisateur(long noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	public String getPseudo() {
@@ -193,7 +183,7 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Utilisateur [noUtilisateur=" + utilisateurId + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", encheres=" + encheres + ", articles=" + articles + "]";
@@ -201,7 +191,7 @@ public class Utilisateur {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(administrateur, articles, codePostal, credit, email, encheres, motDePasse, utilisateurId,
+		return Objects.hash(administrateur, articles, codePostal, credit, email, encheres, motDePasse, noUtilisateur,
 				nom, prenom, pseudo, rue, telephone, ville);
 	}
 
@@ -217,7 +207,7 @@ public class Utilisateur {
 		return administrateur == other.administrateur && Objects.equals(articles, other.articles)
 				&& codePostal == other.codePostal && credit == other.credit && Objects.equals(email, other.email)
 				&& Objects.equals(encheres, other.encheres) && Objects.equals(motDePasse, other.motDePasse)
-				&& utilisateurId == other.utilisateurId && Objects.equals(nom, other.nom)
+				&& noUtilisateur == other.noUtilisateur && Objects.equals(nom, other.nom)
 				&& Objects.equals(prenom, other.prenom) && Objects.equals(pseudo, other.pseudo)
 				&& Objects.equals(rue, other.rue) && telephone == other.telephone && Objects.equals(ville, other.ville);
 	}

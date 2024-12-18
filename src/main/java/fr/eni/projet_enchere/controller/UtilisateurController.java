@@ -45,20 +45,22 @@ public class UtilisateurController {
 	@GetMapping("/signin")
 	public String afficherCreationUtilisateur(Model model) {
 		model.addAttribute("utilisateur", new Utilisateur());
-<<<<<<< HEAD
 
-=======
->>>>>>> 81d5eebc0a5de5aca5d5e9d22a1bca3bcf2baa70
 		return "view-utilisateur-creation";
 	}
 
 	@PostMapping("/signin")
-<<<<<<< HEAD
 	public String creerUtilisateur(@ModelAttribute Utilisateur utilisateur) {
-		this.utilisateurService.creerUtilisateur(utilisateur);
+		try {
+			this.utilisateurService.creerUtilisateur(utilisateur);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return "redirect:/utilisateurs";
-=======
+	}
+
 	public String creerUtilisateur(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult bindingResult)
 			throws BusinessException {
 		if (bindingResult.hasErrors()) {
@@ -77,7 +79,6 @@ public class UtilisateurController {
 				return "view-utilisateur-creation";
 			}
 		}
->>>>>>> 81d5eebc0a5de5aca5d5e9d22a1bca3bcf2baa70
 	}
 
 }

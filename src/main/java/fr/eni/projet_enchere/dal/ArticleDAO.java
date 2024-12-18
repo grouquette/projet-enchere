@@ -7,7 +7,7 @@ import fr.eni.projet_enchere.bo.Article;
 
 public interface ArticleDAO {
 
-	Article read(int id);
+	Article read(long id);
 
 	List<Article> findById(int id);
 	

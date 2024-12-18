@@ -29,7 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
 		return articles;
 	}
 
-	public Article consulterArticleParId(int id) {
+	public Article consulterArticleParId(long id) {
 		Article article = articleDAO.read(id);
 		return article;
 	}

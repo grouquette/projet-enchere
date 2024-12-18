@@ -8,6 +8,6 @@ public interface ArticleService {
 
 	void remove(Article article);
 	List<Article> add(Article articleAVendre);
-	Article consulterArticleParId(int id);
+	Article consulterArticleParId(long id);
 	
 }

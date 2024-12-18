@@ -11,18 +11,18 @@
 		
 		
 		
-		<form action="/encheres/details">
+		<form action="/encheres/details" method="post">
 		
 		
 		
 			<ul class="flex-outer">
 				<li>
 					<label for="articleId"></label>
-					<input id="articleId" type="text" th:value="${articleId}" />
+					<input id="articleId" type="text" th:value="${article.articleId}" readonly/>
 				</li>
 				<li>
 					<label for="description">Description : </label>
-					<textarea id="description" cols="30" rows="10" th:text="${description}" ></textarea>
+					<textarea id="description" cols="30" rows="10" th:text="${article.description}" ></textarea>
 				</li>
 				<li>
 					<label for="idCategorie">Catégorie</label>

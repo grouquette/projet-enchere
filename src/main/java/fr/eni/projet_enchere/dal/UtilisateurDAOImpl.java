@@ -50,12 +50,12 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 		// Mise à jour de l'id du film avec celui généré par la BDD
 		if (keyHolder != null && keyHolder.getKey() != null) {
-			utilisateur.setUtilisateurId(keyHolder.getKey().intValue());
+			utilisateur.setNoUtilisateur(keyHolder.getKey().longValue());
 		}
 	}
 
 	@Override
-	public Utilisateur read(int id) {
+	public Utilisateur read(long id) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", id);
 		return this.jdbcTemplate.queryForObject(FIND_BY_ID, params, new UtilisateurRowMapper());

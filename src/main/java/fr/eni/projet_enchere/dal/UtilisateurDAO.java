@@ -6,5 +6,5 @@ public interface UtilisateurDAO {
 
 	void creer(Utilisateur utilisateur);
 
-	Utilisateur read(int id);
+	Utilisateur read(long id);
 }

@@ -5,22 +5,22 @@ import java.util.Objects;
 
 public class Categorie {
 
-	private short categorieId;
+	private short noCategorie;
 	private String libelle;
 	private List<Article> articles;
 
 	public Categorie(short noCategorie, String libelle, List<Article> articles) {
-		this.categorieId = noCategorie;
+		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 		this.articles = articles;
 	}
 
-	public short getCategorieId() {
-		return categorieId;
+	public short getNoCategorie() {
+		return noCategorie;
 	}
 	
-	public void setCategorieId(short noCategorie) {
-		this.categorieId = noCategorie;
+	public void setNoCategorie(short noCategorie) {
+		this.noCategorie = noCategorie;
 	}
 	
 	public String getLibelle() {
@@ -41,12 +41,12 @@ public class Categorie {
 
 	@Override
 	public String toString() {
-		return "Categorie [noCategorie=" + categorieId + ", libelle=" + libelle + ", articles=" + articles + "]";
+		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + ", articles=" + articles + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(articles, libelle, categorieId);
+		return Objects.hash(articles, libelle, noCategorie);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class Categorie {
 			return false;
 		Categorie other = (Categorie) obj;
 		return Objects.equals(articles, other.articles) && Objects.equals(libelle, other.libelle)
-				&& categorieId == other.categorieId;
+				&& noCategorie == other.noCategorie;
 	}
 	
 
