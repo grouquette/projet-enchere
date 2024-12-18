@@ -5,9 +5,9 @@
 	<ul>
 		<li><a th:href="@{/encheres}">Enchères</a></li>
 		<li><a sec:authorize="isAuthenticated()" th:href="@{/article/creer}">Vendre un article</a></li>
-		<li><a sec:authorize="isAuthenticated()" th:href="@{/utilisateurs/signin}">Mon profil</a></li>
+		<li><a sec:authorize="isAuthenticated()" th:href="@{/utilisateurs}">Mon profil</a></li>
 		<li><a sec:authorize="!isAuthenticated()" th:href="@{/utilisateurs/signin}">S'inscrire</a></li>
 		<li><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Se connecter</a></li>
-		<li><a sec:authorize="isAuthenticated()" th:href="@{/login}">Déconnexion</a></li>
+		<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a></li>
 		</ul>
 </nav> 

@@ -3,25 +3,46 @@ package fr.eni.projet_enchere.bo;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class Utilisateur {
 
 	private long noUtilisateur;
+	@NotBlank(message = "le pseudo ne doit pas être vide.")
+	@Pattern(regexp = "^[a-zA-Z0-9_]{3,30}$", message = "Le pseudo doit contenir entre 3 et 30 caractères, sans caractères spéciaux.")
 	private String pseudo;
+	@NotBlank(message = "le nom ne doit pas être vide.")
+//	@Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ\\-\\s']+$", message = "Le nom ne doit contenir que des lettres, des espaces ou des traits d'union.")
+	@Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ\\-\\s']{1,30}$", message = "Le nom ne doit contenir que des lettres, des espaces ou des traits d'union.")
 	private String nom;
+	@NotBlank(message = "le prenom ne doit pas être vide.")
+	@Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ\\-\\s']{1,30}$", message = "Le prénom ne doit contenir que des lettres, des espaces ou des traits d'union.")
 	private String prenom;
+	@NotBlank(message = "le email ne doit pas être vide.")
+	@Email(message = "L'email est invalide.")
 	private String email;
+	@NotBlank(message = "le telephone ne doit pas être vide.")
+	@Pattern(regexp = "^(\\+\\d{1,3})?\\d{10}$", message = "Le numéro de téléphone doit contenir 10 chiffres, avec un préfixe international facultatif.")
 	private String telephone;
+	@NotBlank(message = "La rue ne doit pas être vide.")
 	private String rue;
+	@NotBlank(message = "le codePostal ne doit pas être vide.")
+	@Pattern(regexp = "^\\d{5}$", message = "Le code postal doit contenir 5 chiffres.")
 	private String codePostal;
+	@NotBlank(message = "le ville ne doit pas être vide.")
+//	@Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ\\s'-]+$", message = "La ville ne doit contenir que des lettres, des espaces ou des traits d'union.")
+	@Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ\\s'-]{1,30}$", message = "La ville ne doit contenir que des lettres, des espaces ou des traits d'union (max 30 caractères).")
 	private String ville;
+	@NotBlank(message = "le motDePasse ne doit pas être vide.")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.")
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
 	private List<Enchere> encheres;
 	private List<ArticleVendu> articles;
 
-	
-	
 	public Utilisateur() {
 		this.setCredit(0);
 		this.setAdministrateur(false);

@@ -12,6 +12,9 @@ DROP TABLE UTILISATEURS;
 
 DROP TABLE CATEGORIES;
 
+use [projet-enchere]
+go
+
 -- créer une table role pour définir qui est admin ou pas--
 
 CREATE TABLE ROLES(

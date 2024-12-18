@@ -1,3 +1,6 @@
+use [projet-enchere]
+go
+
 -- Script de création de la base de données ENCHERES
 --   type :      SQL Server 2012
 --

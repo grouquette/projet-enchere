@@ -11,6 +11,7 @@ import fr.eni.projet_enchere.bo.ArticleVendu;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
+import fr.eni.projet_enchere.exception.BusinessException;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -58,7 +59,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public void creerUtilisateur(Utilisateur utilisateur) {
+	public void creerUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		utilisateurDAO.creer(utilisateur);
 		
 	}
