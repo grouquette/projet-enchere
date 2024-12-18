@@ -3,19 +3,19 @@ package fr.eni.projet_enchere.bo;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class ArticleVendu {
+public class Article {
 
 	private int noArticle;
 	private String nomArticle;
 	private String description; 
-	private int dateDebutEncheres;
+	private LocalDateTime dateDebutEncheres;
 	private LocalDateTime dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
 	private String etatVente;
 	private Retrait lieuRetrait;
 	
-	public ArticleVendu(int noArticle, String nomArticle, String description, int dateDebutEncheres,
+	public Article(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int miseAPrix, int priVente, String etatVente, Retrait lieuRetrait) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -52,11 +52,11 @@ public class ArticleVendu {
 		this.description = description;
 	}
 	
-	public int getDateDebutEncheres() {
+	public LocalDateTime getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 	
-	public void setDateDebutEncheres(int dateDebutEncheres) {
+	public void setDateDebutEncheres(LocalDateTime dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 	
@@ -122,7 +122,7 @@ public class ArticleVendu {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ArticleVendu other = (ArticleVendu) obj;
+		Article other = (Article) obj;
 		return dateDebutEncheres == other.dateDebutEncheres && Objects.equals(dateFinEncheres, other.dateFinEncheres)
 				&& Objects.equals(description, other.description) && Objects.equals(etatVente, other.etatVente)
 				&& Objects.equals(lieuRetrait, other.lieuRetrait) && miseAPrix == other.miseAPrix

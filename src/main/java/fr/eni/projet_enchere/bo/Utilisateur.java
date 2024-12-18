@@ -41,7 +41,7 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 	private List<Enchere> encheres;
-	private List<ArticleVendu> articles;
+	private List<Article> articles;
 
 	public Utilisateur() {
 		this.setCredit(0);
@@ -50,7 +50,7 @@ public class Utilisateur {
 
 	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
-			List<Enchere> encheres, List<ArticleVendu> articles) {
+			List<Enchere> encheres, List<Article> articles) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -171,11 +171,11 @@ public class Utilisateur {
 		this.encheres = encheres;
 	}
 
-	public List<ArticleVendu> getArticles() {
+	public List<Article> getArticles() {
 		return articles;
 	}
 
-	public void setArticles(List<ArticleVendu> articles) {
+	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
 

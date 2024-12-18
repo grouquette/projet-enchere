@@ -5,23 +5,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import fr.eni.projet_enchere.bo.ArticleVendu;
+import fr.eni.projet_enchere.bo.Article;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
-	private List<ArticleVendu> articles = new ArrayList<>();
+	private List<Article> articles = new ArrayList<>();
 
-	public ArticleServiceImpl(List<ArticleVendu> articles) {
+	public ArticleServiceImpl(List<Article> articles) {
 		this.articles = articles;
 	}
 
-	public void remove(ArticleVendu articleARetirer) {
+	public void remove(Article articleARetirer) {
 		articles.remove(articleARetirer);
 	}
 
 	@Override
-	public List<ArticleVendu> add(ArticleVendu articleAVendre) {
+	public List<Article> add(Article articleAVendre) {
 		articles.add(articleAVendre); 
 		return articles;
 	}

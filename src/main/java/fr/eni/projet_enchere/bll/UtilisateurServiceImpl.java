@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
-import fr.eni.projet_enchere.bo.ArticleVendu;
+import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
@@ -28,14 +28,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public ArticleVendu mettreEnVente(ArticleVendu article) {
+	public Article mettreEnVente(Article article) {
 		articleService.add(article);
 		return article;
 	}
 // Methode pour enchérir sur un ArticleVendu
 
 	@Override
-	public void encherir(Utilisateur utilisateur, ArticleVendu articleAEncherir, int montantEnchere) {
+	public void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
 		if (articleAEncherir.getEtatVente().equals("en cours") && montantEnchere >= articleAEncherir.getMiseAPrix()
 				&& utilisateur.getCredit() >= montantEnchere
 				&& montantEnchere > getMaximumMontantEnchere(articleAEncherir.getNoArticle())) {
@@ -64,5 +64,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 	}
 
+	@Override
+	public Utilisateur consulterProfilUtilisateurParId(long id) {
+		Utilisateur u =this.consulterProfilUtilisateurParId(id);
+		return u;
+	}
 
+	@Override
+	public void modifierUtilisateur(Utilisateur utilisateur) {
+		utilisateurDAO.modifier(utilisateur);
+		
+	}
+	
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import fr.eni.projet_enchere.bo.ArticleVendu;
+import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
 
 @Service
@@ -20,7 +20,7 @@ public class EnchereServiceImpl implements EnchereService {
 		return encheres;
 	}
 	
-	public String etatVente(ArticleVendu articleAEncherir) {
+	public String etatVente(Article articleAEncherir) {
 		if (LocalDateTime.now().isBefore(articleAEncherir.getDateFinEncheres())) {
 		//TODO définir les règles etats de vente 	
 		}

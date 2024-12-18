@@ -5,22 +5,22 @@ import java.util.Objects;
 
 public class Categorie {
 
-	private short noCategorie;
+	private int noCategorie;
 	private String libelle;
-	private List<ArticleVendu> articles;
+	private List<Article> articles;
 
-	public Categorie(short noCategorie, String libelle, List<ArticleVendu> articles) {
+	public Categorie(int noCategorie, String libelle, List<Article> articles) {
 		super();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 		this.articles = articles;
 	}
 
-	public short getNoCategorie() {
+	public int getNoCategorie() {
 		return noCategorie;
 	}
 	
-	public void setNoCategorie(short noCategorie) {
+	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
 	
