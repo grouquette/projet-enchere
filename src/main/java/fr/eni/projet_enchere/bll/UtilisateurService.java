@@ -1,11 +1,14 @@
 package fr.eni.projet_enchere.bll;
 
-import fr.eni.projet_enchere.bo.ArticleVendu;
-import fr.eni.projet_enchere.bo.Enchere;
+import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Utilisateur;
 
 public interface UtilisateurService {
 	
-	ArticleVendu mettreEnVente(ArticleVendu article);
-	void encherir(Utilisateur utilisateur, ArticleVendu articleAEncherir, int montantEnchere);
+	Article mettreEnVente(Article article);
+
+	Utilisateur read(int id);
+
+	Utilisateur consulterUtilisateurParId(long id);
+	
 }

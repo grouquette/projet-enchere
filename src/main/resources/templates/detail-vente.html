@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Détail Vente</title>
+</head>
+<body>
+
+<main>
+		<h1>Détail vente</h1>
+		
+		
+		
+		<form action="/encheres/details">
+		
+		
+		
+			<ul class="flex-outer">
+				<li>
+					<label for="articleId"></label>
+					<input id="articleId" type="text" th:value="${articleId}" />
+				</li>
+				<li>
+					<label for="description">Description : </label>
+					<textarea id="description" cols="30" rows="10" th:text="${description}" ></textarea>
+				</li>
+				<li>
+					<label for="idCategorie">Catégorie</label>
+					<input id="idCategorie" type="text" th:value="${categorie}" />
+				</li>
+				<li>
+					<label for="maxEnchere">Meilleure offre : </label>
+					<input id="maxEnchere" type="text" th:value="${prixVente}" />
+				</li>
+					<li>
+					<label for="miseAPrix">Mise à prix: </label>
+					<input id="miseAPrix" type="text" th:value="${miseAPrix}" />
+				</li>
+				<li>
+					<label for="finEnchere">Fin de l'enchère : </label>
+					<input id="finEnchere" type="text" th:value="${dateFinEncheres}" />
+				</li>
+				<li>
+					<label for="retrait">Retrait :</label>
+					<input id="retrait" type="text" th:value="${lieuRetrait}" />
+				</li>
+				<li>
+					<label for="vendeur">Vendeur :</label>
+					<input id="vendeur" type="text" th:value="${utilisateur}" />
+				</li>
+				<li>
+					<label for="proposition">Ma proposition</label>
+					<select name="" id="">
+						<option th:each="a : ${}" th:text="${}"></option>
+					</select>
+					<button type="submit">Enchérir</button>
+				</li>
+			</ul>
+		
+		
+		</form>
+</main>
+
+</body>
+</html>

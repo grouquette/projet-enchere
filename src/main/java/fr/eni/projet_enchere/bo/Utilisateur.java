@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Utilisateur {
 
-	private long noUtilisateur;
+	private int utilisateurId;
 	private String pseudo;
 	private String nom;
 	private String prenom;
@@ -18,12 +18,12 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 	private List<Enchere> encheres;
-	private List<ArticleVendu> articles;
+	private List<Article> articles;
 
-	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(int utilisateurId, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
-			List<Enchere> encheres, List<ArticleVendu> articles) {
-		this.noUtilisateur = noUtilisateur;
+			List<Enchere> encheres, List<Article> articles) {
+		this.utilisateurId = utilisateurId;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -39,12 +39,16 @@ public class Utilisateur {
 		this.articles = articles;
 	}
 
-	public long getNoUtilisateur() {
-		return noUtilisateur;
+
+	public Utilisateur() {
 	}
 
-	public void setNoUtilisateur(long noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public long getUtilisateurId() {
+		return utilisateurId;
+	}
+
+	public void setUtilisateurId(int noUtilisateur) {
+		this.utilisateurId = noUtilisateur;
 	}
 
 	public String getPseudo() {
@@ -143,17 +147,17 @@ public class Utilisateur {
 		this.encheres = encheres;
 	}
 
-	public List<ArticleVendu> getArticles() {
+	public List<Article> getArticles() {
 		return articles;
 	}
 
-	public void setArticles(List<ArticleVendu> articles) {
+	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
 
 	@Override
 	public String toString() {
-		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+		return "Utilisateur [noUtilisateur=" + utilisateurId + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", encheres=" + encheres + ", articles=" + articles + "]";
@@ -161,7 +165,7 @@ public class Utilisateur {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(administrateur, articles, codePostal, credit, email, encheres, motDePasse, noUtilisateur,
+		return Objects.hash(administrateur, articles, codePostal, credit, email, encheres, motDePasse, utilisateurId,
 				nom, prenom, pseudo, rue, telephone, ville);
 	}
 
@@ -177,7 +181,7 @@ public class Utilisateur {
 		return administrateur == other.administrateur && Objects.equals(articles, other.articles)
 				&& codePostal == other.codePostal && credit == other.credit && Objects.equals(email, other.email)
 				&& Objects.equals(encheres, other.encheres) && Objects.equals(motDePasse, other.motDePasse)
-				&& noUtilisateur == other.noUtilisateur && Objects.equals(nom, other.nom)
+				&& utilisateurId == other.utilisateurId && Objects.equals(nom, other.nom)
 				&& Objects.equals(prenom, other.prenom) && Objects.equals(pseudo, other.pseudo)
 				&& Objects.equals(rue, other.rue) && telephone == other.telephone && Objects.equals(ville, other.ville);
 	}

@@ -5,23 +5,22 @@ import java.util.Objects;
 
 public class Categorie {
 
-	private short noCategorie;
+	private short categorieId;
 	private String libelle;
-	private List<ArticleVendu> articles;
+	private List<Article> articles;
 
-	public Categorie(short noCategorie, String libelle, List<ArticleVendu> articles) {
-		super();
-		this.noCategorie = noCategorie;
+	public Categorie(short noCategorie, String libelle, List<Article> articles) {
+		this.categorieId = noCategorie;
 		this.libelle = libelle;
 		this.articles = articles;
 	}
 
-	public short getNoCategorie() {
-		return noCategorie;
+	public short getCategorieId() {
+		return categorieId;
 	}
 	
-	public void setNoCategorie(short noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setCategorieId(short noCategorie) {
+		this.categorieId = noCategorie;
 	}
 	
 	public String getLibelle() {
@@ -31,15 +30,23 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
 
 	@Override
 	public String toString() {
-		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + ", articles=" + articles + "]";
+		return "Categorie [noCategorie=" + categorieId + ", libelle=" + libelle + ", articles=" + articles + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(articles, libelle, noCategorie);
+		return Objects.hash(articles, libelle, categorieId);
 	}
 
 	@Override
@@ -52,7 +59,7 @@ public class Categorie {
 			return false;
 		Categorie other = (Categorie) obj;
 		return Objects.equals(articles, other.articles) && Objects.equals(libelle, other.libelle)
-				&& noCategorie == other.noCategorie;
+				&& categorieId == other.categorieId;
 	}
 	
 

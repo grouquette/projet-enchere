@@ -1,5 +1,6 @@
 package fr.eni.projet_enchere.dal;
 
+import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Utilisateur;
 
 public interface UtilisateurDAO {

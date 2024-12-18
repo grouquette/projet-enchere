@@ -49,7 +49,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		
 		// Mise à jour de l'id du film avec celui généré par la BDD
 		if (keyHolder != null && keyHolder.getKey() != null) {
-			utilisateur.setNoUtilisateur(keyHolder.getKey().longValue());
+			utilisateur.setUtilisateurId(keyHolder.getKey().intValue());
 		}
 		
 		
