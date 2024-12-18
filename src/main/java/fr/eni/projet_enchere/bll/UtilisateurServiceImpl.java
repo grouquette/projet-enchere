@@ -3,8 +3,10 @@ package fr.eni.projet_enchere.bll;
 import org.springframework.stereotype.Service;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
+import fr.eni.projet_enchere.exception.BusinessException;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -29,7 +31,25 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public Utilisateur consulterUtilisateurParId(long id) {
+	public Utilisateur consulterUtilisateurParId(int id) {
 		return utilisateurDAO.read(id);
 	}
+
+	public Enchere saveEnchere() {
+		return null;
+		//TODO
+	}
+
+	@Override
+	public void creerUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		utilisateurDAO.creer(utilisateur);
+		
+	}
+
+	@Override
+	public void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

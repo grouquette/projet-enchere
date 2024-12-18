@@ -1,0 +1,5 @@
+<div th:fragment="frag-error(inputName)" th:if="${#fields.hasErrors(inputName)}">
+    <div class="popup-error">
+        <span th:each="e : ${#fields.errors(inputName)}" th:text="${e}"></span>
+    </div>
+</div>

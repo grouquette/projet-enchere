@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ENI-Encheres</title>
+<link rel="stylesheet" href="/css/encheres.css" />
+<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+	<form action="/article/creer" method="post">
+		<h1>Création d'un article de vente</h1>
+		<div class="form-container">
+			<label for="idTitre">Article</label><input id="idTitre" type="text" />
+		</div>
+		<div class="form-container">
+			<label for="idDescription">Description</label>
+			<textarea id="idDescription" type="text" /></textarea>
+		</div>
+		<div class="form-container">
+			<label for="idCategorie">Catégorie</label><input id="idCategorie"
+				type="text" />
+		</div>
+		<div class="form-container">
+			<label for="idPrix">Mise à prix</label><input id="idPrix"
+				type="number" />
+		</div>
+		<div class="form-container">
+			<label for="idDateDebut">Début de l'enchère</label><input
+				id="idDateDebut" type="date" />
+		</div>
+		<div class="form-container">
+			<label for="idDateFin">Fin de l'enchère</label><input id="idDateFin"
+				type="date" />
+		</div>
+		<div class="form-container">
+			<button type="submit" class="btn go">Enregistrer</button>
+		</div>
+	</form>
+</body>
+</html>

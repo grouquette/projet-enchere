@@ -8,17 +8,32 @@
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<form th:action="@{/login}" method="POST">
-		<ul th:if="${param.error}">
+	<form th:action="@{/login}" method="post">
+		<h1>Connection</h1>
+		<ul th:if="${param.error}" class="no-bullets">
 			<li>Erreur de saisie</li>
 		</ul>
-		<ul>
-			<li><label for="">Pseudo</label><input type="text"
-				name="username" /></li>
-			<li><label for="">Mot de passe</label><input type="password"
-				name="password" /></li>
-			<li><button type="submit">Connection</button></li>
-		</ul>
+		<div class="form-container">
+			<label for="">Pseudo</label> <input type="text" name="username" />
+		</div>
+		<div class="form-container">
+			<label for="">Mot de passe</label> <input type="password"
+				name="password" />
+		</div>
+		<div class="form-container">
+			<button type="submit" class="btn go">Connection</button>
+			<div>
+				<div>
+					<label for="">Se souvenir de moi</label> <input type="checkbox"
+						name="password" />
+				</div>
+				<a href="/utilisateurs">Mot de passe oublié</a>
+			</div>
+		</div>
+		<div class="form-row">
+			<a href="/utilisateurs/signin" class="btn go">Créer un
+				compte</a>
+		</div>
 	</form>
 
 </body>
