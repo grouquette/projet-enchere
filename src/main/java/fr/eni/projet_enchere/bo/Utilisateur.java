@@ -20,6 +20,13 @@ public class Utilisateur {
 	private List<Enchere> encheres;
 	private List<ArticleVendu> articles;
 
+	
+	
+	public Utilisateur() {
+		this.setCredit(0);
+		this.setAdministrateur(false);
+	}
+
 	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
 			List<Enchere> encheres, List<ArticleVendu> articles) {

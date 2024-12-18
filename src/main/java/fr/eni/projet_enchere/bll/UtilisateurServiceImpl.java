@@ -57,5 +57,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		//TODO
 	}
 
+	@Override
+	public void creerUtilisateur(Utilisateur utilisateur) {
+		utilisateurDAO.creer(utilisateur);
+		
+	}
+
 
 }
