@@ -6,7 +6,10 @@ import fr.eni.projet_enchere.bo.Article;
 
 public interface ArticleService {
 
-	void remove(Article articleVendu);
+
+	void remove(Article article);
 	List<Article> add(Article articleAVendre);
+	Article consulterArticleParId(long id);
+
 	
 }

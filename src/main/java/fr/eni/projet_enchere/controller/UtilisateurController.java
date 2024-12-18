@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.eni.projet_enchere.bll.EnchereService;
 import fr.eni.projet_enchere.bll.UtilisateurService;
+import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.exception.BusinessException;
 import jakarta.validation.Valid;
@@ -41,6 +43,11 @@ public class UtilisateurController {
 		return "view-utilisateur-detail";
 	}
 
+	@PostMapping("/detail")
+	public String mettreAJourUtilisateur() {
+		return "redirect:/utilisateurs";
+	}
+	
 	@GetMapping("/signin")
 	public String afficherCreationUtilisateur(Model model) {
 		model.addAttribute("utilisateur", new Utilisateur());

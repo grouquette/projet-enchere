@@ -8,22 +8,28 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.projet_enchere.bo.Utilisateur;
+import fr.eni.projet_enchere.dal.rowmapper.UtilisateurRowMapper;
 
 @Repository
-public class UtilisateurDAOImpl implements UtilisateurDAO{
+public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	private static final String INSERT = "INSERT INTO Utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :codePostal, :ville, :mdp, :credit, :admin)";
+<<<<<<< HEAD
 	
 	private static final String FIND_BY_ID = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville FROM UTILISATEURS WHERE no_utilisateur = :id";
 	
 	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone= :telephone, rue = :rue, code_postal = :codePostal, ville = :ville, mot_de_passe = :motDePasse WHERE no_utilisateur = :email";
+=======
+	private static final String FIND_ALL = "SELECT id, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM Utilisateurs WHERE id = :id";
+	private static final String FIND_BY_ID = "SELECT id, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM Utilisateurs WHERE id = :id";
+>>>>>>> 3e03ed40e2e645ffa67b5328986dbb618543ba10
 	
 	private NamedParameterJdbcTemplate jdbcTemplate;
-	
+
 	public UtilisateurDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
+
 	@Override
 	public void creer(Utilisateur utilisateur) {
 		// Manipulation de la clef primaire auto-générée : IDENTIY
@@ -40,22 +46,20 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		map.addValue("ville", utilisateur.getVille());
 		map.addValue("mdp", utilisateur.getMotDePasse());
 		map.addValue("credit", utilisateur.getCredit());
-		
+
 		if (utilisateur.isAdministrateur()) {
 			numAdmin = 1;
-		}else {
+		} else {
 			numAdmin = 0;
 		}
 		map.addValue("admin", numAdmin);
-		
+
 		this.jdbcTemplate.update(INSERT, map, keyHolder);
-		
+
 		// Mise à jour de l'id du film avec celui généré par la BDD
 		if (keyHolder != null && keyHolder.getKey() != null) {
-			utilisateur.setNoUtilisateur(keyHolder.getKey().longValue());
+			utilisateur.setNoUtilisateur(keyHolder.getKey().intValue());
 		}
-		
-		
 	}
 
 	@Override
@@ -80,6 +84,5 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		
 		this.jdbcTemplate.update(UPDATE, map);		
 	}
-
 
 }

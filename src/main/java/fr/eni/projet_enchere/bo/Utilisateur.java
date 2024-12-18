@@ -9,9 +9,12 @@ import jakarta.validation.constraints.Pattern;
 
 public class Utilisateur {
 
+
+
 	private long noUtilisateur;
 	@NotBlank(message = "le pseudo ne doit pas être vide.")
 	@Pattern(regexp = "^[a-zA-Z0-9_]{3,30}$", message = "Le pseudo doit contenir entre 3 et 30 caractères, sans caractères spéciaux.")
+
 	private String pseudo;
 	@NotBlank(message = "le nom ne doit pas être vide.")
 //	@Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ\\-\\s']+$", message = "Le nom ne doit contenir que des lettres, des espaces ou des traits d'union.")
@@ -43,15 +46,21 @@ public class Utilisateur {
 	private List<Enchere> encheres;
 	private List<Article> articles;
 
+
+	
+
 	public Utilisateur() {
 		this.setCredit(0);
 		this.setAdministrateur(false);
 	}
 
 	public Utilisateur(long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
 			List<Enchere> encheres, List<Article> articles) {
+
 		this.noUtilisateur = noUtilisateur;
+
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -67,11 +76,13 @@ public class Utilisateur {
 		this.articles = articles;
 	}
 
+
+	
 	public long getNoUtilisateur() {
 		return noUtilisateur;
 	}
 
-	public void setNoUtilisateur(long noUtilisateur) {
+	public void setNoUtilisateur(int noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 
@@ -181,7 +192,7 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+		return "Utilisateur [noUtilisateur=" + noUtilisateur+ ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", encheres=" + encheres + ", articles=" + articles + "]";

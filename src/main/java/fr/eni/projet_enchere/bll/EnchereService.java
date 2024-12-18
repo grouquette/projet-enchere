@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
+import fr.eni.projet_enchere.bo.Utilisateur;
 
 public interface EnchereService {
 
@@ -11,5 +12,6 @@ public interface EnchereService {
 	
 	String etatVente(Article article);
 	
+	void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere);
 
 }

@@ -6,14 +6,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.dal.ArticleDAO;
+
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
-	private List<Article> articles = new ArrayList<>();
 
-	public ArticleServiceImpl(List<Article> articles) {
-		this.articles = articles;
+	private List<Article> articles;
+	private ArticleDAO articleDAO;
+
+	public ArticleServiceImpl(ArticleDAO articleDAO) {
+		this.articleDAO = articleDAO;
+		this.articles = new ArrayList<>();
 	}
 
 	public void remove(Article articleARetirer) {
@@ -25,4 +30,10 @@ public class ArticleServiceImpl implements ArticleService {
 		articles.add(articleAVendre); 
 		return articles;
 	}
+
+	public Article consulterArticleParId(long id) {
+		Article article = articleDAO.read(id);
+		return article;
+	}
+	
 }
