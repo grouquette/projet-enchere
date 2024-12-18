@@ -5,6 +5,8 @@ import fr.eni.projet_enchere.bo.Utilisateur;
 public interface UtilisateurDAO {
 
 	void creer(Utilisateur utilisateur);
-
-	Utilisateur read(long id);
+	
+	Utilisateur lire(long id);
+	
+	void modifier(Utilisateur utilisateur);
 }

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Categorie {
 
+
 	private short noCategorie;
 	private String libelle;
 	private List<Article> articles;
@@ -18,6 +19,7 @@ public class Categorie {
 	public short getNoCategorie() {
 		return noCategorie;
 	}
+	
 	
 	public void setNoCategorie(short noCategorie) {
 		this.noCategorie = noCategorie;

@@ -29,7 +29,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<Article> findById(int id) {
+	public List<Article> findById(long id) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("idArticle", id);
 		return this.jdbcTemplate.query(FIND_ALL_BY_ID, params, new ArticleRowMapper());

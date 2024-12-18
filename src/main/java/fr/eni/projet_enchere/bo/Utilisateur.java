@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Pattern;
 
 public class Utilisateur {
 
-
 	private long noUtilisateur;
 	@NotBlank(message = "le pseudo ne doit pas être vide.")
 	@Pattern(regexp = "^[a-zA-Z0-9_]{3,30}$", message = "Le pseudo doit contenir entre 3 et 30 caractères, sans caractères spéciaux.")

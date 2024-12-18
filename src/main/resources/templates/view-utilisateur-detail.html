@@ -7,6 +7,55 @@
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+	
 	<h1>Détail utilisateur</h1>
+	
+	<form action="">
+		<div class="form-container">
+			<div class="form-container">
+				<label for="idPseudo">Pseudo : </label> <input id="idPseudo"
+				type="text" th:field="*{pseudo}" th:value="${utilisateur.pseudo}"
+				disabled="disabled" />
+			</div>
+			<div class="form-container">
+				<label for="idNom">Nom : </label> <input id="idNom"
+				type="text" th:field="*{nom}" th:value="${utilisateur.nom}"
+				disabled="disabled" />
+			</div>
+			<div class="form-container">
+				<label for="idPrenom">Prenom : </label> <input id="idPrenom"
+				type="text" th:field="*{prenom}" th:value="${utilisateur.prenom}"
+				disabled="disabled" />
+			</div>
+			<div class="form-container">
+				<label for="idEmail">Email : </label> <input id="idEmail"
+				type="email" th:field="*{email}" th:value="${utilisateur.email}"
+				disabled="disabled" />
+			</div>
+			<div class="form-container">
+				<label for="idTelephone">Telephone : </label> <input
+				id="idTelephone" type="text" th:field="*{telephone}"
+				th:value="${utilisateur.telephone}" disabled="disabled" />
+			</div>
+			<div class="form-container">
+				<label for="idRue">Rue : </label> <input id="idRue"
+				type="text" th:field="*{rue}" th:value="${utilisateur.rue}"
+				disabled="disabled" />
+			</div>
+			<div class="form-container">
+				<label for="idCodePostal">Code Postal : </label> <input
+				id="idCodePostal" type="text" th:field="*{codePostal}"
+				th:value="${utilisateur.codePostal}" disabled="disabled" />
+			</div>
+			<div class="form-container">
+				<label for="idVille">Ville : </label> <input id="idVille"
+				type="text" th:field="*{ville}" th:value="${utilisateur.ville}"
+				disabled="disabled" />
+			</div>
+		</div>
+		<div class="form-row">
+			<a th:href="@{/utilisateurs/modifier}" class="btn cncl">Modifier</a>
+		</div>
+	</form>
 </body>
 </html>

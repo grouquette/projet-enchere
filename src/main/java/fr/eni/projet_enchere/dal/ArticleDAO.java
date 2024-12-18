@@ -9,6 +9,6 @@ public interface ArticleDAO {
 
 	Article read(long id);
 
-	List<Article> findById(int id);
+	List<Article> findById(long id);
 	
 }

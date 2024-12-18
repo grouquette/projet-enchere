@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.projet_enchere.bll.EnchereService;
 import fr.eni.projet_enchere.bll.UtilisateurService;
@@ -33,7 +34,12 @@ public class UtilisateurController {
 	}
 
 	@GetMapping("/detail")
-	public String afficherDetailUtilisateur() {
+	public String afficherDetailUtilisateur(@RequestParam long noUtilisateur, Model model) {
+		
+		Utilisateur utilisateur = this.utilisateurService.consulterProfilUtilisateurParId(noUtilisateur);
+		
+		model.addAttribute("utilisateur", utilisateur);
+		
 		return "view-utilisateur-detail";
 	}
 
@@ -41,7 +47,7 @@ public class UtilisateurController {
 	public String mettreAJourUtilisateur() {
 		return "redirect:/utilisateurs";
 	}
-
+	
 	@GetMapping("/signin")
 	public String afficherCreationUtilisateur(Model model) {
 		model.addAttribute("utilisateur", new Utilisateur());
@@ -80,5 +86,25 @@ public class UtilisateurController {
 			}
 		}
 	}
+	
+	@GetMapping("/modifier")
+	public String afficherModificationUtilisateurs(Model model) {
+		model.addAttribute("utilisateur", new Utilisateur());
+		return "view-utilisateur-modifier";
+	}
+	
+	 @PostMapping("/modifier")
+	 public String mettreAJourUtilisateur(@ModelAttribute Utilisateur utilisateur) {
+		 // Appel au service pour mettre à jour l'utilisateur
+	     utilisateurService.modifierUtilisateur(utilisateur);
+	     return "redirect:/compte/profil";
+	 }
+	
+	@PostMapping("/supprimer")
+    public String supprimerCompte() {
+       System.out.println("suppression");
+        return "redirect:/";
+	}
+	
 
 }

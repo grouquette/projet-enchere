@@ -23,9 +23,11 @@ public class Article {
 	
 
 
+
 	public Article(long noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait,
 			List<Enchere> encheres, Categorie categorie, Utilisateur utilisateur, long utilisateurId, long categorieId) {
+
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -41,11 +43,8 @@ public class Article {
 		this.utilisateurId = utilisateurId;
 		this.categorieId = categorieId;
 	}
-
-	public Article() {
-	}
-
-	public long getArticleId() {
+	
+	public long getNoArticle() {
 		return noArticle;
 	}
 
@@ -53,57 +52,65 @@ public class Article {
 		this.noArticle = noArticle;
 	}
 
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
+	}
+
 	public String getNomArticle() {
 		return nomArticle;
 	}
-
+	
 	public void setNomArticle(String nomArticle) {
 		this.nomArticle = nomArticle;
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public LocalDateTime getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
-
-	public void setDateDebutEncheres(LocalDateTime localDateTime) {
-		this.dateDebutEncheres = localDateTime;
+	
+	public void setDateDebutEncheres(LocalDateTime dateDebutEncheres) {
+		this.dateDebutEncheres = dateDebutEncheres;
 	}
-
+	
 	public LocalDateTime getDateFinEncheres() {
 		return dateFinEncheres;
 	}
-
+	
 	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
-
+	
 	public int getMiseAPrix() {
 		return miseAPrix;
 	}
-
+	
 	public void setMiseAPrix(int miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
-
+	
 	public int getPrixVente() {
 		return prixVente;
 	}
-
-	public void setPrixVente(int prixVente) {
-		this.prixVente = prixVente;
+	
+	public void setPrixVente(int priVente) {
+		this.prixVente = priVente;
 	}
-
+	
 	public String getEtatVente() {
 		return etatVente;
 	}
+	
+	public Article() {
+	}
+	
 
 	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
@@ -164,12 +171,14 @@ public class Article {
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + lieuRetrait
 				+ ", encheres=" + encheres + ", categorie=" + categorie + ", utilisateur=" + utilisateur
 				+ ", utilisateurId=" + utilisateurId + ", categorieId=" + categorieId + "]";
+
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(noArticle, categorie, categorieId, dateDebutEncheres, dateFinEncheres, description,
 				encheres, etatVente, lieuRetrait, miseAPrix, nomArticle, prixVente, utilisateur, utilisateurId);
+
 	}
 
 	@Override
@@ -190,4 +199,6 @@ public class Article {
 				&& prixVente == other.prixVente && Objects.equals(utilisateur, other.utilisateur)
 				&& utilisateurId == other.utilisateurId;
 	}
+	
+
 }

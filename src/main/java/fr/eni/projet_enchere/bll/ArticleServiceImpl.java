@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.dal.ArticleDAO;
 
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
+
 
 	private List<Article> articles;
 	private ArticleDAO articleDAO;
@@ -25,7 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public List<Article> add(Article articleAVendre) {
-		articles.add(articleAVendre);
+		articles.add(articleAVendre); 
 		return articles;
 	}
 

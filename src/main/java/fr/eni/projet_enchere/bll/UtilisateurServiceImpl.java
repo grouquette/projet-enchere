@@ -46,10 +46,22 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 	}
 
+	
 	@Override
 	public void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
 		// TODO Auto-generated method stub
-		
 	}
 
+	@Override
+	public Utilisateur consulterProfilUtilisateurParId(long id) {
+	Utilisateur u =this.consulterProfilUtilisateurParId(id);
+	return u;
+	}
+
+	@Override
+	public void modifierUtilisateur(Utilisateur utilisateur) {
+		utilisateurDAO.modifier(utilisateur);
+		
+	}
+	
 }

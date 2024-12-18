@@ -27,18 +27,21 @@ public class EnchereServiceImpl implements EnchereService {
 		return encheres;
 	}
 	
+
 	// Methode pour enchérir sur un ArticleVendu
 
 		@Override
 		public void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
 			if (articleAEncherir.getEtatVente().equals("en cours") && montantEnchere >= articleAEncherir.getMiseAPrix()
 					&& utilisateur.getCredit() >= montantEnchere
-					&& montantEnchere > getMaximumMontantEnchere(articleAEncherir.getArticleId())) {
+					&& montantEnchere > getMaximumMontantEnchere(articleAEncherir.getNoArticle())) {
 				Enchere enchere = new Enchere(LocalDateTime.now(), montantEnchere);
 				utilisateur.getEncheres().add(enchere);
-				enchereDAO.creerEnchere(enchere, articleAEncherir.getArticleId(), utilisateur.getNoUtilisateur());
+
+				enchereDAO.creerEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
 			}
 			
+
 		}
 
 		public int getMaximumMontantEnchere(long noArticle) {

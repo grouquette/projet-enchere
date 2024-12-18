@@ -8,7 +8,7 @@ public class ArticleRowMapper implements RowMapper<Article> {
 		@Override
 		public Article mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
 			Article article = new Article();
-			article.setArticleId(rs.getInt("id"));
+			article.setNoArticle(rs.getInt("id"));
 			article.setNomArticle(rs.getString("nom"));
 			article.setDescription(rs.getString("description"));
 			article.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime());

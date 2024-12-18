@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ENI-Encheres</title>
+<link rel="stylesheet" href="/css/encheres.css" />
+<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+	<form th:action="@{/utilisateurs/modifier}" method="post"
+		th:object="${utilisateur}">
+		<h1>Création du compte</h1>
+		<div class="form-container">
+			<div class="form-container">
+				<label for="idPseudo">Pseudo : </label> <input id="idPseudo"
+					type="text" th:field="*{pseudo}" th:value="${utilisateur.pseudo}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idNom">Nom : </label> <input id="idNom" type="text"
+					th:field="*{nom}" th:value="${utilisateur.nom}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idPrenom">Prenom : </label> <input id="idPrenom"
+					type="text" th:field="*{prenom}" th:value="${utilisateur.prenom}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idEmail">Email : </label> <input id="idEmail"
+					type="email" th:field="*{email}" th:value="${utilisateur.email}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idTelephone">Telephone : </label> <input
+					id="idTelephone" type="text" th:field="*{telephone}" th:value="${utilisateur.telephone}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idRue">Rue : </label> <input id="idRue" type="text"
+					th:field="*{rue}" th:value="${utilisateur.rue}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idCodePostal">Code Postal : </label> <input
+					id="idCodePostal" type="text" th:field="*{codePostal}" th:value="${utilisateur.codePostal}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idVille">Ville : </label> <input id="idVille"
+					type="text" th:field="*{ville}" th:value="${utilisateur.ville}" required="required"/>
+			</div>
+			<div class="form-container">
+				<label for="idMotDePasse">Mot de passe : </label> <input
+					id="idMotDePasse" type="password" th:field="*{motDePasse}" th:value="${utilisateur.motDePasse}" required="required" />
+			</div>
+			<div class="form-container">
+				<label for="idMotDePasse">Confirmation : </label> <input
+					id="idMotDePasse" type="password" th:field="*{motDePasseCOnf}" />
+			</div>
+		</div>
+		<div class="form-row">
+			<button type="submit" class="btn go">Enregister</button>
+		</div>
+	</form>
+	<form th:action="@{/utilisateurs/supprimer">
+		<div class="form-conatainer">
+			<button type ="submit" class="btn cncl" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+			Supprimer mon compte
+			</button>
+		</div>
+	</form>
+</body>
+</html>
