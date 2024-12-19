@@ -8,6 +8,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
@@ -26,22 +28,24 @@ public class SecurityConfig {
 				(authorize) -> authorize.requestMatchers("/login").permitAll()
 				.requestMatchers("/css/**").permitAll()
 				.requestMatchers("/images/**").permitAll()
-				.requestMatchers("/utilisateurs/signin").permitAll()
-				.requestMatchers("/utilisateurs").hasAnyRole("ADMIN").anyRequest().authenticated())
+				.requestMatchers("/utilisateur/signin").permitAll()
+				.requestMatchers("/utilisateur").hasAnyRole("ADMIN", "MEMBRE").anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults()).formLogin(form -> form.loginPage("/login").permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
 						.addLogoutHandler(clearSiteData));
 		return http.build();
 	}
-
 	@Bean
 	public UserDetailsService userDetailsService(DataSource dataSource) {
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-
 		jdbcUserDetailsManager
 				.setUsersByUsernameQuery("SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE pseudo = ?");
 		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("SELECT u.pseudo, r.ROLE FROM utilisateurs u \r\n"
 				+ "join ROLES r ON u.administrateur = r.is_admin \r\n" + "WHERE u.pseudo = ?");
 		return jdbcUserDetailsManager;
 	}
+//	@Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }

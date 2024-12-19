@@ -38,6 +38,9 @@ public class Utilisateur {
 	@NotBlank(message = "le motDePasse ne doit pas être vide.")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.")
 	private String motDePasse;
+	@NotBlank(message = "le motDePasse ne doit pas être vide.")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.")
+	private String motDePasseConfirme;
 	private int credit;
 	private boolean administrateur;
 	private List<Enchere> encheres;
@@ -146,6 +149,14 @@ public class Utilisateur {
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+
+	public String getMotDePasseConfirme() {
+		return motDePasseConfirme;
+	}
+
+	public void setMotDePasseConfirme(String motDePasseConfirme) {
+		this.motDePasseConfirme = motDePasseConfirme;
 	}
 
 	public int getCredit() {
