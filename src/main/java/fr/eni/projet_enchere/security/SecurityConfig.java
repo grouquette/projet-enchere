@@ -44,8 +44,8 @@ public class SecurityConfig {
 				+ "join ROLES r ON u.administrateur = r.is_admin \r\n" + "WHERE u.pseudo = ?");
 		return jdbcUserDetailsManager;
 	}
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//	@Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }
