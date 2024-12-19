@@ -74,19 +74,11 @@ public class UtilisateurController {
 		return "view-utilisateur";
 	}
 
-	@GetMapping("/detail")
-	public String afficherDetailUtilisateur(@RequestParam long noUtilisateur, Model model) {
+	
 
-		Utilisateur utilisateur = this.utilisateurService.consulterProfilUtilisateurParId(noUtilisateur);
-
-		model.addAttribute("utilisateur", utilisateur);
-
-		return "view-utilisateur-detail";
-	}
-
-	@PostMapping("/detail")
+	@PostMapping
 	public String mettreAJourUtilisateur() {
-		return "redirect:/utilisateurs";
+		return "redirect:/utilisateur";
 	}
 
 	@GetMapping("/modifier")
