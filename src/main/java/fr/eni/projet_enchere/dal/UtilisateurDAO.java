@@ -8,5 +8,8 @@ public interface UtilisateurDAO {
 	
 	Utilisateur lire(long id);
 	
+	Utilisateur findByPseudo(String pseudo);
+	
 	void modifier(Utilisateur utilisateur);
+
 }

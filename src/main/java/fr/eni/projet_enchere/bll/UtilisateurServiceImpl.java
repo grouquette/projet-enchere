@@ -18,7 +18,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		this.utilisateurDAO = utilisateurDAO;
 		this.articleService = articleService;
 	}
+	@Override
+	public Utilisateur creerUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		utilisateurDAO.creer(utilisateur);
+		return utilisateur;
+	}
 
+	@Override
+	public Utilisateur findByPseudo(String pseudo) {
+		return utilisateurDAO.findByPseudo(pseudo);
+	}
 	@Override
 	public Article mettreEnVente(Article article) {
 		articleService.add(article);
@@ -39,13 +48,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return null;
 		//TODO
 	}
-
-	@Override
-	public void creerUtilisateur(Utilisateur utilisateur) throws BusinessException {
-		utilisateurDAO.creer(utilisateur);
-		
-	}
-
 	
 	@Override
 	public void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<form th:action="@{/utilisateurs/signin}" method="post"
+	<form th:action="@{/utilisateur/signin}" method="post"
 		th:object="${utilisateur}">
 		<h1>Création du compte</h1>
 		<div th:if="${#fields.hasErrors('*')}">
@@ -67,12 +67,6 @@
 					id="idMotDePasse" type="password" th:field="*{motDePasse}" />
 				<div
 					th:replace="~{fragments/fragment-error :: frag-error('motDePasse')}"></div>
-			</div>
-			<div class="form-container">
-				<label for="idMotDePasse">Confirmation : </label> <input
-					id="idMotDePasse" type="password" th:field="*{motDePasseConf}" />
-					
-				<!-- Finir la confirmation -->
 			</div>
 		</div>
 		<div class="form-row">

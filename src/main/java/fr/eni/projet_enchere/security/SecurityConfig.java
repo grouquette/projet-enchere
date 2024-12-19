@@ -26,18 +26,16 @@ public class SecurityConfig {
 				(authorize) -> authorize.requestMatchers("/login").permitAll()
 				.requestMatchers("/css/**").permitAll()
 				.requestMatchers("/images/**").permitAll()
-				.requestMatchers("/utilisateurs/signin").permitAll()
-				.requestMatchers("/utilisateurs").hasAnyRole("ADMIN").anyRequest().authenticated())
+				.requestMatchers("/utilisateur/signin").permitAll()
+				.requestMatchers("/utilisateur").hasAnyRole("ADMIN").anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults()).formLogin(form -> form.loginPage("/login").permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
 						.addLogoutHandler(clearSiteData));
 		return http.build();
 	}
-
 	@Bean
 	public UserDetailsService userDetailsService(DataSource dataSource) {
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-
 		jdbcUserDetailsManager
 				.setUsersByUsernameQuery("SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE pseudo = ?");
 		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("SELECT u.pseudo, r.ROLE FROM utilisateurs u \r\n"
