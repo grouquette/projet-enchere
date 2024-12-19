@@ -2,19 +2,14 @@
 <nav class="navbar" th:fragment="entete">
 	<a href="/" class="logo">ENI-Encheres</a>
 
-	
 	<ul>
+	<div>
+	</div>
 		<li><a th:href="@{/encheres}">Enchères</a></li>
 		<li><a sec:authorize="isAuthenticated()" th:href="@{/article/creer}">Vendre un article</a></li>
-
-		<li><a sec:authorize="isAuthenticated()" th:href="@{/utilisateurs/detail}">Mon profil</a></li>
-
-		<li><a sec:authorize="isAuthenticated()" th:if="${utilisateur!= null}" th:href="@{/utilisateurs/detail(noUtilisateur=${utilisateur.noUtilisateur})}">Mon profil</a>
-			<a th:if="${utilisateur == null}" href="#">Utilisateur non connecté</a></li> <!-- A enlever quand la mise en place de la connection sera bonne -->
-
-		<li><a sec:authorize="!isAuthenticated()" th:href="@{/utilisateurs/signin}">S'inscrire</a></li>
+		<li><a sec:authorize="isAuthenticated()" th:href="@{/utilisateur}">Mon profil</a></li>
+		<li><a sec:authorize="!isAuthenticated()" th:href="@{/utilisateur/signin}">S'inscrire</a></li>
 		<li><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Se connecter</a></li>
 		<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a></li>
 		</ul>
 </nav> 
-

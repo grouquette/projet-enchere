@@ -19,7 +19,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		this.utilisateurDAO = utilisateurDAO;
 		this.articleService = articleService;
 	}
-
+	
+	@Override
+	public Utilisateur findByPseudo(String pseudo) {
+		return utilisateurDAO.findByPseudo(pseudo);
+	}
 	@Override
 	public Article mettreEnVente(Article article) {
 		articleService.add(article);
@@ -34,7 +38,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	@Transactional
-	public void creerUtilisateur(Utilisateur utilisateur) throws BusinessException {
+	public Utilisateur creerUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		boolean valide = validerEmailUnique(utilisateur.getEmail(), be);
 		valide &= validerPseudoUnique(utilisateur.getPseudo(), be);
@@ -44,8 +48,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		}else {
 			throw be;
 		}
+		return utilisateur;
 	}
-
 	
 	@Override
 	public void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {

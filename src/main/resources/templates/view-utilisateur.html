@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ENI-Encheres</title>
+<link rel="stylesheet" href="/css/encheres.css" />
+<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+<body>
+	<form class="form-container">
+		<ul>
+			<div class="form-container">Pseudo : <span th:text="${utilisateurConnecte.pseudo}"></span></div>
+			<div class="form-container">Nom : <span th:text="${utilisateurConnecte.nom}"></span></div>
+			<div class="form-container">Prénom : <span th:text="${utilisateurConnecte.prenom}"></span></div>
+			<div class="form-container">Email : <span th:text="${utilisateurConnecte.email}"></span></div>
+			<div class="form-container">Telephone : <span th:text="${utilisateurConnecte.telephone}"></span></div>
+			<div class="form-container">Rue : <span th:text="${utilisateurConnecte.rue}"></span></div>
+			<div class="form-container">Code postal : <span
+				th:text="${utilisateurConnecte.codePostal}"></span></div>
+			<div class="form-container">Ville : <span th:text="${utilisateurConnecte.ville}"></span></div>
+		</ul>
+	</form>
+
+</body>
+</body>
+</html>
