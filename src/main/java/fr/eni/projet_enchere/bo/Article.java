@@ -44,15 +44,24 @@ public class Article {
 		this.categorieId = categorieId;
 	}
 	
+	public Article() {
+	}
+	
+
+	public Article(String nomArticle2, String description2, Categorie categorie2, LocalDateTime dateDebutEncheres2,
+			LocalDateTime dateFinEncheres2, int miseAPrix2, Retrait lieuRetrait2) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public long getNoArticle() {
 		return noArticle;
 	}
 
-	public void setArticleId(int noArticle) {
+	public void setArticleId(long noArticle) {
 		this.noArticle = noArticle;
 	}
 
-	public void setNoArticle(int noArticle) {
+	public void setNoArticle(long noArticle) {
 		this.noArticle = noArticle;
 	}
 
@@ -100,17 +109,13 @@ public class Article {
 		return prixVente;
 	}
 	
-	public void setPrixVente(int priVente) {
-		this.prixVente = priVente;
+	public void setPrixVente(int prixVente) {
+		this.prixVente = prixVente;
 	}
 	
 	public String getEtatVente() {
 		return etatVente;
 	}
-	
-	public Article() {
-	}
-	
 
 	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;

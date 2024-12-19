@@ -27,12 +27,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur read(int id) {
-		return utilisateurDAO.read(id);
+		return utilisateurDAO.lire(id);
 	}
 
 	@Override
 	public Utilisateur consulterUtilisateurParId(int id) {
-		return utilisateurDAO.read(id);
+		return utilisateurDAO.lire(id);
 	}
 
 	public Enchere saveEnchere() {
