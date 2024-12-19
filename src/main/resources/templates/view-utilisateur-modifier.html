@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<form th:action="@{/utilisateurs/modifier}" method="post"
+	<form th:action="@{/utilisateur/modifier}" method="post"
 		th:object="${utilisateur}">
 		<h1>Création du compte</h1>
 		<div class="form-container">
@@ -57,7 +57,7 @@
 			<button type="submit" class="btn go">Enregister</button>
 		</div>
 	</form>
-	<form th:action="@{/utilisateurs/supprimer">
+	<form th:action="@{/utilisateur/supprimer">
 		<div class="form-conatainer">
 			<button type ="submit" class="btn cncl" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
 			Supprimer mon compte
