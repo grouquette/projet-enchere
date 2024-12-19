@@ -9,48 +9,52 @@
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
 	<form th:action="@{/utilisateur/modifier}" method="post"
-		th:object="${utilisateur}">
+		th:object="${utilisateurConnecte}">
 		<h1>Modification du compte</h1>
 		<div class="form-container">
 			<div class="form-container">
 				<label for="idPseudo">Pseudo : </label> <input id="idPseudo"
-					type="text" th:field="*{pseudo}" th:value="${utilisateur.pseudo}" required="required"/>
+					type="text" th:field="*{pseudo}" th:value="${utilisateurConnecte.pseudo}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idNom">Nom : </label> <input id="idNom" type="text"
-					th:field="*{nom}" th:value="${utilisateur.nom}" required="required"/>
+					th:field="*{nom}" th:value="${utilisateurConnecte.nom}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idPrenom">Prenom : </label> <input id="idPrenom"
-					type="text" th:field="*{prenom}" th:value="${utilisateur.prenom}" required="required"/>
+					type="text" th:field="*{prenom}" th:value="${utilisateurConnecte.prenom}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idEmail">Email : </label> <input id="idEmail"
-					type="email" th:field="*{email}" th:value="${utilisateur.email}" required="required"/>
+					type="email" th:field="*{email}" th:value="${utilisateurConnecte.email}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idTelephone">Telephone : </label> <input
-					id="idTelephone" type="text" th:field="*{telephone}" th:value="${utilisateur.telephone}" required="required"/>
+					id="idTelephone" type="text" th:field="*{telephone}" th:value="${utilisateurConnecte.telephone}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idRue">Rue : </label> <input id="idRue" type="text"
-					th:field="*{rue}" th:value="${utilisateur.rue}" required="required"/>
+					th:field="*{rue}" th:value="${utilisateurConnecte.rue}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idCodePostal">Code Postal : </label> <input
-					id="idCodePostal" type="text" th:field="*{codePostal}" th:value="${utilisateur.codePostal}" required="required"/>
+					id="idCodePostal" type="text" th:field="*{codePostal}" th:value="${utilisateurConnecte.codePostal}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idVille">Ville : </label> <input id="idVille"
-					type="text" th:field="*{ville}" th:value="${utilisateur.ville}" required="required"/>
+					type="text" th:field="*{ville}" th:value="${utilisateurConnecte.ville}" required="required"/>
 			</div>
 			<div class="form-container">
 				<label for="idMotDePasse">Mot de passe : </label> <input
-					id="idMotDePasse" type="password" th:field="*{motDePasse}" th:value="${utilisateur.motDePasse}" required="required" />
+					id="idMotDePasse" type="password" th:field="*{motDePasse}" th:value="${utilisateurConnecte.motDePasse}"  />
 			</div>
 			<div class="form-container">
-				<label for="idMotDePasse">Confirmation : </label> <input
-					id="idMotDePasse" type="password" th:field="*{motDePasseConfirme}" />
+				<label for="idMotDePasse2">Confirmation : </label> <input
+					id="idMotDePasse2" type="password" th:field="*{motDePasseConfirme}" />
+			</div>
+			<div class ="form-container">
+				<label for="idCredit">Crédit</label><input
+				id="idCredit" type="number" th:value="${utilisateurConnecte.credit}" readonly="readonly"/>
 			</div>
 		</div>
 		<div class="form-row">
@@ -58,7 +62,7 @@
 		</div>
 	</form>
 	<!--  <form th:action="@{/utilisateur/supprimer">
-		<div class="form-conatainer">
+		<div class="form-container">
 			<button type ="submit" class="btn cncl" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
 			Supprimer mon compte
 			</button>-->

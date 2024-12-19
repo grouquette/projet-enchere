@@ -104,4 +104,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 		return motDePasseConfirm;
 	}
+
+	@Override
+	public void supprimerUtilisateur(String pseudo) {
+		utilisateurDAO.supprimer(pseudo);
+		
+	}
 }

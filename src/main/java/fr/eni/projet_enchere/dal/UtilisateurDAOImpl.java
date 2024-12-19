@@ -29,6 +29,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
 	private static final String COUNT_EMAIL = "SELECT COUNT(*) FROM UTILISATEURS WHERE email = :email" ;
 
+	private static final String DELETE_BY_PSEUDO = "DELETE FROM UTILISATEURS WHERE pseudo = :pseudo";
 	
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -118,4 +119,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		return nbEmail > 0 ? true : false;
 	}
 
+	public void supprimer(String pseudo) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		this.jdbcTemplate.update(DELETE_BY_PSEUDO, map);
+		
+	}
 }
