@@ -61,11 +61,12 @@
 			<button type="submit" class="btn go">Enregister</button>
 		</div>
 	</form>
-	<!--  <form th:action="@{/utilisateur/supprimer">
-		<div class="form-container">
-			<button type ="submit" class="btn cncl" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+	<form th:action="@{/utilisateur/supprimer}" th:object="${utilisateurConnecte}" method="post">
+		<div class="form-row">
+			<input type="hidden" th:field="*{pseudo}" />
+			<button type ="submit" class="btn cncl">
 			Supprimer mon compte
-			</button>-->
+			</button>
 		</div>
 	</form>
 </body>

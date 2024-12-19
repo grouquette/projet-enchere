@@ -32,10 +32,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return article;
 	}
 
-	@Override
-	public Utilisateur consulterUtilisateurParId(int id) {
-		return utilisateurDAO.lire(id);
-	}
+	
 	
 	public Enchere saveEnchere() {
 		return null;
@@ -66,7 +63,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur consulterProfilUtilisateurParId(long id) {
-	Utilisateur u =this.consulterProfilUtilisateurParId(id);
+	Utilisateur u =this.utilisateurDAO.lire(id);
 	return u;
 	}
 

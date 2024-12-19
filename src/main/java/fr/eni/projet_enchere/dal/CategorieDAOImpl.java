@@ -11,7 +11,7 @@ import fr.eni.projet_enchere.bo.Categorie;
 @Repository
 public class CategorieDAOImpl implements CategorieDAO {
 
-    private static final String FIND_ALL_CATEGORIES = "SELECT id, libelle FROM Categories";
+    private static final String FIND_ALL_CATEGORIES = "SELECT no_categorie, libelle FROM Categories";
 
     private NamedParameterJdbcTemplate jdbcTemplate;
 

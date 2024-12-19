@@ -123,6 +123,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("pseudo", pseudo);
 		this.jdbcTemplate.update(DELETE_BY_PSEUDO, map);
+	
 		
 	}
 }

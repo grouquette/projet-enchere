@@ -100,7 +100,7 @@ public class UtilisateurController {
 	@PostMapping("/supprimer")
 	public String supprimerCompte(@ModelAttribute Utilisateur utilisateur) {
 		utilisateurService.supprimerUtilisateur(utilisateur.getPseudo());
-		return "redirect:/";
+		return "redirect:/logout";
 	}
 
 }
