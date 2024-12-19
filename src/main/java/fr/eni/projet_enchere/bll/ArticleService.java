@@ -2,11 +2,12 @@ package fr.eni.projet_enchere.bll;
 
 import java.util.List;
 
-import fr.eni.projet_enchere.bo.ArticleVendu;
+import fr.eni.projet_enchere.bo.Article;
 
 public interface ArticleService {
 
-	void remove(ArticleVendu articleVendu);
-	List<ArticleVendu> add(ArticleVendu articleAVendre);
-	
+
+	void remove(Article article);
+	List<Article> add(Article articleAVendre);
+	Article consulterArticleParId(long id);
 }

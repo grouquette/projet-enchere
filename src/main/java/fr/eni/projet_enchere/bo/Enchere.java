@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Enchere {
 	
+	private long idEnchere;
 	private LocalDateTime dateEnchere;
 	private int montantEnchere;
 	
@@ -29,6 +30,14 @@ public class Enchere {
 		this.montantEnchere = montant_enchere;
 	}
 	
+	public long getIdEnchere() {
+		return idEnchere;
+	}
+
+	public void setIdEnchere(long idEnchere) {
+		this.idEnchere = idEnchere;
+	}
+
 	@Override
 	public String toString() {
 		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montantEnchere + "]";
@@ -50,7 +59,5 @@ public class Enchere {
 		Enchere other = (Enchere) obj;
 		return dateEnchere == other.dateEnchere && montantEnchere == other.montantEnchere;
 	}
-	
-	
 
 }

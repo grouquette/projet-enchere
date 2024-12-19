@@ -68,6 +68,12 @@
 				<div
 					th:replace="~{fragments/fragment-error :: frag-error('motDePasse')}"></div>
 			</div>
+			<div class="form-container">
+				<label for="idMotDePasse">Confirmation : </label> <input
+					id="idMotDePasse" type="password" th:field="*{motDePasseConf}" />
+					
+				<!-- Finir la confirmation -->
+			</div>
 		</div>
 		<div class="form-row">
 			<button type="submit" class="btn go">Creer</button>

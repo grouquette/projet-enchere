@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Categorie {
 
+
 	private short noCategorie;
 	private String libelle;
-	private List<ArticleVendu> articles;
+	private List<Article> articles;
 
-	public Categorie(short noCategorie, String libelle, List<ArticleVendu> articles) {
-		super();
+	public Categorie(short noCategorie, String libelle, List<Article> articles) {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 		this.articles = articles;
@@ -19,6 +19,7 @@ public class Categorie {
 	public short getNoCategorie() {
 		return noCategorie;
 	}
+	
 	
 	public void setNoCategorie(short noCategorie) {
 		this.noCategorie = noCategorie;
@@ -30,6 +31,14 @@ public class Categorie {
 	
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+	
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 
 	@Override
