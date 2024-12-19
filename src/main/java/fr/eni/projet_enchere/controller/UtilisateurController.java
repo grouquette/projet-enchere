@@ -54,7 +54,7 @@ public class UtilisateurController {
 					ObjectError error = new ObjectError("globalError", m);
 					bindingResult.addError(error);
 				});
-				return "view-utilisateur";
+				return "view-utilisateur-creation";
 			}
 		}
 	}
