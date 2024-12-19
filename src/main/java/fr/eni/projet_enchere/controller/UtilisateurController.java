@@ -56,17 +56,6 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/signin")
-	public String creerUtilisateur(@ModelAttribute Utilisateur utilisateur) {
-		try {
-			this.utilisateurService.creerUtilisateur(utilisateur);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return "redirect:/utilisateurs";
-	}
-
 	public String creerUtilisateur(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult bindingResult)
 			throws BusinessException {
 		if (bindingResult.hasErrors()) {

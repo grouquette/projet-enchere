@@ -20,6 +20,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	private static final String FIND_ALL = "SELECT id, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM Utilisateurs WHERE id = :id";
 	
+	private static final String COUNT_PSEUDO = "SELECT COUNT(*) FROM UTILISATEURS WHERE pseudo = :pseudo" ;
+	
+	private static final String COUNT_EMAIL = "SELECT COUNT(*) FROM UTILISATEURS WHERE email = :email" ;
+
+	
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	public UtilisateurDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
@@ -80,6 +85,22 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		map.addValue("mdp", utilisateur.getMotDePasse());
 		
 		this.jdbcTemplate.update(UPDATE, map);		
+	}
+
+	@Override
+	public boolean existPseudo(String pseudo) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		int nbPseudo = jdbcTemplate.queryForObject(COUNT_PSEUDO, map, Integer.class);
+		return nbPseudo > 0 ? true : false;
+	}
+
+	@Override
+	public boolean existEmail(String email) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("email", email);
+		int nbEmail = jdbcTemplate.queryForObject(COUNT_EMAIL, map, Integer.class);
+		return nbEmail > 0 ? true : false;
 	}
 
 }

@@ -1,6 +1,7 @@
 package fr.eni.projet_enchere.bll;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
@@ -25,25 +26,24 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return article;
 	}
 
-	@Override
-	public Utilisateur read(int id) {
-		return utilisateurDAO.read(id);
-	}
-
-	@Override
-	public Utilisateur consulterUtilisateurParId(int id) {
-		return utilisateurDAO.read(id);
-	}
-
+	
 	public Enchere saveEnchere() {
 		return null;
 		//TODO
 	}
 
 	@Override
+	@Transactional
 	public void creerUtilisateur(Utilisateur utilisateur) throws BusinessException {
-		utilisateurDAO.creer(utilisateur);
-		
+		BusinessException be = new BusinessException();
+		boolean valide = validerEmailUnique(utilisateur.getEmail(), be);
+		valide &= validerPseudoUnique(utilisateur.getPseudo(), be);
+		valide &= validerMotDePasse(utilisateur.getMotDePasse(), utilisateur.getMotDePasseConfirme(), be);
+		if (valide) {
+			utilisateurDAO.creer(utilisateur);
+		}else {
+			throw be;
+		}
 	}
 
 	
@@ -64,4 +64,36 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 	}
 	
+	private boolean validerPseudoUnique(String pseudo, BusinessException be) {
+		
+		boolean pseudoExiste = this.utilisateurDAO.existPseudo(pseudo);
+		
+		if (pseudoExiste) {
+			be.addMessage("Le pseudo existe déjà");
+		}
+		
+		return !pseudoExiste;
+	}
+	
+	private boolean validerEmailUnique(String email, BusinessException be) {
+		
+		boolean emailExiste = this.utilisateurDAO.existEmail(email);
+		
+		if (emailExiste) {
+			be.addMessage("L'adresse email existe déjà");
+		}
+		
+		return !emailExiste;
+	}
+	
+	private boolean validerMotDePasse(String motDePasse, String motDePasseConfirme, BusinessException be) {
+		
+		boolean motDePasseConfirm = motDePasse != null && motDePasse.equals(motDePasseConfirme);
+		
+		if (!motDePasseConfirm) {
+			be.addMessage("Les mots de passe ne sont pas identiques");
+		}
+		
+		return motDePasseConfirm;
+	}
 }

@@ -11,19 +11,13 @@ import fr.eni.projet_enchere.exception.BusinessException;
 public interface UtilisateurService {
 	
 	Article mettreEnVente(Article article);
-
-	Utilisateur read(int id);
-
-	Utilisateur consulterUtilisateurParId(int id);
 	
 	void creerUtilisateur(Utilisateur utilisateur) throws BusinessException;
 	
-
 	Utilisateur consulterProfilUtilisateurParId(long id);
 	
 	void modifierUtilisateur(Utilisateur utilisateur);
-	
-	
+		
 	void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere);
 
 }

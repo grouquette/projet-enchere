@@ -9,4 +9,8 @@ public interface UtilisateurDAO {
 	Utilisateur lire(long id);
 	
 	void modifier(Utilisateur utilisateur);
+	
+	boolean existPseudo(String pseudo);
+	
+	boolean existEmail(String email);
 }
