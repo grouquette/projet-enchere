@@ -74,24 +74,19 @@ public class UtilisateurController {
 		return "view-utilisateur";
 	}
 
-	@GetMapping("/detail")
-	public String afficherDetailUtilisateur(@RequestParam long noUtilisateur, Model model) {
-
-		Utilisateur utilisateur = this.utilisateurService.consulterProfilUtilisateurParId(noUtilisateur);
-
-		model.addAttribute("utilisateur", utilisateur);
-
-		return "view-utilisateur-detail";
-	}
-
-	@PostMapping("/detail")
-	public String mettreAJourUtilisateur() {
-		return "redirect:/utilisateurs";
-	}
 
 	@GetMapping("/modifier")
 	public String afficherModificationUtilisateurs(Model model) {
-		model.addAttribute("utilisateur", new Utilisateur());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()) {
+			User userDetails = (User) authentication.getPrincipal();
+			String pseudo = userDetails.getUsername();
+			Utilisateur utilisateur = utilisateurService.findByPseudo(pseudo);
+
+			model.addAttribute("utilisateurConnecte", utilisateur);
+		} else {
+			model.addAttribute("utilisateurConnecte", null);
+		}
 		return "view-utilisateur-modifier";
 	}
 
@@ -99,13 +94,13 @@ public class UtilisateurController {
 	public String mettreAJourUtilisateur(@ModelAttribute Utilisateur utilisateur) {
 		// Appel au service pour mettre à jour l'utilisateur
 		utilisateurService.modifierUtilisateur(utilisateur);
-		return "redirect:/compte/profil";
+		return "redirect:/utilisateur";
 	}
 
 	@PostMapping("/supprimer")
-	public String supprimerCompte() {
-		System.out.println("suppression");
-		return "redirect:/";
+	public String supprimerCompte(@ModelAttribute Utilisateur utilisateur) {
+		utilisateurService.supprimerUtilisateur(utilisateur.getPseudo());
+		return "redirect:/logout";
 	}
 
 }

@@ -35,6 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	
+	
 	public Enchere saveEnchere() {
 		return null;
 		//TODO
@@ -65,7 +66,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur consulterProfilUtilisateurParId(long id) {
-	Utilisateur u =this.consulterProfilUtilisateurParId(id);
+	Utilisateur u =this.utilisateurDAO.lire(id);
 	return u;
 	}
 
@@ -106,5 +107,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		}
 		
 		return motDePasseConfirm;
+	}
+
+	@Override
+	public void supprimerUtilisateur(String pseudo) {
+		utilisateurDAO.supprimer(pseudo);
+		
 	}
 }

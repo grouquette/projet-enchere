@@ -20,5 +20,9 @@ public interface UtilisateurService {
 	void modifierUtilisateur(Utilisateur utilisateur);
 
 	void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere);
+	
+	void supprimerUtilisateur(String pseudo);
+
+
 
 }
