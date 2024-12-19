@@ -1,7 +1,5 @@
 package fr.eni.projet_enchere.bll;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +13,8 @@ import fr.eni.projet_enchere.exception.BusinessException;
 public class UtilisateurServiceImpl implements UtilisateurService {
 	
 	private UtilisateurDAO utilisateurDAO;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 	private ArticleService articleService;
 
 	public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO, ArticleService articleService) {
@@ -48,8 +46,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		valide &= validerPseudoUnique(utilisateur.getPseudo(), be);
 		valide &= validerMotDePasse(utilisateur.getMotDePasse(), utilisateur.getMotDePasseConfirme(), be);
 		if (valide) {
-			String motDePasseHashe = passwordEncoder.encode(utilisateur.getMotDePasse());
-		    utilisateur.setMotDePasse(motDePasseHashe);
+//			String motDePasseHashe = "{bcrypt}" + passwordEncoder.encode(utilisateur.getMotDePasse());
+//		    utilisateur.setMotDePasse(motDePasseHashe);
 			utilisateurDAO.creer(utilisateur);
 		}else {
 			throw be;

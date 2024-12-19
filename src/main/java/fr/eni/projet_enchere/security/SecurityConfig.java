@@ -29,7 +29,7 @@ public class SecurityConfig {
 				.requestMatchers("/css/**").permitAll()
 				.requestMatchers("/images/**").permitAll()
 				.requestMatchers("/utilisateur/signin").permitAll()
-				.requestMatchers("/utilisateur").hasAnyRole("ADMIN").anyRequest().authenticated())
+				.requestMatchers("/utilisateur").hasAnyRole("ADMIN", "MEMBRE").anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults()).formLogin(form -> form.loginPage("/login").permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
 						.addLogoutHandler(clearSiteData));
@@ -44,8 +44,8 @@ public class SecurityConfig {
 				+ "join ROLES r ON u.administrateur = r.is_admin \r\n" + "WHERE u.pseudo = ?");
 		return jdbcUserDetailsManager;
 	}
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//	@Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }
