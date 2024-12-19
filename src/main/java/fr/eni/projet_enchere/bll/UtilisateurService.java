@@ -23,4 +23,6 @@ public interface UtilisateurService {
 	
 	void supprimerUtilisateur(String pseudo);
 
+	Utilisateur consulterUtilisateurParId(int id);
+
 }

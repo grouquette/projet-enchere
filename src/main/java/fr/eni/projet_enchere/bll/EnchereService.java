@@ -14,4 +14,6 @@ public interface EnchereService {
 	
 	void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere);
 
+	int getMaximumMontantEnchere(long noArticle);
+
 }

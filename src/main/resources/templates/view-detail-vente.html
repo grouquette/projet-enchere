@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Détail Vente</title>
+<link rel="stylesheet" href="/css/encheres.css" />
+<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+</head>
+<body>
+<div th:replace="~{fragments/fragments-entete::entete}"></div>
+<main>
+		<h1>Détail vente</h1>
+		
+		
+		
+		<form action="/details" method="post">
+		
+		
+		
+			<ul class="flex-outer">
+				<li>
+					<label for="idArticle"></label>
+					<input id="idArticle" type="text" th:value="${article.noArticle}" readonly/>
+				</li>
+				<li>
+					<label for="idDescription">Description : </label>
+					<textarea id="idDescription" cols="30" rows="10" th:text="${article.description}" ></textarea>
+				</li>
+				<li>
+					<label for="idCategorie">Catégorie</label>
+					<input id="idCategorie" type="text" th:value="${categorie}" />
+				</li>
+				<li>
+					<label for="idMaxEnchere">Meilleure offre : </label>
+					<input id="idMaxEnchere" type="text" th:value="${prixVente}" />
+				</li>
+				<li>
+					<label for="idMiseAPrix">Mise à prix : </label>
+					<input id="idMiseAPrix" type="number" th:value="${miseAPrix}" />
+				<li>
+					<label for="idFinEnchere">Fin de l'enchère : </label>
+					<input id="idFinEnchere" type="text" th:value="${dateFinEncheres}" />
+				</li>
+				<li>
+					<label for="retrait">Retrait :</label>
+					<input id="retrait" type="text" th:value="${lieuRetrait.rue} + ' ' + ${lieuRetrait.code_postal} + ' ' + ${lieuRetrait.ville}" />
+				</li>
+				<li>
+					<label for="idVendeur">Vendeur :</label>
+					<input id="idVendeur" type="text" th:value="${utilisateur}" />
+				</li>
+				<li>
+					<label for="proposition">Ma proposition</label>
+					<select name="" id="">
+						<option th:each="p : ${propositions}" th:value="${a}"></option>
+					</select>
+					<div class="form-row">
+			<button type="submit" class="btn go">Enchérir</button>
+		</div>
+				</li>
+			</ul>
+		
+		
+		</form>
+</main>
+
+</body>
+</html>

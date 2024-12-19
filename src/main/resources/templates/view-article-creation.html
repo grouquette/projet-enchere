@@ -8,34 +8,52 @@
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<form action="/article/creer" method="post">
-		<h1>Création d'un article de vente</h1>
-		<div class="form-container">
-			<label for="idTitre">Article</label><input id="idTitre" type="text" />
+
+		<h1>Nouvelle vente</h1>
+		
+			<form action="/creer" method="post" th:object="${article}">
+			
+			<ul class="flex-outer">
+				<li>
+					<label for="article">Article</label>
+					<input id="articleId" type="text" th:field="*{nomArticle}" required/>
+				</li>
+				<li>
+					<label for="description">Description : </label>
+					<textarea id="idDescription" maxlength="250" cols="30" rows="10" th:field="*{description}" required></textarea>
+				</li>
+				<li>
+					<label for="categorie">Catégorie :</label> <select id="categorie" th:field="*{categorie}"> 
+					<option th:each="categorie : ${categories}" th:value="${categorie.noCategorie}" th:text="${categorie.libelle}"></option> 
+					</select>
+				</li>
+				<li>
+					<label for="idMiseAPrix">Mise à prix :</label> 
+					<select id="idMiseAPrix" th:field="*{miseAPrix}"> 
+					<option th:each="prix : ${prixList}" th:value="${prix}" th:text="${prix}"></option>
+					</select>
+				<li>
+				<li> <label for="dateDebutEncheres">Début de l'enchères :</label> 
+					<input id="idDateDebutEncheres" type="datetime-local" th:field="*{dateDebutEncheres}" required/>
+				<li>
+				<li> 
+					<label for="dateFinEncheres">Fin de l'enchères :</label> 
+					<input id="dateFinEncheres" type="datetime-local" th:field="*{dateFinEncheres}" required/> 
+				</li>
+				<li>
+					<label for="lieuRetrait">Retrait :</label>
+					<input id="lieuRetrait" type="text" th:field="*{lieuRetrait.rue}" required/>
+					<input id="lieuRetrait" type="text" th:field="*{lieuRetrait.code_postal}" required/>
+					<input id="lieuRetrait" type="text" th:field="*{lieuRetrait.ville}" required/>
+				</li>
+					
+		<div class="form-row">
+			<button type="submit" class="btn go">Enregister</button>
+			<button type="submit" class="btn go">Annuler</button>
+			<button type="submit" class="btn go">Annuler la vente</button>
 		</div>
-		<div class="form-container">
-			<label for="idDescription">Description</label>
-			<textarea id="idDescription" type="text" /></textarea>
-		</div>
-		<div class="form-container">
-			<label for="idCategorie">Catégorie</label><input id="idCategorie"
-				type="text" />
-		</div>
-		<div class="form-container">
-			<label for="idPrix">Mise à prix</label><input id="idPrix"
-				type="number" />
-		</div>
-		<div class="form-container">
-			<label for="idDateDebut">Début de l'enchère</label><input
-				id="idDateDebut" type="date" />
-		</div>
-		<div class="form-container">
-			<label for="idDateFin">Fin de l'enchère</label><input id="idDateFin"
-				type="date" />
-		</div>
-		<div class="form-container">
-			<button type="submit" class="btn go">Enregistrer</button>
-		</div>
-	</form>
+			</ul>
+		
+		</form>
 </body>
 </html>
