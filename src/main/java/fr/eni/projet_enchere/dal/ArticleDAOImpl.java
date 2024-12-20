@@ -2,6 +2,7 @@ package fr.eni.projet_enchere.dal;
 
 import java.util.List;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -19,6 +20,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String FIND_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
 	private static final String FIND_ALL_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
 	private static String INSERT_ARTICLE = "INSERT INTO Articles (nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id) VALUES (:nom, :description, :dateDebutEncheres, :dateFinEncheres, :miseAPrix, :prixVente, :etatVente, :vendeurId, :categorieId)";
+	private static final String FIND_ALL_ARTICLE = "SELECT * FROM Articles_vendus";
 
 	public ArticleDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -55,5 +57,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("idArticle", id);
 		return this.jdbcTemplate.query(FIND_ALL_BY_ID, params, new ArticleRowMapper());
+	}
+
+	@Override
+	public List<Article> findAll() {
+		return jdbcTemplate.query(FIND_ALL_ARTICLE, new BeanPropertyRowMapper<>(Article.class));
 	}
 }

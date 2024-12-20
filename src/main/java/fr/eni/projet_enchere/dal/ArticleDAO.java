@@ -12,5 +12,7 @@ public interface ArticleDAO {
 	List<Article> findById(long id);
 
 	void creerArticle(Article article);
+
+	List<Article> findAll();
 	
 }
