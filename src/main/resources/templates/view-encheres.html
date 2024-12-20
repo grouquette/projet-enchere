@@ -4,9 +4,25 @@
 <meta charset="UTF-8">
 <title>ENI-Encheres</title>
 <link rel="stylesheet" href="/css/encheres.css" />
+<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
 	<h1>Liste des enchères</h1>
+	<div th:each="article : ${articleSession}">
+			<form th:action="@{/encheres}" method="post">
+				<input type="hidden" name="text" th:value="${article}" />
+				<button type="submit">
+					<h2 th:text="${article.nomArticle}"></h2>
+					<p><strong>Description:</strong> <span th:text="${article.description}"></span></p>
+					<p><strong>Date de début:</strong> <span th:text="${article.dateDebutEncheres}"></span></p>
+					<p><strong>Date de fin:</strong> <span th:text="${article.dateFinEncheres}"></span></p>
+					<p><strong>Mise à prix:</strong> <span th:text="${article.miseAPrix}"></span></p>
+					<p><strong>Prix de vente:</strong> <span th:text="${article.prixVente}"></span></p>
+					<p><strong>État de la vente:</strong> <span th:text="${article.etatVente}"></span></p>
+				</button>
+			</form>
+		</div>
 </body>
 </html>
