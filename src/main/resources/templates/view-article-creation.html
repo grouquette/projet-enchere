@@ -1,59 +1,58 @@
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
-<title>ENI-Encheres</title>
+    <meta charset="UTF-8">
+    <title>Nouvelle vente</title>
 <link rel="stylesheet" href="/css/encheres.css" />
 <link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+    <h1>Nouvelle vente</h1>
+    <form action="/article/creer" method="post" th:object="${article}">
+        <ul class="flex-outer">
+            <li>
+                <label for="nomArticle">Article</label>
+                <input id="nomArticle" type="text" th:field="*{nomArticle}" required/>
+            </li>
+            <li>
+                <label for="description">Description :</label>
+                <textarea id="description" th:field="*{description}" required></textarea>
+            </li>
+            <li>
+                <label for="categorie">Catégorie :</label>
+                <select id="categorie" th:field="*{categorie}">
+                    <option th:each="categorie : ${categories}" th:value="${categorie.noCategorie}" th:text="${categorie.libelle}"></option>
+                </select>
+            </li>
+            <li>
+                <label for="miseAPrix">Mise à prix :</label>
+                <select id="miseAPrix" th:field="*{miseAPrix}">
+                    <option th:each="prix : ${prixList}" th:value="${prix}" th:text="${prix}"></option>
+                </select>
+            </li>
+            <li>
+                <label for="dateDebutEncheres">Début des enchères :</label>
+                <input id="dateDebutEncheres" type="datetime-local" th:field="*{dateDebutEncheres}" required/>
+            </li>
+            <li>
+                <label for="dateFinEncheres">Fin des enchères :</label>
+                <input id="dateFinEncheres" type="datetime-local" th:field="*{dateFinEncheres}" required/>
+            </li>
+            <li>
+                <label for="lieuRetrait">Retrait :</label>
+                <input id="lieuRetrait" type="text" th:field="*{lieuRetrait.rue}" required/>
+                <input id="lieuRetrait" type="text" th:field="*{lieuRetrait.code_postal}" required/>
+                <input id="lieuRetrait" type="text" th:field="*{lieuRetrait.ville}" required/>
+            </li>
+        </ul>
+        <div class="form-row">
+           <form action="/article/creer" method="post" th:object="${article}">
+    		<button type="submit" class="btn go">Enregistrer</button>
+    		<a href="/encheres" class="btn cncl">Annuler</a>
+</form>
 
-		<h1>Nouvelle vente</h1>
-		
-			<form action="/creer" method="post" th:object="${article}">
-			
-			<ul class="flex-outer">
-				<li>
-					<label for="article">Article</label>
-					<input id="articleId" type="text" th:field="*{nomArticle}" required/>
-				</li>
-				<li>
-					<label for="description">Description : </label>
-					<textarea id="idDescription" maxlength="250" cols="30" rows="10" th:field="*{description}" required></textarea>
-				</li>
-				<li>
-					<label for="categorie">Catégorie :</label> <select id="categorie" th:field="*{categorie}"> 
-					<option th:each="categorie : ${categories}" th:value="${categorie.noCategorie}" th:text="${categorie.libelle}"></option> 
-					</select>
-				</li>
-				<li>
-					<label for="idMiseAPrix">Mise à prix :</label> 
-					<select id="idMiseAPrix" th:field="*{miseAPrix}"> 
-					<option th:each="prix : ${prixList}" th:value="${prix}" th:text="${prix}"></option>
-					</select>
-				<li>
-				<li> <label for="dateDebutEncheres">Début de l'enchères :</label> 
-					<input id="idDateDebutEncheres" type="datetime-local" th:field="*{dateDebutEncheres}" required/>
-				<li>
-				<li> 
-					<label for="dateFinEncheres">Fin de l'enchères :</label> 
-					<input id="dateFinEncheres" type="datetime-local" th:field="*{dateFinEncheres}" required/> 
-				</li>
-				<li>
-					<label for="lieuRetrait">Retrait :</label>
-					<input id="lieuRetrait" type="text" th:field="*{lieuRetrait.rue}" required/>
-					<input id="lieuRetrait" type="text" th:field="*{lieuRetrait.code_postal}" required/>
-					<input id="lieuRetrait" type="text" th:field="*{lieuRetrait.ville}" required/>
-				</li>
-					
-		<div class="form-row">
-			<button type="submit" class="btn go">Enregister</button>
-			<button type="submit" class="btn go">Annuler</button>
-			<button type="submit" class="btn go">Annuler la vente</button>
-		</div>
-			</ul>
-		
-		</form>
+            
+        </div>
+    </form>
 </body>
 </html>

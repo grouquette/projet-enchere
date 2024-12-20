@@ -19,6 +19,11 @@ public class ArticleController {
 	private ArticleService articleService;
 	private CategorieService categorieService;
 
+	public ArticleController(ArticleService articleService, CategorieService categorieService) {
+		this.articleService = articleService;
+		this.categorieService = categorieService;
+	}
+
 	@GetMapping("/creer")
 	public String creerArticleForm(Model model) {
 		model.addAttribute("article", new Article());
@@ -29,7 +34,7 @@ public class ArticleController {
 	@PostMapping("/creer")
 	public String creerArticleSubmit(@ModelAttribute Article article) {
 		articleService.add(article);
-		return "redirect: view-encheres";
+		return "view-detail-vente";
 	}
 
 	@GetMapping("/details")

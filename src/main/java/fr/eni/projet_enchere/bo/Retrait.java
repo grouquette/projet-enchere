@@ -13,6 +13,9 @@ public class Retrait {
 		this.code_postal = code_postal;
 		this.ville = ville;
 	}
+	
+	public Retrait( ) {
+	}
 
 	public String getRue() {
 		return rue;
