@@ -47,7 +47,7 @@ public class UtilisateurController {
 		} else {
 			try {
 				this.utilisateurService.creerUtilisateur(utilisateur);
-				return "redirect:/utilisateur";
+				return "redirect:/encheres";
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				e.getListeMessage().forEach(m -> {
