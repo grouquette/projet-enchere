@@ -11,46 +11,72 @@
 	<form th:action="@{/utilisateur/modifier}" method="post"
 		th:object="${utilisateurConnecte}">
 		<h1>Modification du compte</h1>
+		<div th:if="${#fields.hasErrors('*')}">
+			<h2>Veuillez vérifier vos données</h2>
+			<ul th:if="${#fields.hasGlobalErrors()}">
+				<li th:each="e : ${#fields.globalErrors()}" th:text="${e}"></li>
+			</ul>
+		</div>
 		<div class="form-container">
 			<div class="form-container">
 				<label for="idPseudo">Pseudo : </label> <input id="idPseudo"
 					type="text" th:field="*{pseudo}" th:value="${utilisateurConnecte.pseudo}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('pseudo')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idNom">Nom : </label> <input id="idNom" type="text"
 					th:field="*{nom}" th:value="${utilisateurConnecte.nom}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('nom')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idPrenom">Prenom : </label> <input id="idPrenom"
 					type="text" th:field="*{prenom}" th:value="${utilisateurConnecte.prenom}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('prenom')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idEmail">Email : </label> <input id="idEmail"
 					type="email" th:field="*{email}" th:value="${utilisateurConnecte.email}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('email')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idTelephone">Telephone : </label> <input
 					id="idTelephone" type="text" th:field="*{telephone}" th:value="${utilisateurConnecte.telephone}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('telephone')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idRue">Rue : </label> <input id="idRue" type="text"
 					th:field="*{rue}" th:value="${utilisateurConnecte.rue}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('rue')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idCodePostal">Code Postal : </label> <input
 					id="idCodePostal" type="text" th:field="*{codePostal}" th:value="${utilisateurConnecte.codePostal}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('codePostal')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idVille">Ville : </label> <input id="idVille"
 					type="text" th:field="*{ville}" th:value="${utilisateurConnecte.ville}" required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('ville')}"></div>
 			</div>
 			<div class="form-container">
 				<label for="idMotDePasse">Mot de passe : </label> <input
 					id="idMotDePasse" type="password" th:field="*{motDePasse}" th:value="${utilisateurConnecte.motDePasse}"  required="required"/>
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('motDePasse')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idMotDePasse2">Confirmation : </label> <input
-					id="idMotDePasse2" type="password" th:field="*{motDePasseConfirme}" />
+				<label for="idConfirmMotDePasse">Confirmation : </label> <input
+					id="idConfirmMotDePasse" type="password" th:field="*{motDePasseConfirme}" />
+				<div
+					th:replace="~{fragments/fragment-error :: frag-error('motDePasseConfirme')}"></div>
 			</div>
 			<div class ="form-container">
 				<label for="idCredit">Crédit</label><input

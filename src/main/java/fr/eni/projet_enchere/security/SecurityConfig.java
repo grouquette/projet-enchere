@@ -25,7 +25,10 @@ public class SecurityConfig {
 		HeaderWriterLogoutHandler clearSiteData = new HeaderWriterLogoutHandler(
 				new ClearSiteDataHeaderWriter(Directive.ALL));
 		http.authorizeHttpRequests(
-				(authorize) -> authorize.requestMatchers("/login").permitAll()
+				(authorize) -> authorize
+				.requestMatchers("/").permitAll()
+				.requestMatchers("/encheres").permitAll()
+				.requestMatchers("/login").permitAll()
 				.requestMatchers("/css/**").permitAll()
 				.requestMatchers("/images/**").permitAll()
 				.requestMatchers("/utilisateur/signin").permitAll()

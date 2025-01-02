@@ -71,9 +71,19 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public void modifierUtilisateur(Utilisateur utilisateur) {
-		utilisateurDAO.modifier(utilisateur);
-		
+	@Transactional
+	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		BusinessException be = new BusinessException();
+		boolean valide = validerMotDePasse(utilisateur.getMotDePasse(), utilisateur.getMotDePasseConfirme(), be);
+		if (valide) {
+			String motDePasseHashe = passwordEncoder.encode(utilisateur.getMotDePasse());
+			motDePasseHashe = motDePasseHashe.replace("$2a$", "$2y$");
+			utilisateur.setMotDePasse(motDePasseHashe);
+			utilisateurDAO.modifier(utilisateur);
+		}else {
+			throw be;
+		}
+			
 	}
 	
 	private boolean validerPseudoUnique(String pseudo, BusinessException be) {

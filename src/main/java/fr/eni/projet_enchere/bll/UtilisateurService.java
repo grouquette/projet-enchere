@@ -17,7 +17,7 @@ public interface UtilisateurService {
 		
 	Utilisateur consulterProfilUtilisateurParId(long id);
 
-	void modifierUtilisateur(Utilisateur utilisateur);
+	void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException;
 
 	void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere);
 	

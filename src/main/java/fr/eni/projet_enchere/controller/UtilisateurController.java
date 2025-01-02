@@ -91,10 +91,25 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/modifier")
-	public String mettreAJourUtilisateur(@ModelAttribute Utilisateur utilisateur) {
+	public String mettreAJourUtilisateur(@Valid @ModelAttribute("utilisateurConnecte") Utilisateur utilisateurConnecte, BindingResult bindingResult) {
 		// Appel au service pour mettre à jour l'utilisateur
-		utilisateurService.modifierUtilisateur(utilisateur);
-		return "redirect:/utilisateur";
+		if (bindingResult.hasErrors()) {
+			// Retourne la vue avec les erreurs affichées
+			return "view-utilisateur-modifier";
+		}else {
+			try {
+				this.utilisateurService.modifierUtilisateur(utilisateurConnecte);
+				return "redirect:/utilisateur";
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				e.getListeMessage().forEach(m -> {
+					ObjectError error = new ObjectError("globalError", m);
+					bindingResult.addError(error);
+				});
+				System.out.println(bindingResult.getAllErrors());
+				return "view-utilisateur-modifier";
+			}
+		}
 	}
 
 	@PostMapping("/supprimer")
