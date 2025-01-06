@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import fr.eni.projet_enchere.bo.Article;
-import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 
 @Service
@@ -15,4 +14,8 @@ public interface ContexteService {
 //	List<Enchere> getAllEncheres();
 
 	List<Article> getAllArticles();
+
+	List<Article> consulterArticleParNom(String nomArticle);
+
+	List<Article> consulterArticleParCategorie(Long noCategorie);
 }
