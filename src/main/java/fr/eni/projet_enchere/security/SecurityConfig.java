@@ -40,7 +40,11 @@ public class SecurityConfig {
 				.anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults()).formLogin(form -> form.loginPage("/login").permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-						.addLogoutHandler(clearSiteData).logoutSuccessUrl("/"));
+						.addLogoutHandler(clearSiteData).logoutSuccessUrl("/"))
+				.sessionManagement(session -> session
+						.sessionFixation(sessionFixation -> sessionFixation.migrateSession())
+						.maximumSessions(1)
+						.expiredUrl("/login?invalid=true"));
 		return http.build();
 	}
 
