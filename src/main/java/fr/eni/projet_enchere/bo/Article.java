@@ -204,6 +204,5 @@ public class Article {
 				&& prixVente == other.prixVente && Objects.equals(utilisateur, other.utilisateur)
 				&& utilisateurId == other.utilisateurId;
 	}
-	
 
 }

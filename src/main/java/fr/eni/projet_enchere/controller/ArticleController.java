@@ -3,6 +3,8 @@ package fr.eni.projet_enchere.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import fr.eni.projet_enchere.bo.Article;
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
 	private CategorieService categorieService;
 	private final ContexteService contexteService;
 
@@ -35,14 +38,17 @@ public class ArticleController {
 	}
 
 	@GetMapping("/article/creer")
-	public String creerArticleForm(Model model) {
+	@PreAuthorize("isAuthenticated()")
+	public String creerArticleForm(Model model, Authentication authentication) {
 		model.addAttribute("article", new Article());
 		model.addAttribute("categories", categorieService.findAll());
 		return "view-article-creation";
 	}
 
 	@PostMapping("/article/creer")
-	public String creerArticleSubmit(@ModelAttribute Article article) {
+	@PreAuthorize("isAuthenticated()")
+	public String creerArticleSubmit(@ModelAttribute Article article, Authentication authentication,  @RequestParam("categorie") int categorieId) {
+		article.setCategorie(categorieService.findById(categorieId));
 		articleService.add(article);
 		return "view-detail-vente";
 	}
@@ -52,7 +58,7 @@ public class ArticleController {
 		Article a = this.articleService.consulterArticleParId(id);
 
 		model.addAttribute("article", a);
-
+		
 		return "detail-vente";
 	}
 

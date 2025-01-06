@@ -8,4 +8,6 @@ public interface CategorieDAO {
 
 	List<Categorie> findAll();
 
+	Categorie findById(int id);
+
 }

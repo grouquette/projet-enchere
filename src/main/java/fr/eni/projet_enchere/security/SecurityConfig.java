@@ -4,7 +4,9 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,25 +21,29 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		HeaderWriterLogoutHandler clearSiteData = new HeaderWriterLogoutHandler(
 				new ClearSiteDataHeaderWriter(Directive.ALL));
-		http.authorizeHttpRequests(
-				(authorize) -> authorize
-				.requestMatchers("/").permitAll()
-				.requestMatchers("/encheres").permitAll()
-				.requestMatchers("/login").permitAll()
+		http.authorizeHttpRequests((authorize) -> authorize
 				.requestMatchers("/css/**").permitAll()
 				.requestMatchers("/images/**").permitAll()
+				.requestMatchers("/login").permitAll()
 				.requestMatchers("/utilisateur/signin").permitAll()
-				.requestMatchers("/utilisateur").hasAnyRole("ADMIN", "MEMBRE").anyRequest().authenticated())
+				.requestMatchers("/encheres").permitAll()
+				.requestMatchers("/").permitAll()
+		        .requestMatchers(HttpMethod.GET, "/article/creer").authenticated()
+		        .requestMatchers(HttpMethod.POST, "/article/creer").authenticated()
+				.requestMatchers("/utilisateur").hasAnyRole("ADMIN", "MEMBRE")
+				.anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults()).formLogin(form -> form.loginPage("/login").permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
 						.addLogoutHandler(clearSiteData));
 		return http.build();
 	}
+
 	@Bean
 	public UserDetailsService userDetailsService(DataSource dataSource) {
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
@@ -47,8 +53,9 @@ public class SecurityConfig {
 				+ "join ROLES r ON u.administrateur = r.is_admin \r\n" + "WHERE u.pseudo = ?");
 		return jdbcUserDetailsManager;
 	}
+
 	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

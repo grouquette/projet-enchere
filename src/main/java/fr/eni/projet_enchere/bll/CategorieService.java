@@ -7,5 +7,6 @@ import fr.eni.projet_enchere.bo.Categorie;
 public interface CategorieService {
 
 	List<Categorie> findAll();
+	Categorie findById(int id);
 
 }
