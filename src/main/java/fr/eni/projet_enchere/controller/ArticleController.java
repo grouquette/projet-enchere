@@ -48,7 +48,6 @@ public class ArticleController {
 		articleService.add(article);
 		return "view-detail-vente";
 	}
-<<<<<<< HEAD
 
 	@GetMapping("/article/details")
 	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
@@ -59,14 +58,13 @@ public class ArticleController {
 		return "detail-vente";
 	}
 
-=======
 //	@GetMapping("/encheres")
 //	public String afficherListeDesArticles(@RequestParam(value = "nomArticle", required = false) String nomArticle, Model model) {
 //		List<Article> articles = contexteService.getAllArticles();
 //	    model.addAttribute("articleSession", articles);
 //		return "view-encheres";
 //	}
->>>>>>> 9cb5b18e0f309dde100261d7aaee8ded4ceadc85
+
 	@GetMapping("/encheres")
 	public String afficherListeArticles(
 	        @RequestParam(value = "nomArticle", required = false) String nomArticle,
