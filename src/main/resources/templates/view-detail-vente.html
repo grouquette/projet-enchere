@@ -9,53 +9,6 @@
 <body>
 <div th:replace="~{fragments/fragments-entete::entete}"></div>
 <main>
-<<<<<<< HEAD
-		 <h1>Detail Vente</h1>
-
-    <form th:action="@{/details}" method="get" th:object="${article}">
-        <ul class="flex-outer">
-            <li>
-                <label for="nomArticle">Nom Article:</label>
-                <input id="nomArticle" type="text" th:value="${article.nomArticle}" readonly/>
-            </li>
-            <li>
-                <label for="description">Description : </label>
-                <textarea id="description" readonly th:text="${article.description}"></textarea>
-            </li>
-            <li>
-                <label for="libelle">Catégorie</label>
-                <input id="libelle" type="text" th:value="${article.categorie.libelle}" readonly/>
-            </li>
-            <li>
-                <label for="maxEnchere">Meilleure offre : </label>
-                <input id="maxEnchere" type="text" th:value="${article.prixVente}" readonly/>
-            </li>
-            <li>
-                <label for="miseAPrix">Mise à prix : </label>
-                <input id="miseAPrix" type="number" th:value="${article.miseAPrix}" readonly/>
-            </li>
-            <li>
-                <label for="finEnchere">Fin de l'enchère : </label>
-                <input id="finEnchere" type="text" th:value="${article.dateFinEncheres}" readonly/>
-            </li>
-            <li>
-                <label for="retrait">Retrait :</label>
-                <input id="retrait" type="text" th:value="${article.lieuRetrait.rue} + ' ' + ${article.lieuRetrait.code_postal} + ' ' + ${article.lieuRetrait.ville}" readonly/>
-            </li>
-            <li>
-                <label for="utilisateur">Vendeur :</label>
-                <input id="utilisateur" type="text" th:value="${article.utilisateur}" readonly/>
-            </li>
-            <li>
-                <label for="montantEnchere">Ma proposition</label>
-                <div class="form-row">
-                    <button type="submit" class="btn go">Enchérir</button>
-                </div>
-            </li>
-        </ul>
-    </form>
-</main>
-=======
 		<h1>Détail vente</h1>
 		<form class="form-container">
 		<ul>
@@ -72,50 +25,10 @@
 			<div class="form-container">utilisateurId : <span th:text="${article.utilisateurId}"></span></div>
 			<div class="form-container">categorieId : <span th:text="${article.categorieId}"></span></div>
 		</ul>
-		</form>
-	<!--
-		<form action="/article/details" method="post" th:object="${article}">
-			<ul class="flex-outer">
-				<li>
-					<label for="idDescription">Description : </label>
-					<textarea id="idDescription" cols="30" rows="10" th:text="${article.description}" ></textarea>
-				</li>
-				<li>
-					<label for="idCategorie">Catégorie</label>
-					<input id="idCategorie" type="text" th:value="${categorie}" />
-				</li>
-				<li>
-					<label for="idMaxEnchere">Meilleure offre : </label>
-					<input id="idMaxEnchere" type="text" th:value="${prixVente}" />
-				</li>
-				<li>
-					<label for="idMiseAPrix">Mise à prix : </label>
-					<input id="idMiseAPrix" type="number" th:value="${miseAPrix}" />
-				<li>
-					<label for="idFinEnchere">Fin de l'enchère : </label>
-					<input id="idFinEnchere" type="text" th:value="${dateFinEncheres}" />
-				</li>
-				<li>
-					<label for="retrait">Retrait :</label>
-					<input id="retrait" type="text" th:value="${lieuRetrait.rue} + ' ' + ${lieuRetrait.code_postal} + ' ' + ${lieuRetrait.ville}" />
-				</li>
-				<li>
-					<label for="idVendeur">Vendeur :</label>
-					<input id="idVendeur" type="text" th:value="${utilisateur}" />
-				</li>
-				<li>
-					<label for="proposition">Ma proposition</label>
-					<select name="" id="">
-						<option th:each="p : ${propositions}" th:value="${a}"></option>
-					</select>
-					<div class="form-row">
+		<div class="form-row">
 			<button type="submit" class="btn go">Enchérir</button>
 		</div>
-				</li>
-			</ul>
-		</form> -->
+		</form>
 </main>  
->>>>>>> 9cb5b18e0f309dde100261d7aaee8ded4ceadc85
-
 </body>
 </html>
