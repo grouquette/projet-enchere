@@ -14,5 +14,11 @@ public interface ArticleDAO {
 	void creerArticle(Article article);
 
 	List<Article> findAll();
+
+	Article readByName(String nomArticle);
+
+	List<Article> findByName(String nomArticle);
+
+	List<Article> findByCategory(Long noCategorie);
 	
 }

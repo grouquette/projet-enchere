@@ -37,4 +37,14 @@ public class ContexteServiceImpl implements ContexteService {
 	public List<Article> getAllArticles() {
 		return articleDAO.findAll();
 	}
+
+	@Override
+	public List<Article> consulterArticleParNom(String nomArticle) {
+		return articleDAO.findByName(nomArticle);
+	}
+
+	@Override
+	public List<Article> consulterArticleParCategorie(Long noCategorie) {
+		return articleDAO.findByCategory(noCategorie);
+	}
 }

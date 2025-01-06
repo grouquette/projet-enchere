@@ -15,4 +15,6 @@ public interface ArticleService {
 	Article consulterArticleParId(long id);
 	Article creerArticle(String nomArticle, String description, Categorie categorie, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait);
+	Article consulterArticleParNom(String nomArticle);
+	List<Categorie> consulterCategorie();
 }

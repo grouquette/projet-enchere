@@ -21,6 +21,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String FIND_ALL_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
 	private static String INSERT_ARTICLE = "INSERT INTO Articles (nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id) VALUES (:nom, :description, :dateDebutEncheres, :dateFinEncheres, :miseAPrix, :prixVente, :etatVente, :vendeurId, :categorieId)";
 	private static final String FIND_ALL_ARTICLE = "SELECT * FROM Articles_vendus";
+	private static final String FIND_BY_NAME = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE nom_article = :nomArticle";
+	private static final String FIND_BY_CATEGORY = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE no_categorie = :noCategorie";
+
 
 	public ArticleDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -58,9 +61,30 @@ public class ArticleDAOImpl implements ArticleDAO {
 		params.addValue("idArticle", id);
 		return this.jdbcTemplate.query(FIND_ALL_BY_ID, params, new ArticleRowMapper());
 	}
+	@Override
+	public List<Article> findByName(String nomArticle) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("nomArticle", nomArticle);
+		return this.jdbcTemplate.query(FIND_BY_NAME, params, new ArticleRowMapper());
+	}
 
 	@Override
 	public List<Article> findAll() {
 		return jdbcTemplate.query(FIND_ALL_ARTICLE, new BeanPropertyRowMapper<>(Article.class));
 	}
+
+	@Override
+	public Article readByName(String nomArticle) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("nomArticle", nomArticle);
+		return this.jdbcTemplate.queryForObject(FIND_BY_NAME, params, new ArticleRowMapper());
+	}
+
+	@Override
+	public List<Article> findByCategory(Long noCategorie) {
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("noCategorie", noCategorie);
+	    return jdbcTemplate.query(FIND_BY_CATEGORY, params, new BeanPropertyRowMapper<>(Article.class));
+	}
+
 }
