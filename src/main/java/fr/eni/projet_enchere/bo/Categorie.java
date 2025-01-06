@@ -15,6 +15,9 @@ public class Categorie {
 		this.libelle = libelle;
 		this.articles = articles;
 	}
+	
+	public Categorie() {
+	}
 
 	public short getNoCategorie() {
 		return noCategorie;

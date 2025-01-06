@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Nouvelle vente</title>
-<link rel="stylesheet" href="/css/encheres.css" />
-<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+    <link rel="stylesheet" href="/css/encheres.css" />
+    <link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
-	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+    <div th:replace="~{fragments/fragments-entete::entete}"></div>
     <h1>Nouvelle vente</h1>
     <form action="/article/creer" method="post" th:object="${article}">
         <ul class="flex-outer">
@@ -40,18 +41,14 @@
             </li>
             <li>
                 <label for="lieuRetrait">Retrait :</label>
-                <input id="lieuRetrait" type="text" th:field="*{lieuRetrait.rue}" required/>
-                <input id="lieuRetrait" type="text" th:field="*{lieuRetrait.code_postal}" required/>
-                <input id="lieuRetrait" type="text" th:field="*{lieuRetrait.ville}" required/>
+                <input id="rue" type="text" th:field="*{lieuRetrait.rue}" required/>
+                <input id="code_postal" type="text" th:field="*{lieuRetrait.code_postal}" required/>
+                <input id="ville" type="text" th:field="*{lieuRetrait.ville}" required/>
             </li>
         </ul>
         <div class="form-row">
-           <form action="/article/creer" method="post" th:object="${article}">
-    		<button type="submit" class="btn go">Enregistrer</button>
-    		<a href="/encheres" class="btn cncl">Annuler</a>
-</form>
-
-            
+            <button type="submit" class="btn go">Enregistrer</button>
+            <a href="/encheres" class="btn cncl">Annuler</a>
         </div>
     </form>
 </body>
