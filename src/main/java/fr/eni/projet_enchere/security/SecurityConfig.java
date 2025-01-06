@@ -35,7 +35,7 @@ public class SecurityConfig {
 				.requestMatchers("/utilisateur").hasAnyRole("ADMIN", "MEMBRE").anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults()).formLogin(form -> form.loginPage("/login").permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-						.addLogoutHandler(clearSiteData));
+						.addLogoutHandler(clearSiteData).logoutSuccessUrl("/"));
 		return http.build();
 	}
 	@Bean
