@@ -17,4 +17,5 @@ public interface ArticleService {
 			LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait);
 	Article consulterArticleParNom(String nomArticle);
 	List<Categorie> consulterCategorie();
+	void save(Article article);
 }

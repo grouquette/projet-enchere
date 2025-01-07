@@ -21,4 +21,6 @@ public interface ArticleDAO {
 
 	List<Article> findByCategory(Long noCategorie);
 	
+	void save(Article article);
+	
 }

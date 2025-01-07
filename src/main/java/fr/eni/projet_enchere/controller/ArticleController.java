@@ -41,13 +41,15 @@ public class ArticleController {
 		model.addAttribute("categories", categorieService.findAll());
 		return "view-article-creation";
 	}
+
 	@PostMapping("/article/creer")
 	@PreAuthorize("isAuthenticated()")
-	public String creerArticleSubmit(@ModelAttribute Article article, Authentication authentication,  @RequestParam("categorie") int categorieId) {
-		article.setCategorie(categorieService.findById(categorieId));
-		articleService.add(article);
-		return "view-detail-vente";
+	public String creerArticleSubmit(@ModelAttribute Article article, Authentication authentication, @RequestParam("categorie") int categorieId) {
+	    article.setCategorie(categorieService.findById(categorieId));
+	    articleService.save(article);
+	    return "view-detail-vente";
 	}
+
 
 	@GetMapping("/article/details")
 	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {

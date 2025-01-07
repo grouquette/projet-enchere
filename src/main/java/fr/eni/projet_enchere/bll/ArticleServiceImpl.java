@@ -59,4 +59,9 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Categorie> consulterCategorie() {
 		return categorieDAO.findAll();
 	}
+
+	@Override
+	public void save(Article article) {
+		articleDAO.save(article);
+	}
 }
