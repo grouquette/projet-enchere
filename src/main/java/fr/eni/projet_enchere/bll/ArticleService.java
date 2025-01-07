@@ -18,4 +18,7 @@ public interface ArticleService {
 			LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait, Utilisateur utilisateur);
 	Article consulterArticleParNom(String nomArticle);
 	Utilisateur getUtilisateurParNom(String username);
-	}
+	List<Categorie> consulterCategorie();
+	String etatVente(Article article);
+}
+

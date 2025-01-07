@@ -66,4 +66,21 @@ public class ArticleServiceImpl implements ArticleService {
 		return utilisateurDAO.findByPseudo(username);
 
 	}
+	
+	@Override
+	public String etatVente(Article articleAEncherir) {
+		if (articleAEncherir.getDateFinEncheres().isBefore(LocalDateTime.now())) {
+			return "Terminée";
+		}
+		if (articleAEncherir.getDateDebutEncheres().isAfter(LocalDateTime.now())) {
+			return "À venir";
+		}
+		return "En cours";
+	}
+	@Override
+	public List<Categorie> consulterCategorie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
