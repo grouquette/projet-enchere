@@ -21,7 +21,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String FIND_ALL_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
 	private static String INSERT_ARTICLE = "INSERT INTO Articles (nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id) VALUES (:nom, :description, :dateDebutEncheres, :dateFinEncheres, :miseAPrix, :prixVente, :etatVente, :vendeurId, :categorieId)";
 	private static final String FIND_ALL_ARTICLE = "SELECT * FROM Articles_vendus";
-	private static final String FIND_BY_NAME = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE nom_article = :nomArticle";
+	private static final String FIND_BY_NAME = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,c.libelle, u.pseudo, a.no_utilisateur, a.no_categorie FROM Articles_vendus a  INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie WHERE nom_article = :nomArticle";
 	private static final String FIND_BY_CATEGORY = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE no_categorie = :noCategorie";
 
 

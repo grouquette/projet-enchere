@@ -3,6 +3,8 @@ package fr.eni.projet_enchere.dal.rowmapper;
 import org.springframework.jdbc.core.RowMapper;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Categorie;
+import fr.eni.projet_enchere.bo.Utilisateur;
 
 public class ArticleRowMapper implements RowMapper<Article> {
 		@Override
@@ -17,6 +19,19 @@ public class ArticleRowMapper implements RowMapper<Article> {
 			article.setPrixVente(rs.getInt("prix_vente"));
 			article.setUtilisateurId(rs.getInt("no_utilisateur"));
 			article.setCategorieId(rs.getInt("no_categorie"));
+			
+			// Association utilisateur
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(rs.getLong("no_utilisateur"));
+			utilisateur.setPseudo(rs.getString("pseudo"));
+			article.setUtilisateur(utilisateur);
+			
+			// Association catégorie
+			Categorie categorie = new Categorie();
+			categorie.setNoCategorie(rs.getShort("no_categorie"));
+			categorie.setLibelle(rs.getString("libelle"));
+			article.setCategorie(categorie);
+			
 			return article;
 		}
 	}
