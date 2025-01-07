@@ -19,7 +19,6 @@ public class ArticleRowMapper implements RowMapper<Article> {
 			article.setMiseAPrix(rs.getInt("prix_initial"));
 			article.setPrixVente(rs.getInt("prix_vente"));
 			article.setUtilisateurId(rs.getInt("no_utilisateur"));
-			article.setCategorieId(rs.getInt("no_categorie"));
 			
 			// Association utilisateur
 			Utilisateur utilisateur = new Utilisateur();

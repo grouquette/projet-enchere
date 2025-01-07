@@ -10,7 +10,9 @@
 <div th:replace="~{fragments/fragments-entete::entete}"></div>
 <main>
 		<h1>Détail vente</h1>
-		<form class="form-container">
+		<form th:action="@{/creerEnchere}" method="post"
+		th:object="${enchere}" class="form-container">
+		 <input type="hidden" name="articleId" th:value="${article.noArticle}" />
 		<ul>
 			<div class="form-container">nom : <span th:text="${article.nomArticle}"></span></div>
 			<div class="form-container">description : <span th:text="${article.description}"></span></div>
@@ -23,13 +25,14 @@
 			<div class="form-container">categorie : <span th:text="${article.categorie}"></span></div>
 			<div class="form-container">utilisateur : <span th:text="${article.utilisateur}"></span></div>
 			<div class="form-container">utilisateurId : <span th:text="${article.utilisateurId}"></span></div>
-			<div class="form-container">categorieId : <span th:text="${article.categorieId}"></span></div>
-		</ul>
+		
 		<div class="form-row">
+			<label for="montantEnchere">Ma proposition :</label>
+   			<input type="number" id="montantEnchere" th:field="*{montantEnchere}" min="0" step="1" placeholder="Entrez un prix">
 			<button type="submit" class="btn go">Enchérir</button>
 		</div>
+		</ul>
 		</form>
 </main>  
-
 </body>
 </html>

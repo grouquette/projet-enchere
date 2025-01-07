@@ -13,11 +13,9 @@ import fr.eni.projet_enchere.bo.Enchere;
 
 @Repository
 public class EnchereDAOImpl implements EnchereDAO {
-
-	private static final String INSERT_ENCHERE = "INSERT INTO Encheres (date_enchere, montant_enchere, article_id, utilisateur_id) VALUES (:dateEnchere, :montantEnchere, :articleId, :utilisateurId)";
+	private static final String INSERT_ENCHERE = "INSERT INTO Encheres (date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (:dateEnchere, :montantEnchere, :noArticle, :utilisateurId)";
 	private static final String FIND_ALL_ENCHERE = "SELECT * FROM Encheres";
-	private static final String FIND_BY_ARTICLE_ID = "SELECT * FROM Encheres WHERE article_id = :articleId";
-
+	private static final String FIND_BY_ARTICLE_ID = "SELECT * FROM Encheres WHERE no_article = :noArticle";
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	public EnchereDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
@@ -30,13 +28,12 @@ public class EnchereDAOImpl implements EnchereDAO {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("dateEnchere", enchere.getDateEnchere());
 		params.addValue("montantEnchere", enchere.getMontantEnchere());
-		params.addValue("articleId", noArticle);
+		params.addValue("noArticle", noArticle);
 		params.addValue("utilisateurId", utilisateurId);
 		jdbcTemplate.update(INSERT_ENCHERE, params, keyHolder);
 		if (keyHolder != null && keyHolder.getKey() != null) {
 			enchere.setIdEnchere(keyHolder.getKey().longValue());
 		}
-
 	}
 
 	@Override
@@ -50,5 +47,4 @@ public class EnchereDAOImpl implements EnchereDAO {
 		params.addValue("noArticle", noArticle);
 		return jdbcTemplate.query(FIND_BY_ARTICLE_ID, params, new BeanPropertyRowMapper<>(Enchere.class));
 	}
-
 }

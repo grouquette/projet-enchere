@@ -6,6 +6,7 @@ import java.util.List;
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Categorie;
 import fr.eni.projet_enchere.bo.Retrait;
+import fr.eni.projet_enchere.bo.Utilisateur;
 
 public interface ArticleService {
 
@@ -14,8 +15,7 @@ public interface ArticleService {
 	List<Article> add(Article articleAVendre);
 	Article consulterArticleParId(long id);
 	Article creerArticle(String nomArticle, String description, Categorie categorie, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait);
+			LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait, Utilisateur utilisateur);
 	Article consulterArticleParNom(String nomArticle);
-	List<Categorie> consulterCategorie();
-	void save(Article article);
-}
+	Utilisateur getUtilisateurParNom(String username);
+	}

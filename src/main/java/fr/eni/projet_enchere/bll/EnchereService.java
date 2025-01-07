@@ -16,4 +16,6 @@ public interface EnchereService {
 
 	int getMaximumMontantEnchere(long noArticle);
 
+	Utilisateur getUtilisateurParNom(String username);
+
 }

@@ -18,6 +18,9 @@ import fr.eni.projet_enchere.bll.CategorieService;
 import fr.eni.projet_enchere.bll.contexte.ContexteService;
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Categorie;
+import fr.eni.projet_enchere.bo.Enchere;
+import fr.eni.projet_enchere.bo.Retrait;
+import fr.eni.projet_enchere.bo.Utilisateur;
 
 @Controller
 //@RequestMapping("/article")
@@ -28,87 +31,89 @@ public class ArticleController {
 	@Autowired
 	private CategorieService categorieService;
 	private final ContexteService contexteService;
+
 	public ArticleController(ArticleService articleService, CategorieService categorieService,
 			ContexteService contexteService) {
 		this.articleService = articleService;
 		this.categorieService = categorieService;
 		this.contexteService = contexteService;
 	}
+
 	@GetMapping("/article/creer")
 	@PreAuthorize("isAuthenticated()")
 	public String creerArticleForm(Model model, Authentication authentication) {
-		model.addAttribute("article", new Article());
+		Article article = new Article();
+		article.setLieuRetrait(new Retrait()); // Initialisation de lieuRetrait
+		model.addAttribute("article", article);
 		model.addAttribute("categories", categorieService.findAll());
 		return "view-article-creation";
 	}
 
 	@PostMapping("/article/creer")
 	@PreAuthorize("isAuthenticated()")
-	public String creerArticleSubmit(@ModelAttribute Article article, Authentication authentication, @RequestParam("categorie") int categorieId) {
-	    article.setCategorie(categorieService.findById(categorieId));
-	    articleService.save(article);
-	    return "view-detail-vente";
+	public String creerArticleSubmit(@ModelAttribute Article article, Authentication authentication,
+	                                 @RequestParam("categorie") int noCategorie) {
+		String username = authentication.getName(); // Nom d'utilisateur actuel
+		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
+		article.setUtilisateur(utilisateur);
+		articleService.creerArticle(
+			    article.getNomArticle(),
+			    article.getDescription(),
+			    article.getCategorie(),
+			    article.getDateDebutEncheres(),
+			    article.getDateFinEncheres(),
+			    article.getMiseAPrix(),
+			    article.getLieuRetrait(),
+			    article.getUtilisateur()
+			);
+			return "view-encheres";
 	}
-
-
-	@GetMapping("/article/details")
-	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
-		Article a = this.articleService.consulterArticleParId(id);
-
-		model.addAttribute("article", a);
-		
-		return "detail-vente";
-	}
-
-//	@GetMapping("/encheres")
-//	public String afficherListeDesArticles(@RequestParam(value = "nomArticle", required = false) String nomArticle, Model model) {
-//		List<Article> articles = contexteService.getAllArticles();
-//	    model.addAttribute("articleSession", articles);
-//		return "view-encheres";
-//	}
 
 	@GetMapping("/encheres")
 	public String afficherListeArticles(
-	        @RequestParam(value = "nomArticle", required = false) String nomArticle,
-	        @RequestParam(value = "noCategorie", required = false) Long noCategorie,  // Ajout de cette ligne
-	        Model model) {
-	    List<Article> articles;
-
-	    if (nomArticle != null && !nomArticle.isEmpty()) {
-	        articles = contexteService.consulterArticleParNom(nomArticle);
-	    } else if (noCategorie != null) {
-	        articles = contexteService.consulterArticleParCategorie(noCategorie);  // Ajout de cette méthode
-	    } else {
-	        articles = contexteService.getAllArticles();
-	    }
-
-	    List<Categorie> categories = categorieService.findAll();
-	    model.addAttribute("categoriesSession", categories);
-	    model.addAttribute("articleSession", articles);
-	    model.addAttribute("nomArticle", nomArticle); // Pour pré-remplir le champ de recherche
-	    model.addAttribute("noCategorie", noCategorie); // Pour pré-remplir la sélection de la catégorie
-
-	    return "view-encheres";
+			@RequestParam(value = "nomArticle", required = false) String nomArticle,
+			@RequestParam(value = "noCategorie", required = false) Long noCategorie, // Ajout de cette ligne
+			Model model) {
+		List<Article> articles;
+		if (nomArticle != null && !nomArticle.isEmpty()) {
+			articles = contexteService.consulterArticleParNom(nomArticle);
+		} else if (noCategorie != null) {
+			articles = contexteService.consulterArticleParCategorie(noCategorie); // Ajout de cette méthode
+		} else {
+			articles = contexteService.getAllArticles();
+		}
+		List<Categorie> categories = categorieService.findAll();
+		model.addAttribute("categoriesSession", categories);
+		model.addAttribute("articleSession", articles);
+		model.addAttribute("nomArticle", nomArticle); // Pour pré-remplir le champ de recherche
+		model.addAttribute("noCategorie", noCategorie); // Pour pré-remplir la sélection de la catégorie
+		return "view-encheres";
 	}
 
 	@PostMapping("/encheres")
 	public String afficherDetailArticle(@RequestParam("nomArticle") String nomArticle, Model model) {
 		Article a = this.articleService.consulterArticleParNom(nomArticle);
 		model.addAttribute("article", a);
+		model.addAttribute("enchere", new Enchere(null, 0, a, null)); // Ajouter un objet enchère vide
 		return "view-detail-vente";
 	}
-//	@GetMapping("/article/details")
-//	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
-//		Article a = this.articleService.consulterArticleParId(id);
-//		model.addAttribute("article", a);
-//		return "view-detail-vente";
-//	}
+		
+	@GetMapping("/article/details")
+	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
+		Article a = this.articleService.consulterArticleParId(id);
+		System.out.println(a);
+		model.addAttribute("article", a);
+		model.addAttribute("enchere", new Enchere(null, 0, a, null)); // Ajouter un objet enchère vide
+		return "view-detail-vente";
+	}
+
 	@ModelAttribute("articleSession")
 	public List<Article> chargerArticlesEnSession() {
 		return this.contexteService.getAllArticles();
 	}
+
 	@ModelAttribute("categoriesSession")
 	public List<Categorie> chargerCategorieEnSession() {
-		return this.articleService.consulterCategorie();
+		return this.categorieService.consulterCategorie();
 	}
 }

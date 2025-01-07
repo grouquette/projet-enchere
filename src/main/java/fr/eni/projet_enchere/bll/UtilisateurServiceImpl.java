@@ -6,14 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.projet_enchere.bo.Article;
-import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
 import fr.eni.projet_enchere.exception.BusinessException;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
-	
 	private UtilisateurDAO utilisateurDAO;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -22,23 +20,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO, ArticleService articleService) {
 		this.utilisateurDAO = utilisateurDAO;
 		this.articleService = articleService;
-	}
-	
-	@Override
-	public Utilisateur findByPseudo(String pseudo) {
-		return utilisateurDAO.findByPseudo(pseudo);
-	}
-	@Override
-	public Article mettreEnVente(Article article) {
-		articleService.add(article);
-		return article;
-	}
-
-	
-	
-	public Enchere saveEnchere() {
-		return null;
-		//TODO
 	}
 
 	@Override
@@ -53,21 +34,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 			motDePasseHashe = motDePasseHashe.replace("$2a$", "$2y$");
 			utilisateur.setMotDePasse(motDePasseHashe);
 			utilisateurDAO.creer(utilisateur);
-		}else {
+		} else {
 			throw be;
 		}
 		return utilisateur;
-	}
-	
-	@Override
-	public void encherir(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public Utilisateur consulterProfilUtilisateurParId(long id) {
-	Utilisateur u =this.utilisateurDAO.lire(id);
-	return u;
 	}
 
 	@Override
@@ -80,48 +50,54 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 			motDePasseHashe = motDePasseHashe.replace("$2a$", "$2y$");
 			utilisateur.setMotDePasse(motDePasseHashe);
 			utilisateurDAO.modifier(utilisateur);
-		}else {
+		} else {
 			throw be;
 		}
-			
 	}
-	
+
 	private boolean validerPseudoUnique(String pseudo, BusinessException be) {
-		
 		boolean pseudoExiste = this.utilisateurDAO.existPseudo(pseudo);
-		
 		if (pseudoExiste) {
 			be.addMessage("Le pseudo existe déjà");
 		}
-		
 		return !pseudoExiste;
 	}
-	
+
 	private boolean validerEmailUnique(String email, BusinessException be) {
-		
 		boolean emailExiste = this.utilisateurDAO.existEmail(email);
-		
 		if (emailExiste) {
 			be.addMessage("L'adresse email existe déjà");
 		}
-		
 		return !emailExiste;
 	}
-	
+
 	private boolean validerMotDePasse(String motDePasse, String motDePasseConfirme, BusinessException be) {
-		
 		boolean motDePasseConfirm = motDePasse != null && motDePasse.equals(motDePasseConfirme);
-		
 		if (!motDePasseConfirm) {
 			be.addMessage("Les mots de passe ne sont pas identiques");
 		}
-		
 		return motDePasseConfirm;
+	}
+
+	@Override
+	public Utilisateur findByPseudo(String pseudo) {
+		return utilisateurDAO.findByPseudo(pseudo);
+	}
+
+	@Override
+	public Utilisateur consulterProfilUtilisateurParId(long id) {
+		Utilisateur u = this.utilisateurDAO.lire(id);
+		return u;
 	}
 
 	@Override
 	public void supprimerUtilisateur(String pseudo) {
 		utilisateurDAO.supprimer(pseudo);
-		
+	}
+
+	@Override
+	public Article mettreEnVente(Article article) {
+		articleService.add(article);
+		return article;
 	}
 }
