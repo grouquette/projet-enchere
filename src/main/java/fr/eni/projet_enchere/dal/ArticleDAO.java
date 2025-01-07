@@ -3,6 +3,7 @@ package fr.eni.projet_enchere.dal;
 import java.util.List;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Retrait;
 
 
 public interface ArticleDAO {
@@ -20,5 +21,7 @@ public interface ArticleDAO {
 	List<Article> findByName(String nomArticle);
 
 	List<Article> findByCategory(Long noCategorie);
+
+	
 	
 }

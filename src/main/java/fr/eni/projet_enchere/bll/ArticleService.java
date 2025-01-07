@@ -14,11 +14,11 @@ public interface ArticleService {
 	void remove(Article article);
 	List<Article> add(Article articleAVendre);
 	Article consulterArticleParId(long id);
-	Article creerArticle(String nomArticle, String description, Categorie categorie, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait, Utilisateur utilisateur);
+	Article creerArticle(Article article);
 	Article consulterArticleParNom(String nomArticle);
 	Utilisateur getUtilisateurParNom(String username);
 	List<Categorie> consulterCategorie();
 	String etatVente(Article article);
+	
 }
 

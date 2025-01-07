@@ -28,18 +28,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	@Override
 	@Transactional
-	public Article creerArticle(
-			String nomArticle, 
-			String description, 
-			Categorie categorie,
-			LocalDateTime dateDebutEncheres, 
-			LocalDateTime dateFinEncheres, 
-			int miseAPrix, 
-			Retrait lieuRetrait,
-			Utilisateur utilisateur
-			){
-		Article article = new Article(nomArticle, description, categorie, dateDebutEncheres, dateFinEncheres, miseAPrix,
-				lieuRetrait, utilisateur);
+	public Article creerArticle(Article article){
+		
 		articleDAO.creerArticle(article);
 		// Mettre à jour l'état de vente
 		return article;

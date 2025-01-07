@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Retrait;
 import fr.eni.projet_enchere.dal.rowmapper.ArticleRowMapper;
 
 @Repository
@@ -19,7 +20,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	private static final String FIND_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE no_article = :idArticle";
 	private static final String FIND_ALL_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE no_article = :idArticle";
-	private static String INSERT_ARTICLE = "INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom, :description, :dateDebutEncheres, :dateFinEncheres, :miseAPrix, :prixVente, :noVendeur, :noCategorie)";
+	private static final String INSERT_ARTICLE = "INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom, :description, :dateDebutEncheres, :dateFinEncheres, :miseAPrix, :prixVente, :noVendeur, :noCategorie)";
+	private static final String INSERT_RETRAIT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (:noArticle, :rue, :codePostal, :ville)";
 	private static final String FIND_ALL_ARTICLE = "SELECT * FROM Articles_vendus";
 	private static final String FIND_BY_NAME = "SELECT a.no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, r.rue, r.code_postal, r.ville,c.libelle, u.pseudo, a.no_utilisateur, a.no_categorie FROM Articles_vendus a  INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie INNER JOIN RETRAITS r ON a.no_article = r.no_article WHERE nom_article = :nomArticle";
 	private static final String FIND_BY_CATEGORY = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE no_categorie = :noCategorie";
@@ -44,6 +46,13 @@ public class ArticleDAOImpl implements ArticleDAO {
 		if (keyHolder.getKey() != null) {
 			article.setNoArticle(keyHolder.getKey().longValue());
 		}
+		MapSqlParameterSource paramsRetrait = new MapSqlParameterSource();
+		paramsRetrait.addValue("noArticle", article.getNoArticle());
+		paramsRetrait.addValue("rue", article.getLieuRetrait().getRue());
+		paramsRetrait.addValue("codePostal", article.getLieuRetrait().getCode_postal());
+		paramsRetrait.addValue("ville", article.getLieuRetrait().getVille());
+		
+		jdbcTemplate.update(INSERT_RETRAIT,	paramsRetrait);
 	}
 
 	@Override

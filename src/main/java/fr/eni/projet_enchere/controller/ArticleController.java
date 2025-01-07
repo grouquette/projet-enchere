@@ -56,16 +56,7 @@ public class ArticleController {
 		String username = authentication.getName(); // Nom d'utilisateur actuel
 		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
 		article.setUtilisateur(utilisateur);
-		articleService.creerArticle(
-			    article.getNomArticle(),
-			    article.getDescription(),
-			    article.getCategorie(),
-			    article.getDateDebutEncheres(),
-			    article.getDateFinEncheres(),
-			    article.getMiseAPrix(),
-			    article.getLieuRetrait(),
-			    article.getUtilisateur()
-			);
+		articleService.creerArticle(article);
 			return "view-encheres";
 	}
 
