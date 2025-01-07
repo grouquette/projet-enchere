@@ -8,5 +8,6 @@ public interface CategorieService {
 
 	List<Categorie> findAll();
 	Categorie findById(int id);
+	List<Categorie> consulterCategorie();
 
 }

@@ -18,19 +18,18 @@ public class ArticleRowMapper implements RowMapper<Article> {
 			article.setMiseAPrix(rs.getInt("prix_initial"));
 			article.setPrixVente(rs.getInt("prix_vente"));
 			article.setUtilisateurId(rs.getInt("no_utilisateur"));
-			article.setCategorieId(rs.getInt("no_categorie"));
 			
-			// Association utilisateur
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur.setNoUtilisateur(rs.getLong("no_utilisateur"));
-			utilisateur.setPseudo(rs.getString("pseudo"));
-			article.setUtilisateur(utilisateur);
-			
-			// Association catégorie
-			Categorie categorie = new Categorie();
-			categorie.setNoCategorie(rs.getShort("no_categorie"));
-			categorie.setLibelle(rs.getString("libelle"));
-			article.setCategorie(categorie);
+//			// Association utilisateur
+//			Utilisateur utilisateur = new Utilisateur();
+//			utilisateur.setNoUtilisateur(rs.getLong("no_utilisateur"));
+//			utilisateur.setPseudo(rs.getString("pseudo"));
+//			article.setUtilisateur(utilisateur);
+//			
+//			// Association catégorie
+//			Categorie categorie = new Categorie();
+//			categorie.setNoCategorie(rs.getShort("no_categorie"));
+//			categorie.setLibelle(rs.getString("libelle"));
+//			article.setCategorie(categorie);
 			
 			return article;
 		}

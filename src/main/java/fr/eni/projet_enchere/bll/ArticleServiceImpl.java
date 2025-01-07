@@ -4,64 +4,66 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Categorie;
 import fr.eni.projet_enchere.bo.Retrait;
+import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.ArticleDAO;
-import fr.eni.projet_enchere.dal.CategorieDAO;
+import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
-
 	private List<Article> articles;
+	@Autowired
 	private ArticleDAO articleDAO;
-	private CategorieDAO categorieDAO;
-
-	public ArticleServiceImpl(ArticleDAO articleDAO, CategorieDAO categorieDAO) {
+	@Autowired
+	private UtilisateurDAO utilisateurDAO;
+	public ArticleServiceImpl(ArticleDAO articleDAO) {
 		this.articleDAO = articleDAO;
-		this.categorieDAO = categorieDAO;
 		this.articles = new ArrayList<>();
 	}
-
 	@Override
-	public Article creerArticle(String nomArticle, String description, Categorie categorie,
-			LocalDateTime dateDebutEncheres, LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait) {
+	@Transactional
+	public Article creerArticle(
+			String nomArticle, 
+			String description, 
+			Categorie categorie,
+			LocalDateTime dateDebutEncheres, 
+			LocalDateTime dateFinEncheres, 
+			int miseAPrix, 
+			Retrait lieuRetrait,
+			Utilisateur utilisateur
+			){
 		Article article = new Article(nomArticle, description, categorie, dateDebutEncheres, dateFinEncheres, miseAPrix,
-				lieuRetrait);
+				lieuRetrait, utilisateur);
 		articleDAO.creerArticle(article);
+		// Mettre à jour l'état de vente
 		return article;
 	}
-
 	public void remove(Article articleARetirer) {
 		articles.remove(articleARetirer);
 	}
-
 	@Override
 	public List<Article> add(Article articleAVendre) {
 		articles.add(articleAVendre);
 		return articles;
 	}
-
 	public Article consulterArticleParId(long id) {
 		Article article = articleDAO.read(id);
 		return article;
 	}
-
 	@Override
 	public Article consulterArticleParNom(String nomArticle) {
 		Article article = articleDAO.readByName(nomArticle);
 		return article;
 	}
-
 	@Override
-	public List<Categorie> consulterCategorie() {
-		return categorieDAO.findAll();
-	}
+	public Utilisateur getUtilisateurParNom(String username) {
+		return utilisateurDAO.findByPseudo(username);
 
-	@Override
-	public void save(Article article) {
-		articleDAO.save(article);
 	}
 }

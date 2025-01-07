@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +12,15 @@ import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.EnchereDAO;
+import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
 @Service
 public class EnchereServiceImpl implements EnchereService {
-
 	private List<Enchere> encheres = new ArrayList<>();
-
 	@Autowired
 	private EnchereDAO enchereDAO;
+	@Autowired
+	private UtilisateurDAO utilisateurDAO;
 
 	@Override
 	public List<Enchere> add(Enchere enchere) {
@@ -30,22 +30,25 @@ public class EnchereServiceImpl implements EnchereService {
 
 	@Override
 	public void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
-		if (articleAEncherir.getEtatVente().equals("en cours") && montantEnchere >= articleAEncherir.getMiseAPrix()
+		if (etatVente(articleAEncherir).equals("En cours") && montantEnchere >= articleAEncherir.getMiseAPrix()
 				&& utilisateur.getCredit() >= montantEnchere
 				&& montantEnchere > getMaximumMontantEnchere(articleAEncherir.getNoArticle())) {
-			Enchere enchere = new Enchere(LocalDateTime.now(), montantEnchere);
+			if (utilisateur.getEncheres() == null) {
+				utilisateur.setEncheres(new ArrayList<>()); // Initialiser la liste d'enchères si elle est null
+			}
+			Enchere enchere = new Enchere(LocalDateTime.now(), montantEnchere, articleAEncherir, utilisateur);
 			utilisateur.getEncheres().add(enchere);
-
 			enchereDAO.creerEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
+		} else {
+			// Gérer les cas où l'enchère ne peut pas être créée
 		}
-
 	}
 
 	@Override
 	public int getMaximumMontantEnchere(long noArticle) {
 		List<Enchere> encheres = enchereDAO.findByArticleId(noArticle);
 		return encheres.stream().max(Comparator.comparing(Enchere::getMontantEnchere)).map(Enchere::getMontantEnchere)
-				.orElseThrow(() -> new NoSuchElementException()); // récupère un flux d'Enchere, récupère la plus haute
+				.orElse(0); // Retourne 0 si aucune enchère n'est trouvée
 	}
 
 	@Override
@@ -53,6 +56,14 @@ public class EnchereServiceImpl implements EnchereService {
 		if (articleAEncherir.getDateFinEncheres().isBefore(LocalDateTime.now())) {
 			return "Terminée";
 		}
+		if (articleAEncherir.getDateDebutEncheres().isAfter(LocalDateTime.now())) {
+			return "À venir";
+		}
 		return "En cours";
+	}
+
+	@Override
+	public Utilisateur getUtilisateurParNom(String username) {
+		return utilisateurDAO.findByPseudo(username);
 	}
 }

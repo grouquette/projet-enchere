@@ -13,13 +13,11 @@ import fr.eni.projet_enchere.dal.UtilisateurDAO;
 @Service
 public class ContexteServiceImpl implements ContexteService {
 	private UtilisateurDAO utilisateurDAO;
-//	private EnchereDAO enchereDAO;
 	private ArticleDAO articleDAO;
 
 	public ContexteServiceImpl(UtilisateurDAO utilisateurDAO, EnchereDAO enchereDAO, ArticleDAO articleDAO) {
 		super();
 		this.utilisateurDAO = utilisateurDAO;
-//		this.enchereDAO = enchereDAO;
 		this.articleDAO = articleDAO;
 	}
 
@@ -27,11 +25,6 @@ public class ContexteServiceImpl implements ContexteService {
 	public Utilisateur charger(String pseudo) {
 		return utilisateurDAO.findByPseudo(pseudo);
 	}
-
-//	@Override
-//	public List<Enchere> getAllEncheres() {
-//		return enchereDAO.findAll();
-//	}
 
 	@Override
 	public List<Article> getAllArticles() {
