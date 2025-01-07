@@ -25,49 +25,14 @@
 			<div class="form-container">utilisateurId : <span th:text="${article.utilisateurId}"></span></div>
 			<div class="form-container">categorieId : <span th:text="${article.categorieId}"></span></div>
 		</ul>
-		</form>
-	<!--
-		<form action="/article/details" method="post" th:object="${article}">
-			<ul class="flex-outer">
-				<li>
-					<label for="idDescription">Description : </label>
-					<textarea id="idDescription" cols="30" rows="10" th:text="${article.description}" ></textarea>
-				</li>
-				<li>
-					<label for="idCategorie">Catégorie</label>
-					<input id="idCategorie" type="text" th:value="${categorie}" />
-				</li>
-				<li>
-					<label for="idMaxEnchere">Meilleure offre : </label>
-					<input id="idMaxEnchere" type="text" th:value="${prixVente}" />
-				</li>
-				<li>
-					<label for="idMiseAPrix">Mise à prix : </label>
-					<input id="idMiseAPrix" type="number" th:value="${miseAPrix}" />
-				<li>
-					<label for="idFinEnchere">Fin de l'enchère : </label>
-					<input id="idFinEnchere" type="text" th:value="${dateFinEncheres}" />
-				</li>
-				<li>
-					<label for="retrait">Retrait :</label>
-					<input id="retrait" type="text" th:value="${lieuRetrait.rue} + ' ' + ${lieuRetrait.code_postal} + ' ' + ${lieuRetrait.ville}" />
-				</li>
-				<li>
-					<label for="idVendeur">Vendeur :</label>
-					<input id="idVendeur" type="text" th:value="${utilisateur}" />
-				</li>
-				<li>
-					<label for="proposition">Ma proposition</label>
-					<select name="" id="">
-						<option th:each="p : ${propositions}" th:value="${a}"></option>
-					</select>
-					<div class="form-row">
+		<div class="form-row">
 			<button type="submit" class="btn go">Enchérir</button>
 		</div>
-				</li>
-			</ul>
-		</form> -->
+		</form>
 </main>  
+<<<<<<< HEAD
 
+=======
+>>>>>>> 19f6a5353c9e6f375be3d9ed72b7a019522c87ca
 </body>
 </html>
