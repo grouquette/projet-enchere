@@ -17,9 +17,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	private static final String FIND_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
-	private static final String FIND_ALL_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
-	private static String INSERT_ARTICLE = "INSERT INTO Articles (nom, description, date_debut_encheres, date_fin_encheres, mise_a_prix, prix_vente, etat_vente, vendeur_id, categorie_id) VALUES (:nom, :description, :dateDebutEncheres, :dateFinEncheres, :miseAPrix, :prixVente, :etatVente, :vendeurId, :categorieId)";
+	private static final String FIND_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
+	private static final String FIND_ALL_BY_ID = "SELECT id, nom, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, etat_vente, vendeur_id, categorie_id FROM Articles WHERE id = :idArticle";
+	private static String INSERT_ARTICLE = "INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, etat_vente, vendeur_id, categorie_id) VALUES (:nom, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :etat_vente, :vendeur_id, :categorie_id)";
 	private static final String FIND_ALL_ARTICLE = "SELECT * FROM Articles_vendus";
 	private static final String FIND_BY_NAME = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE nom_article = :nomArticle";
 	private static final String FIND_BY_CATEGORY = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE no_categorie = :noCategorie";
@@ -31,22 +31,23 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public void creerArticle(Article article) {
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("nom", article.getNomArticle());
-		params.addValue("description", article.getDescription());
-		params.addValue("dateDebutEncheres", article.getDateDebutEncheres());
-		params.addValue("dateFinEncheres", article.getDateFinEncheres());
-		params.addValue("miseAPrix", article.getMiseAPrix());
-		params.addValue("prixVente", article.getPrixVente());
-		params.addValue("etatVente", article.getEtatVente());
-		params.addValue("vendeurId", article.getUtilisateurId());
-		params.addValue("categorieId", article.getCategorieId());
-		jdbcTemplate.update(INSERT_ARTICLE, params, keyHolder);
-		if (keyHolder.getKey() != null) {
-			article.setNoArticle(keyHolder.getKey().longValue());
-		}
+	    KeyHolder keyHolder = new GeneratedKeyHolder();
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("nom", article.getNomArticle());
+	    params.addValue("description", article.getDescription());
+	    params.addValue("date_debut_encheres", article.getDateDebutEncheres());
+	    params.addValue("date_fin_encheres", article.getDateFinEncheres());
+	    params.addValue("prix_initial", article.getMiseAPrix());
+	    params.addValue("prix_vente", article.getPrixVente());
+	    params.addValue("etat_vente", article.getEtatVente());
+	    params.addValue("vendeur_id", article.getUtilisateurId());
+	    params.addValue("categorie_id", article.getCategorieId());
+	    jdbcTemplate.update(INSERT_ARTICLE, params, keyHolder);
+	    if (keyHolder.getKey() != null) {
+	        article.setNoArticle(keyHolder.getKey().longValue());
+	    }
 	}
+
 
 	@Override
 	public Article read(long id) {
@@ -85,6 +86,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 	    MapSqlParameterSource params = new MapSqlParameterSource();
 	    params.addValue("noCategorie", noCategorie);
 	    return jdbcTemplate.query(FIND_BY_CATEGORY, params, new BeanPropertyRowMapper<>(Article.class));
+	}
+
+	@Override
+	public void save(Article article) {
+		creerArticle(article);
+		
 	}
 
 }
