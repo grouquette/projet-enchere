@@ -76,7 +76,7 @@ VALUES
 ('outils'),
 ('téléphones');
 
--- Insertion de données dans categories--
+-- Insertion de données dans articles--
 
 INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)
 VALUES
@@ -84,3 +84,12 @@ VALUES
 ('Cuisine bon appétit 23 accessoires', 'Cuisine contemporaine avec nombreuses fonctionnalités. Module électronique. Four, frigo, évier, machine à espresso. 23 accessoires inclus. Hauteur plan de travail : 48.5cm.', GETDATE(), GETDATE()+5, 2, 2, 3,2),
 ('Perceuse-visseuse sans fil 18V', 'Perceuse visseuse Makita 18V neuve. Modèle DDF453SYE, Moteur brushless sans charbon plus durable et performant, Vendu avec une batterie et chargeur', GETDATE(), GETDATE()+10, 6, 6, 3, 3),
 ('SAMSUNG Galaxy A15 4GB+128GB (Bleu Nuit)', 'Samsung Galaxy A15 4G 4Go de RAM, 128 Go de mémoire, écran 6,5 pouces avec une résolution de 1080 x 1920. Bon état', GETDATE(), GETDATE()+4, 4, 4, 5,4); 
+
+-- Insertion de données dans Retrait
+
+INSERT INTO RETRAITS (no_article, rue, code_postal, ville)
+VALUES
+(1, '3, rue des alouettes', '44800' , 'Saint-Herblain'),
+(2, '25, rue des sapins', '49000', 'Angers'),
+(3, '230, allée des brumes', '85200', 'La Roche sur Yon'),
+(4, '2 boulevard des chats', '44300', 'Nantes');

@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Categorie;
+import fr.eni.projet_enchere.bo.Retrait;
 import fr.eni.projet_enchere.bo.Utilisateur;
 
 public class ArticleRowMapper implements RowMapper<Article> {
@@ -31,6 +32,13 @@ public class ArticleRowMapper implements RowMapper<Article> {
 			categorie.setNoCategorie(rs.getShort("no_categorie"));
 			categorie.setLibelle(rs.getString("libelle"));
 			article.setCategorie(categorie);
+			
+			// Association retrait
+			Retrait retrait = new Retrait();
+			retrait.setRue(rs.getString("rue"));
+			retrait.setCode_postal(rs.getString("code_postal"));
+			retrait.setVille(rs.getString("ville"));
+			article.setLieuRetrait(retrait);
 			
 			return article;
 		}
