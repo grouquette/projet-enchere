@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
@@ -30,6 +31,7 @@ public class Article {
 	@NotNull(message = "Le prix de vente est obligatoire")
 	private int prixVente;
 	private String etatVente;
+	@Valid
 	private Retrait lieuRetrait;
 	private List<Enchere> encheres;
 	private Categorie categorie;
@@ -38,7 +40,7 @@ public class Article {
 
 	
 	@AssertTrue(message = "La date de fin doit être postérieure à la date de début")
-    private boolean isDateFinEncheresValid() {
+    public boolean isDateFinEncheresValid() {
         if (dateDebutEncheres == null || dateFinEncheres == null) {
             return true; // La validation @NotNull s'occupera de ce cas
         }

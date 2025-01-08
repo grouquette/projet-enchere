@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import fr.eni.projet_enchere.bo.Categorie;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Retrait;
 import fr.eni.projet_enchere.bo.Utilisateur;
+import jakarta.validation.Valid;
 
 @Controller
 //@RequestMapping("/article")
@@ -56,13 +58,19 @@ public class ArticleController {
 
 	@PostMapping("/article/creer")
 	@PreAuthorize("isAuthenticated()")
-	public String creerArticleSubmit(@ModelAttribute Article article, Authentication authentication,
-	                                 @RequestParam("categorie") int noCategorie) {
-		String username = authentication.getName(); // Nom d'utilisateur actuel
-		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
-		article.setUtilisateur(utilisateur);
-		articleService.creerArticle(article);
-		return "redirect:/encheres";
+	public String creerArticleSubmit(@Valid @ModelAttribute("article") Article article, BindingResult bindingResult, Authentication authentication,
+	                                 @RequestParam("categorie") int noCategorie, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("categories", categorieService.findAll());
+			return "view-article-creation";
+		}else {
+			String username = authentication.getName(); // Nom d'utilisateur actuel
+			Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
+			article.setUtilisateur(utilisateur);
+			articleService.creerArticle(article);
+			return "redirect:/encheres";
+		}
+		
 	}
 
 	@GetMapping("/encheres")

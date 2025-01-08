@@ -129,12 +129,6 @@ VALUES
 (14, '23, place des Ã©glises', '76000', 'Rouen');
 INSERT INTO RETRAITS (no_article, rue, code_postal, ville)
 VALUES
-<<<<<<< HEAD
--- Correspondant aux articles dÃ©jÃ  insÃ©rÃ©s
-(15, '15, avenue de la libertÃ©', '75001', 'Paris'),
-(16, '12, rue des marguerites', '31000', 'Toulouse');
-=======
 -- Correspondant aux articles déjà insérés
 (15, '15, avenue de la liberté', '75001', 'Paris'),
 (16, '12, rue des marguerites', '31000', 'Toulouse');
->>>>>>> 258bf02820afb9fd6e7633e1909e4a25c802c3ce
