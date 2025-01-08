@@ -28,7 +28,7 @@ public class Utilisateur {
 	private String telephone;
 	@NotBlank(message = "La rue ne doit pas être vide.")
 	private String rue;
-	@NotBlank(message = "le codePostal ne doit pas être vide.")
+	@NotBlank(message = "le code Postal ne doit pas être vide.")
 	@Pattern(regexp = "^\\d{5}$", message = "Le code postal doit contenir 5 chiffres.")
 	private String codePostal;
 	@NotBlank(message = "le ville ne doit pas être vide.")

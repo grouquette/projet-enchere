@@ -5,14 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
 public class Article {
 
 	private long noArticle;
+	@Size(min = 3, max = 250, message = "Le nom de l'article doit contenir entre 3 et 250 caractères")
 	private String nomArticle;
+	@Size(min = 3, max = 300, message = "La description doit contenir entre 3 et 250 caractères")
 	private String description;
+	@NotNull(message = "La date de début d'enchère est obligatoire")
+	@FutureOrPresent(message = "Le date du début d'enchère ne peut pas être antérieure à aujourd'hui")
 	private LocalDateTime dateDebutEncheres;
+	@NotNull(message = "La date de fin d'enchère est obligatoire")
 	private LocalDateTime dateFinEncheres;
+	@NotNull(message = "La mise à prix est obligatoire")
+	@PositiveOrZero(message = "La mise à prix ne peut pas être négative")
 	private int miseAPrix;
+	@NotNull(message = "Le prix de vente est obligatoire")
 	private int prixVente;
 	private String etatVente;
 	private Retrait lieuRetrait;
@@ -21,9 +36,26 @@ public class Article {
 	private Utilisateur utilisateur;
 	private long utilisateurId;
 
+	
+	@AssertTrue(message = "La date de fin doit être postérieure à la date de début")
+    private boolean isDateFinEncheresValid() {
+        if (dateDebutEncheres == null || dateFinEncheres == null) {
+            return true; // La validation @NotNull s'occupera de ce cas
+        }
+        return dateFinEncheres.isAfter(dateDebutEncheres);
+    }
 	public Article() {
 	}
 
+	@AssertTrue(message = "Le prix de vente ne peut pas être inférieur à la mise à prix")
+    private boolean isPrixVenteValid() {
+        // Si le prix de vente est 0, cela signifie qu'il n'y a pas encore eu de vente
+        if (prixVente == 0) {
+            return true;
+        }
+        return prixVente >= miseAPrix;
+    }
+	
 	public Article(long noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait,
 			List<Enchere> encheres, Categorie categorie, Utilisateur utilisateur, long utilisateurId,
