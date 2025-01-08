@@ -58,7 +58,7 @@ public class ArticleController {
 		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
 		article.setUtilisateur(utilisateur);
 		articleService.creerArticle(article);
-		return "view-encheres";
+		return "redirect:/encheres";
 	}
 
 	@GetMapping("/encheres")
