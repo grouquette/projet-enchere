@@ -17,4 +17,6 @@ public interface UtilisateurDAO {
 	boolean existEmail(String email);
 
 	public void supprimer(String pseudo);
+
+	void update(Utilisateur gagnant);
 }

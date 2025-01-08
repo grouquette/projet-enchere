@@ -19,6 +19,8 @@ public interface ArticleDAO {
 
 	List<Article> findByCategory(Long noCategorie);
 
+	void update(Article existingArticle);
+
 	
 	
 }
