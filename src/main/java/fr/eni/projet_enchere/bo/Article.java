@@ -45,19 +45,19 @@ public class Article {
 	}
 
 	public Article(String nomArticle, String description, Categorie categorie, LocalDateTime dateDebutEncheres,
-		      LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait, Utilisateur utilisateur) {
-		    this.nomArticle = nomArticle;
-		    this.description = description;
-		    this.categorie = categorie;
-		    this.dateDebutEncheres = dateDebutEncheres;
-		    this.dateFinEncheres = dateFinEncheres;
-		    this.miseAPrix = miseAPrix;
-		    this.lieuRetrait = lieuRetrait;
-		    this.prixVente = 0;  // Par défaut, prixVente pourrait être 0.
-		    this.etatVente = "En attente";  // Par défaut, l'état de vente est "En attente".
-		    this.encheres = new ArrayList<>();  // Initialisation de la liste des enchères.
-		    this.utilisateur = utilisateur;  // Vous pourriez également initialiser avec un utilisateur par défaut.
-		}
+			LocalDateTime dateFinEncheres, int miseAPrix, Retrait lieuRetrait, Utilisateur utilisateur) {
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.categorie = categorie;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.lieuRetrait = lieuRetrait;
+		this.prixVente = 0; // Par défaut, prixVente pourrait être 0.
+		this.etatVente = "En attente"; // Par défaut, l'état de vente est "En attente".
+		this.encheres = new ArrayList<>(); // Initialisation de la liste des enchères.
+		this.utilisateur = utilisateur; // Vous pourriez également initialiser avec un utilisateur par défaut.
+	}
 
 	public long getNoArticle() {
 		return noArticle;
@@ -173,16 +173,13 @@ public class Article {
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + lieuRetrait
 				+ ", encheres=" + encheres + ", categorie=" + categorie + ", utilisateur=" + utilisateur
-				+ ", utilisateurId=" + utilisateurId 
-				+ ", categorieId=" + "]";
+				+ ", utilisateurId=" + utilisateurId + ", categorieId=" + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(noArticle, categorie, dateDebutEncheres, dateFinEncheres, description, encheres, etatVente,
-				lieuRetrait, miseAPrix, nomArticle, prixVente, utilisateur 
-				, utilisateurId
-				);
+				lieuRetrait, miseAPrix, nomArticle, prixVente, utilisateur, utilisateurId);
 	}
 
 	@Override
@@ -201,7 +198,6 @@ public class Article {
 				&& Objects.equals(etatVente, other.etatVente) && Objects.equals(lieuRetrait, other.lieuRetrait)
 				&& miseAPrix == other.miseAPrix && Objects.equals(nomArticle, other.nomArticle)
 				&& prixVente == other.prixVente && Objects.equals(utilisateur, other.utilisateur)
-				&& utilisateurId == other.utilisateurId
-				;
+				&& utilisateurId == other.utilisateurId;
 	}
 }
