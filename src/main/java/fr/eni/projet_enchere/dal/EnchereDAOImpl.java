@@ -14,21 +14,13 @@ public class EnchereDAOImpl implements EnchereDAO {
 	private static final String INSERT_ENCHERE = "INSERT INTO Encheres (date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (:dateEnchere, :montantEnchere, :noArticle, :utilisateurId)";
 	private static final String FIND_ALL_ENCHERE = "SELECT * FROM Encheres";
 	private static final String FIND_BY_ARTICLE_ID = "SELECT * FROM Encheres WHERE no_article = :noArticle";
-	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_ID = 
-		    "SELECT TOP 1 e.*, a.nom_article " +
-		    "FROM Encheres e " +
-		    "INNER JOIN Articles_vendus a ON e.no_article = a.no_article " +
-		    "WHERE no_article = :noArticle " +
-			"ORDER BY e.date_enchere DESC";
-	
-	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_NAME =
-		    "SELECT TOP 1 e.*, a.nom_article " +
-		    "FROM Encheres e " +
-		    "INNER JOIN Articles_vendus a ON e.no_article = a.no_article " +
-		    "WHERE a.nom_article = :nomArticle " +
-		    "ORDER BY e.date_enchere DESC";
+	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_ID = "SELECT TOP 1 e.*, a.nom_article "
+			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article "
+			+ "WHERE e.no_article = :noArticle " + "ORDER BY e.date_enchere DESC";
 
-
+	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_NAME = "SELECT TOP 1 e.*, a.nom_article "
+			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article "
+			+ "WHERE a.nom_article = :nomArticle " + "ORDER BY e.date_enchere DESC";
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -57,22 +49,22 @@ public class EnchereDAOImpl implements EnchereDAO {
 		params.addValue("noArticle", noArticle);
 		return jdbcTemplate.query(FIND_BY_ARTICLE_ID, params, new BeanPropertyRowMapper<>(Enchere.class));
 	}
-	
+
 	@Override
 	public Enchere findLastEnchereByArticleId(long noArticle) {
-	    MapSqlParameterSource params = new MapSqlParameterSource();
-	    params.addValue("noArticle", noArticle);
-	    List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_ID, params, 
-	            new BeanPropertyRowMapper<>(Enchere.class));
-	    return result.isEmpty() ? null : result.get(0); // Retourne null si aucune enchère trouvée
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("noArticle", noArticle);
+		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_ID, params,
+				new BeanPropertyRowMapper<>(Enchere.class));
+		return result.isEmpty() ? null : result.get(0); 
 	}
 
 	@Override
 	public Enchere findLastEnchereByArticleName(String nomArticle) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
-	    params.addValue("nomArticle", nomArticle);
-	    List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_NAME, params, 
-	            new BeanPropertyRowMapper<>(Enchere.class));
-	    return result.isEmpty() ? null : result.get(0); // Retourne null si aucune enchère trouvée
+		params.addValue("nomArticle", nomArticle);
+		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_NAME, params,
+				new BeanPropertyRowMapper<>(Enchere.class));
+		return result.isEmpty() ? null : result.get(0);
 	}
 }
