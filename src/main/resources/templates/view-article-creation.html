@@ -11,14 +11,22 @@
     <h1>Nouvelle vente</h1>
     <form action="/article/creer" method="post" th:object="${article}">
      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+     	<div th:if="${#fields.hasErrors('*')}">
+			<h2>Veuillez vérifier vos données</h2>
+
+		</div>
         <ul>
             <li>
                 <label for="nomArticle">Article</label>
                 <input id="nomArticle" type="text" th:field="*{nomArticle}" required/>
+                <div
+					th:replace="~{fragments/fragment-error::frag-error('nomArticle')}"></div>
             </li>
             <li>
                 <label for="description">Description :</label>
                 <textarea id="description" th:field="*{description}" required></textarea>
+                <div
+					th:replace="~{fragments/fragment-error::frag-error('description')}"></div>
             </li>
             <li>
                 <label for="categorie">Catégorie :</label>
@@ -29,20 +37,35 @@
 			<li>
    				<label for="miseAPrix">Mise à prix :</label>
    				<input type="number" id="miseAPrix" th:field="*{miseAPrix}" min="0" step="1" placeholder="Entrez un prix">
+   				<div
+					th:replace="~{fragments/fragment-error::frag-error('miseAPrix')}"></div>
 			</li>
             <li>
                 <label for="dateDebutEncheres">Début des enchères :</label>
                 <input id="dateDebutEncheres" type="datetime-local" th:field="*{dateDebutEncheres}" required/>
+                <div
+					th:replace="~{fragments/fragment-error::frag-error('dateDebutEncheres')}"></div>
             </li>
             <li>
                 <label for="dateFinEncheres">Fin des enchères :</label>
                 <input id="dateFinEncheres" type="datetime-local" th:field="*{dateFinEncheres}" required/>
+                <div
+					th:replace="~{fragments/fragment-error::frag-error('dateFinEncheres')}"></div>
+				<div
+					th:replace="~{fragments/fragment-error::frag-error('dateFinEncheresValid')}"></div>
+				
             </li>
             <li>
                 <label for="lieuRetrait">Retrait :</label>
                 <label for="rue">rue :</label><input id="rue" type="text" th:field="*{lieuRetrait.rue}" required/>
+                <div
+					th:replace="~{fragments/fragment-error::frag-error('lieuRetrait.rue')}"></div>
                 <label for="code_postal">code_postal :</label><input id="code_postal" type="text" th:field="*{lieuRetrait.code_postal}" required/>
+                <div
+					th:replace="~{fragments/fragment-error::frag-error('lieuRetrait.code_postal')}"></div>
                 <label for="ville">ville :</label><input id="ville" type="text" th:field="*{lieuRetrait.ville}" required/>
+                <div
+					th:replace="~{fragments/fragment-error::frag-error('lieuRetrait.ville')}"></div>
             </li>
         </ul> <!-- -->
         <div class="form-row">
