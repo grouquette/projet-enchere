@@ -26,16 +26,26 @@ public class ArticleDAOImpl implements ArticleDAO {
 			+ "INNER JOIN RETRAITS r ON a.no_article= r.no_article "
 			+ "WHERE a.no_article = :idArticle";
 	private static final String FIND_ALL_ARTICLE = "SELECT * FROM Articles_vendus";
-	private static final String FIND_BY_NAME = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, a.no_utilisateur, a.no_categorie, "
-			+ "c.libelle, u.pseudo, r.rue, r.code_postal, r.ville " 
-			+ "FROM Articles_vendus a "
-			+ "INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur "
-			+ "INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie " 
-			+ "INNER JOIN RETRAITS r ON a.no_article= r.no_article "
-			+ "WHERE nom_article = :nomArticle";
+	private static final String FIND_BY_NAME = 
+		    "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, " +
+		    "a.prix_initial, a.prix_vente, a.no_utilisateur, a.no_categorie, c.libelle, u.pseudo, r.rue, r.code_postal, r.ville " +
+		    "FROM Articles_vendus a " +
+		    "INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur " +
+		    "INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie " +
+		    "INNER JOIN RETRAITS r ON a.no_article = r.no_article " +
+		    "WHERE a.nom_article LIKE :nomArticle";
+
 	private static final String FIND_BY_CATEGORY = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM Articles_vendus WHERE no_categorie = :noCategorie";
 	private static String INSERT_ARTICLE = "INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom, :description, :dateDebutEncheres, :dateFinEncheres, :miseAPrix, :prixVente, :noVendeur, :noCategorie)";
 	private static final String INSERT_RETRAIT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (:noArticle, :rue, :codePostal, :ville)";
+	private static final String FIND_BY_NAME_AND_CATEGORY = 
+		    "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, " +
+		    "a.prix_initial, a.prix_vente, a.no_utilisateur, a.no_categorie, c.libelle, u.pseudo, r.rue, r.code_postal, r.ville " +
+		    "FROM Articles_vendus a " +
+		    "INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur " +
+		    "INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie " +
+		    "INNER JOIN RETRAITS r ON a.no_article = r.no_article " +
+		    "WHERE a.nom_article LIKE :nomArticle AND a.no_categorie = :noCategorie";
 
 	public ArticleDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -80,16 +90,16 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public Article readByName(String nomArticle) {
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("nomArticle", nomArticle);
-		return this.jdbcTemplate.queryForObject(FIND_BY_NAME, params, new ArticleRowMapper());
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("nomArticle", "%" + nomArticle + "%"); // Ajout des caractères génériques
+	    return this.jdbcTemplate.queryForObject(FIND_BY_NAME, params, new ArticleRowMapper());
 	}
 
 	@Override
 	public List<Article> findByName(String nomArticle) {
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("nomArticle", nomArticle);
-		return this.jdbcTemplate.query(FIND_BY_NAME, params, new ArticleRowMapper());
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("nomArticle", "%" + nomArticle + "%"); // Ajout des caractères génériques
+	    return this.jdbcTemplate.query(FIND_BY_NAME, params, new ArticleRowMapper());
 	}
 
 	@Override
@@ -118,6 +128,16 @@ public class ArticleDAOImpl implements ArticleDAO {
 	    params.addValue("noArticle", article.getNoArticle());
 	    
 	    jdbcTemplate.update(sql, params);
+	}
+
+	@Override
+	public List<Article> findByNomAndCategorie(String nomArticle, Long noCategorie) {
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("nomArticle", "%" + nomArticle + "%"); // Permet une recherche partielle sur le nom
+	    params.addValue("noCategorie", noCategorie);
+
+	    return jdbcTemplate.query(FIND_BY_NAME_AND_CATEGORY, params, new ArticleRowMapper());
+
 	}
 
 

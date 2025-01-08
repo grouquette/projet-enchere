@@ -1,82 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ENI-Encheres</title>
-<link rel="stylesheet" href="/css/encheres.css" />
-<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+	<meta charset="UTF-8">
+	<title>ENI-Encheres</title>
+	<link rel="stylesheet" href="/css/encheres.css" />
+	<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<form th:action="@{/utilisateur/signin}" method="post"
-		th:object="${utilisateur}">
-		<h1>Création du compte</h1>
+	<form th:action="@{/utilisateur/signin}" method="post" th:object="${utilisateur}">
+		<h2>Création du compte</h2>
 		<div th:if="${#fields.hasErrors('*')}">
-			<h2>Veuillez vérifier vos données</h2>
+			<h3>Veuillez vérifier vos données</h3>
 			<ul th:if="${#fields.hasGlobalErrors()}">
 				<li th:each="e : ${#fields.globalErrors()}" th:text="${e}"></li>
 			</ul>
 		</div>
 		<div class="form-container">
 			<div class="form-container">
-				<label for="idPseudo">Pseudo : </label> <input id="idPseudo"
-					type="text" th:field="*{pseudo}" />
-				<div
-					th:replace="~{fragments/fragment-error::frag-error('pseudo')}"></div>
+				<label for="idPseudo">Pseudo : </label> <input id="idPseudo" type="text" th:field="*{pseudo}" />
+				<div th:replace="~{fragments/fragment-error::frag-error('pseudo')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idNom">Nom : </label> <input id="idNom" type="text"
-					th:field="*{nom}" />
+				<label for="idNom">Nom : </label> <input id="idNom" type="text" th:field="*{nom}" />
 				<div th:replace="~{fragments/fragment-error::frag-error('nom')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idPrenom">Prenom : </label> <input id="idPrenom"
-					type="text" th:field="*{prenom}" />
-				<div
-					th:replace="~{fragments/fragment-error::frag-error('prenom')}"></div>
+				<label for="idPrenom">Prenom : </label> <input id="idPrenom" type="text" th:field="*{prenom}" />
+				<div th:replace="~{fragments/fragment-error::frag-error('prenom')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idEmail">Email : </label> <input id="idEmail"
-					type="email" th:field="*{email}" />
+				<label for="idEmail">Email : </label> <input id="idEmail" type="email" th:field="*{email}" />
 				<div th:replace="~{fragments/fragment-error::frag-error('email')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idTelephone">Telephone : </label> <input
-					id="idTelephone" type="text" th:field="*{telephone}" />
-				<div
-					th:replace="~{fragments/fragment-error::frag-error('telephone')}"></div>
+				<label for="idTelephone">Telephone : </label> <input id="idTelephone" type="text" th:field="*{telephone}" />
+					<div th:replace="~{fragments/fragment-error::frag-error('telephone')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idRue">Rue : </label> <input id="idRue" type="text"
-					th:field="*{rue}" />
+				<label for="idRue">Rue : </label> <input id="idRue" type="text" th:field="*{rue}" />
 				<div th:replace="~{fragments/fragment-error::frag-error('rue')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idCodePostal">Code Postal : </label> <input
-					id="idCodePostal" type="text" th:field="*{codePostal}" />
-				<div
-					th:replace="~{fragments/fragment-error::frag-error('codePostal')}"></div>
+				<label for="idCodePostal">Code Postal : </label> <input id="idCodePostal" type="text" th:field="*{codePostal}" />
+				<div th:replace="~{fragments/fragment-error::frag-error('codePostal')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idVille">Ville : </label> <input id="idVille"
-					type="text" th:field="*{ville}" />
+				<label for="idVille">Ville : </label> <input id="idVille" type="text" th:field="*{ville}" />
 				<div th:replace="~{fragments/fragment-error::frag-error('ville')}"></div>
 			</div>
 			<div class="form-container">
-				<label for="idMotDePasse">Mot de passe : </label> <input
-					id="idMotDePasse" type="password" th:field="*{motDePasse}" />
-				<div
-					th:replace="~{fragments/fragment-error::frag-error('motDePasse')}"></div>
+				<label for="idMotDePasse">Mot de passe : </label> <input id="idMotDePasse" type="password" th:field="*{motDePasse}" />
+				<div th:replace="~{fragments/fragment-error::frag-error('motDePasse')}"></div>
 			</div>
 			<div class="form-container">
-    			<label for="idConfirmMotDePasse">Confirmer le mot de passe :</label>
-   				<input id="idConfirmMotDePasse" type="password" th:field="*{motDePasseConfirme}" />
-    			<div th:replace="~{fragments/fragment-error::frag-error('motDePasseConfirme')}"></div>
+	    		<label for="idConfirmMotDePasse">Confirmer le mot de passe :</label>
+	   			<input id="idConfirmMotDePasse" type="password" th:field="*{motDePasseConfirme}" />
+	    		<div th:replace="~{fragments/fragment-error::frag-error('motDePasseConfirme')}"></div>
 			</div>
 		</div>
 		<div class="form-row">
-			<button type="submit" class="btn go">Creer</button>
-			<a th:href="@{/encheres}" class="btn cncl">Annuler</a>
+			<div class="form-container">
+				<button type="submit" class="btn go">Creer</button>
+				<a th:href="@{/encheres}" class="btn cncl flex-center">Annuler</a>
+			</div>
 		</div>
 	</form>
 </body>

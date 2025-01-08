@@ -114,6 +114,7 @@ button {
 	width: 90%; /* Prend 50% de la largeur de son conteneur parent */
 	height: 10vh;
 	margin: 2vh;
+	text-align: center;
 }
 
 .cncl:hover {
@@ -126,9 +127,17 @@ button {
 	width: 90%; /* Prend 50% de la largeur de son conteneur parent */
 	height: 10vh;
 	margin: 2vh;
+	text-align: center;
 }
 
 .go:hover {
 	background-color: #0080ff; /* Rouge foncé */
 	text-decoration: none;
+}
+
+.flex-center {
+    display: flex;              /* Active Flexbox */
+    justify-content: center;    /* Centre le contenu horizontalement */
+    align-items: center;        /* Centre le contenu verticalement */
+    text-align: center;         /* Assure que le texte est bien centré */
 }

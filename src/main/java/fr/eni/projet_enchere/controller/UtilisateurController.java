@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -70,7 +71,13 @@ public class UtilisateurController {
 		}
 		return "view-utilisateur";
 	}
-
+	
+	@GetMapping("/profil/{noUtilisateur}")
+	public String afficherProfil(@PathVariable Long noUtilisateur, Model model) {
+	    Utilisateur utilisateur = utilisateurService.consulterProfilUtilisateurParId(noUtilisateur);
+	    model.addAttribute("utilisateur", utilisateur);
+	    return "view-utilisateur"; // Nom de la vue pour afficher le profil
+	}
 
 	@GetMapping("/modifier")
 	public String afficherModificationUtilisateurs(Model model) {

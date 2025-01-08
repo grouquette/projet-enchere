@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ENI-Encheres</title>
-<link rel="stylesheet" href="/css/encheres.css" />
-<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
-
+	<meta charset="UTF-8">
+	<title>ENI-Encheres</title>
+	<link rel="stylesheet" href="/css/encheres.css" />
+	<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<h1>Liste des enchères</h1>
-	
-	<div class="form-container">
     <form th:action="@{/encheres}" method="get">
-        <label for="nomArticle">Filtres : </label>
-        <input id="nomArticle" name="nomArticle" type="text" th:value="${nomArticle}" />
-         <label for="noCategorie">Catégorie :</label> 
-		<select id="noCategorie" name="noCategorie">
-		<option value="" th:text="'Toutes catégories'">Toutes catégories</option>
-    	<option th:each="c : ${categoriesSession}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
-		</select>
-        <button type="submit">Rechercher</button>
+    	<h2>Liste des enchères</h2>
+		<label for="nomArticle">Filtres : </label>
+		<div class="form-container">		
+			<div class="form-row">
+        		<div class="form-row">	
+        			<input id="nomArticle" name="nomArticle" type="text" th:value="${nomArticle}" />
+        		</div>
+        		<div class="form-container">
+         			<label for="noCategorie">Catégorie :</label> 
+					<select id="noCategorie" name="noCategorie">
+						<option value="" th:text="'Toutes catégories'">Toutes catégories</option>
+    					<option th:each="c : ${categoriesSession}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
+					</select>
+				</div>		
+			</div>
+			<div class="form-row">
+        		<button type="submit" class="btn go">Rechercher</button>
+        	</div>
+       	</div>
     </form>
-	</div>
-	
 	<div class="articles-container">
-	<div th:each="article : ${articleSession}" class="article-card">
-		<form th:action="@{/encheres}" method="post">
-			<input type="hidden" name="nomArticle" th:value="${article.nomArticle}" />
-			<button type="submit">
+		<div th:each="article : ${articleSession}" class="article-card">
+			<form th:action="@{/encheres}" method="post">
+				<input type="hidden" name="nomArticle" th:value="${article.nomArticle}" />
+				<button type="submit">
 				<h2 th:text="${article.nomArticle}"></h2>
 				<p><strong>Prix de vente:</strong> <span th:text="${article.prixVente}"></span></p>
 				<p><strong>Date de fin:</strong> <span th:text="${article.dateFinEncheres}"></span></p>
 				<p><strong>Utilisateur:</strong> <span th:text="${article.utilisateurId}"></span></p>
-			</button>
-		</form>
-	</div>
+				</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

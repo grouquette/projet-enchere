@@ -18,4 +18,6 @@ public interface ContexteService {
 	List<Article> consulterArticleParNom(String nomArticle);
 
 	List<Article> consulterArticleParCategorie(Long noCategorie);
+
+	List<Article> consulterArticleParNomEtCategorie(String nomArticle, Long noCategorie);
 }

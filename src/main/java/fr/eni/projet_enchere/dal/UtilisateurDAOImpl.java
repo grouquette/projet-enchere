@@ -22,8 +22,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private static final String FIND_BY_PSEUDO = "SELECT * FROM Utilisateurs WHERE pseudo = :pseudo";
 
 	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone= :telephone, rue = :rue, code_postal = :codePostal, ville = :ville, mot_de_passe = :motDePasse WHERE pseudo = :pseudo";
-
-	private static final String FIND_ALL = "SELECT id, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM Utilisateurs WHERE id = :id";
 	
 	private static final String COUNT_PSEUDO = "SELECT COUNT(*) FROM UTILISATEURS WHERE pseudo = :pseudo" ;
 	
