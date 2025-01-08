@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.projet_enchere.bll.ArticleService;
 import fr.eni.projet_enchere.bll.CategorieService;
+import fr.eni.projet_enchere.bll.EnchereService;
 import fr.eni.projet_enchere.bll.contexte.ContexteService;
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Categorie;
@@ -31,7 +32,10 @@ public class ArticleController {
 	private ArticleService articleService;
 	@Autowired
 	private CategorieService categorieService;
-	private final ContexteService contexteService;
+	@Autowired
+	private ContexteService contexteService;
+	@Autowired
+	private EnchereService enchereService;
 
 	public ArticleController(ArticleService articleService, CategorieService categorieService,
 			ContexteService contexteService) {
@@ -86,7 +90,9 @@ public class ArticleController {
 	@PostMapping("/encheres")
 	public String afficherDetailArticle(@RequestParam("nomArticle") String nomArticle, Model model) {
 		Article a = this.articleService.consulterArticleParNom(nomArticle);
+	    Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(nomArticle); // Charge la dernière enchère
 		model.addAttribute("article", a);
+		model.addAttribute("derniereEnchere", derniereEnchere);
 		model.addAttribute("enchere", new Enchere(null, 0, a, null)); // Ajouter un objet enchère vide
 		return "view-detail-vente";
 	}
@@ -94,7 +100,6 @@ public class ArticleController {
 	@GetMapping("/article/details")
 	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
 		Article a = this.articleService.consulterArticleParId(id);
-		System.out.println(a);
 		model.addAttribute("article", a);
 		model.addAttribute("enchere", new Enchere(null, 0, a, null)); // Ajouter un objet enchère vide
 		return "view-detail-vente";

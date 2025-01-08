@@ -131,4 +131,4 @@ INSERT INTO RETRAITS (no_article, rue, code_postal, ville)
 VALUES
 -- Correspondant aux articles déjà insérés
 (15, '15, avenue de la liberté', '75001', 'Paris'),
-(16, '12, rue des marguerites', '31000', 'Toulouse'),
+(16, '12, rue des marguerites', '31000', 'Toulouse');

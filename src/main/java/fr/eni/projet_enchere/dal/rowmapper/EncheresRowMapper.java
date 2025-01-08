@@ -3,9 +3,6 @@ package fr.eni.projet_enchere.dal.rowmapper;
 import org.springframework.jdbc.core.RowMapper;
 
 import fr.eni.projet_enchere.bo.Article;
-import fr.eni.projet_enchere.bo.Categorie;
-import fr.eni.projet_enchere.bo.Retrait;
-import fr.eni.projet_enchere.bo.Utilisateur;
 
 public class EncheresRowMapper implements RowMapper<Article> {
 
