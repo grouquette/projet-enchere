@@ -15,6 +15,10 @@ public interface EnchereService {
 	void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere);
 
 	int getMaximumMontantEnchere(long noArticle);
+	
+	Enchere getDerniereEncherePourArticle(long noArticle);
+	
+	Enchere getDerniereEncherePourArticle(String nomArticle);
 
 	Utilisateur getUtilisateurParNom(String username);
 

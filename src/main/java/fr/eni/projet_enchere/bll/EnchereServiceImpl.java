@@ -52,6 +52,16 @@ public class EnchereServiceImpl implements EnchereService {
 	}
 
 	@Override
+	public Enchere getDerniereEncherePourArticle(long noArticle) {
+		return enchereDAO.findLastEnchereByArticleId(noArticle);
+	}
+
+	@Override
+	public Enchere getDerniereEncherePourArticle(String nomArticle) {
+		return enchereDAO.findLastEnchereByArticleName(nomArticle);
+	}
+
+	@Override
 	public String etatVente(Article articleAEncherir) {
 		if (articleAEncherir.getDateFinEncheres().isBefore(LocalDateTime.now())) {
 			return "Terminée";
