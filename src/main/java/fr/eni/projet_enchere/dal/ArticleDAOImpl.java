@@ -99,4 +99,26 @@ public class ArticleDAOImpl implements ArticleDAO {
 		return jdbcTemplate.query(FIND_BY_CATEGORY, params, new BeanPropertyRowMapper<>(Article.class));
 	}
 
+	@Override
+	public void update(Article article) {
+	    String sql = "UPDATE Articles_vendus SET nom_article = :nomArticle, description = :description, " +
+	                 "date_debut_encheres = :dateDebutEncheres, date_fin_encheres = :dateFinEncheres, " +
+	                 "prix_initial = :miseAPrix, prix_vente = :prixVente, no_utilisateur = :noUtilisateur, " +
+	                 "no_categorie = :noCategorie WHERE no_article = :noArticle";
+	    
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("nomArticle", article.getNomArticle());
+	    params.addValue("description", article.getDescription());
+	    params.addValue("dateDebutEncheres", article.getDateDebutEncheres());
+	    params.addValue("dateFinEncheres", article.getDateFinEncheres());
+	    params.addValue("miseAPrix", article.getMiseAPrix());
+	    params.addValue("prixVente", article.getPrixVente());
+	    params.addValue("noUtilisateur", article.getUtilisateur().getNoUtilisateur());
+	    params.addValue("noCategorie", article.getCategorie().getNoCategorie());
+	    params.addValue("noArticle", article.getNoArticle());
+	    
+	    jdbcTemplate.update(sql, params);
+	}
+
+
 }

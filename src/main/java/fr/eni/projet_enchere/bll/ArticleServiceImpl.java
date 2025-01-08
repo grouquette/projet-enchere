@@ -65,5 +65,23 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return "En cours";
 	}
+	
+	@Override
+	@Transactional
+	public void updateArticle(Article article) {
+	    Article existingArticle = articleDAO.read(article.getNoArticle());
+	    
+	    existingArticle.setNomArticle(article.getNomArticle());
+	    existingArticle.setDescription(article.getDescription());
+	    existingArticle.setDateDebutEncheres(article.getDateDebutEncheres());
+	    existingArticle.setDateFinEncheres(article.getDateFinEncheres());
+	    existingArticle.setMiseAPrix(article.getMiseAPrix());
+	    existingArticle.setPrixVente(article.getPrixVente());
+	    existingArticle.setUtilisateur(article.getUtilisateur());
+	    existingArticle.setCategorie(article.getCategorie());
+	    
+	    articleDAO.update(existingArticle);
+	}
+
 
 }

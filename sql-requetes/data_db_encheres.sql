@@ -36,7 +36,7 @@ INSERT INTO Utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_posta
 VALUES
     ('jdoe', 'Doe', 'John', 'john.doe@example.com', '0123456789', '10 rue de Paris', '75001', 'Paris', '$2y$10$uQME.1FDRC4f3MTiQmv.WuWA6KjiPBPT1IBgF.qND5sFCrgA58x0m', 100.00, 0)/*Mot de Passe = password123*/,
     ('asmith', 'Smith', 'Anna', 'anna.smith@example.com', '0123456790', '20 avenue des Champs', '75008', 'Paris', '$2y$10$yRjXjdryx6UjQR/jIyirceQubr04y0S..rkTe0puJilc155hdtxjm', 250.50, 0)/*Mot de Passe = securePass1*/,
-    ('jdupont', 'Dupont', 'Jean', 'jean.dupont@example.com', '0654321987', '5 place de l''Étoile', '69001', 'Lyon', '$2y$10$fdT.k1LH.NACI4etrLfSJecXKUz3LDL6UpmGTXeUfNylsqE.fLGeG', 300.00, 1)/*Mot de Passe = jeanPass2024*/,
+    ('jdupont', 'Dupont', 'Jean', 'jean.dupont@example.com', '0654321987', '5 place de l''étoile', '69001', 'Lyon', '$2y$10$fdT.k1LH.NACI4etrLfSJecXKUz3LDL6UpmGTXeUfNylsqE.fLGeG', 300.00, 1)/*Mot de Passe = jeanPass2024*/,
     ('claporte', 'Laporte', 'Claire', 'claire.laporte@example.com', '0678192345', '12 boulevard Haussmann', '75009', 'Paris', '$2y$10$nPs7xuVP2p.IP2Ldcd7TNuS0upGhx2JsRGVicPiRn3QZgFPAiKJMq', 500.00, 1)/*Mot de Passe = claireAdmin*/,
     ('mpaul', 'Paul', 'Martin', 'martin.paul@example.com', '0612345678', '8 rue Victor Hugo', '33000', 'Bordeaux', '$2y$10$V.dUk7yvAfSiXLAKxlzWpeN2IX4flXzCEh3bBkWjyrUvq4UMar4o6', 150.00, 0)/*Mot de Passe = martin123*/,
     ('elou', 'Lou', 'Emma', 'emma.lou@example.com', '0698123456', '3 chemin des Fleurs', '13000', 'Marseille', '$2y$10$wWEXBHXpST6oA6OVJekrn.Ii92DvOZ3fZ/3UJAeyz.j.WH9FhaxWe!', 200.00, 0)/*Mot de Passe = emma2023!*/,
@@ -46,7 +46,7 @@ VALUES
     ('tlee', 'Lee', 'Tom', 'tom.lee@example.com', '0612340987', '78 allée des Pins', '06000', 'Nice', '$2y$10$bTxvz/x2gyD35PYSoBc2vuFGU550UbaD.IieQQMObfY9E49Bz1hjq', 120.00, 0)/*Mot de Passe = Tom2023$*/;
 
 
--- Insertion de données dans categories--
+-- Insertion de donnÃ©es dans categories--
 
 INSERT INTO Categories (libelle)
 VALUES
@@ -72,7 +72,7 @@ VALUES
 ('voyages');
 
 
--- Insertion de données dans articles--
+-- Insertion de donnÃ©es dans articles--
 
 INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)
 VALUES
@@ -82,13 +82,13 @@ VALUES
 ('SAMSUNG Galaxy A15 4GB+128GB (Bleu Nuit)', 'Samsung Galaxy A15 4G 4Go de RAM, 128 Go de mémoire, écran 6,5 pouces avec une résolution de 1080 x 1920. Bon état', GETDATE(), GETDATE()+4, 4, 4, 5,4); 
 INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)
 VALUES
--- Électronique
+-- électronique
 ('Apple iPhone 13 Pro Max 256GB', 'Smartphone Apple avec écran 6,7 pouces, triple caméra 12 MP, et stockage 256 Go. Couleur Graphite.', GETDATE(), GETDATE() + 7, 950, 1200, 2, 1),
-('Écouteurs Bluetooth Sony WH-1000XM4', 'Écouteurs sans fil avec réduction de bruit active, autonomie de 30 heures, couleur noir.', GETDATE(), GETDATE() + 5, 150, 200, 4, 1),
+('écouteurs Bluetooth Sony WH-1000XM4', 'écouteurs sans fil avec réduction de bruit active, autonomie de 30 heures, couleur noir.', GETDATE(), GETDATE() + 5, 150, 200, 4, 1),
 
 -- Maison et jardin
 ('Aspirateur Dyson V15 Detect', 'Aspirateur sans fil Dyson, détecteur laser pour poussières fines, autonomie 60 minutes.', GETDATE(), GETDATE() + 10, 500, 550, 3, 2),
-('Set de jardin en bois acacia', 'Ensemble de table et chaises pour 6 personnes, matériau durable et résistant aux intempéries.', GETDATE(), GETDATE() + 14, 300, 400, 6, 2),
+('Set de jardin en bois acacia', 'Ensemble de table et chaises pour 6 personnes, matériau durable et rÃ©sistant aux intempéries.', GETDATE(), GETDATE() + 14, 300, 400, 6, 2),
 
 -- Mode et accessoires
 ('Montre connectée Garmin Fenix 6 Pro', 'Montre GPS multisports avec musique, navigation et cartographie intégrées.', GETDATE(), GETDATE() + 10, 450, 490, 7, 3),
@@ -99,7 +99,7 @@ VALUES
 ('Jeu de société Catan', 'Jeu de stratégie pour 3 à 4 joueurs, édition 2025.', GETDATE(), GETDATE() + 4, 30, 40, 2, 4),
 
 -- Produits culturels
-('Livre "Les Misérables" de Victor Hugo', 'Édition collector reliée, couverture cuir, illustrations origine.', GETDATE(), GETDATE() + 12, 25, 35, 1, 5),
+('Livre "Les Misérables" de Victor Hugo', 'édition collector reliée, couverture cuir, illustrations origine.', GETDATE(), GETDATE() + 12, 25, 35, 1, 5),
 ('Vinyle "Thriller" de Michael Jackson', 'Album légendaire en édition originale, 1982.', GETDATE(), GETDATE() + 9, 50, 70, 9, 5),
 
 -- Sport
@@ -116,7 +116,7 @@ VALUES
 (4, '2 boulevard des chats', '44300', 'Nantes');
 INSERT INTO RETRAITS (no_article, rue, code_postal, ville)
 VALUES
--- Correspondant aux articles déjà insérés
+-- Correspondant aux articles déjà  insérés
 (5, '15, avenue de la liberté', '75001', 'Paris'),
 (6, '12, rue des marguerites', '31000', 'Toulouse'),
 (7, '45, impasse des lilas', '13001', 'Marseille'),

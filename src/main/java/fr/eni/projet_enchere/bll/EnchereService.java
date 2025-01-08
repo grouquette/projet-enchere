@@ -21,5 +21,10 @@ public interface EnchereService {
 	Enchere getDerniereEncherePourArticle(String nomArticle);
 
 	Utilisateur getUtilisateurParNom(String username);
+	
+	Article gagnerEnchere(long noArticle);
+	
+	boolean validerEnchereUnique(long noUtilisateur, long noArticle);
+
 
 }

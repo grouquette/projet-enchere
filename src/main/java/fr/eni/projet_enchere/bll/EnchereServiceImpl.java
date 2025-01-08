@@ -21,7 +21,8 @@ public class EnchereServiceImpl implements EnchereService {
 	private EnchereDAO enchereDAO;
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
-
+	@Autowired
+	private ArticleService articleService;
 	@Override
 	public List<Enchere> add(Enchere enchere) {
 		encheres.add(enchere);
@@ -30,17 +31,25 @@ public class EnchereServiceImpl implements EnchereService {
 
 	@Override
 	public void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
+		boolean valide = validerEnchereUnique(utilisateur.getNoUtilisateur(), articleAEncherir.getNoArticle());
 		if (etatVente(articleAEncherir).equals("En cours") && montantEnchere >= articleAEncherir.getMiseAPrix()
 				&& utilisateur.getCredit() >= montantEnchere
 				&& montantEnchere > getMaximumMontantEnchere(articleAEncherir.getNoArticle())) {
 			if (utilisateur.getEncheres() == null) {
 				utilisateur.setEncheres(new ArrayList<>()); // Initialiser la liste d'enchères si elle est null
 			}
+			
 			Enchere enchere = new Enchere(LocalDateTime.now(), montantEnchere, articleAEncherir, utilisateur);
 			utilisateur.getEncheres().add(enchere);
-			enchereDAO.creerEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
+			if (valide) {
+				enchereDAO.creerEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
+			}else {
+				enchereDAO.updateEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
+			}
+			
 		} else {
 			// Gérer les cas où l'enchère ne peut pas être créée
+
 		}
 	}
 
@@ -76,4 +85,39 @@ public class EnchereServiceImpl implements EnchereService {
 	public Utilisateur getUtilisateurParNom(String username) {
 		return utilisateurDAO.findByPseudo(username);
 	}
+
+	@Override
+	public Article gagnerEnchere(long noArticle) {
+	    Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
+	    
+	    if (derniereEnchere == null) {
+	        return null; 
+	    }
+
+	    Article article = derniereEnchere.getArticle();
+	    if (LocalDateTime.now().isBefore(article.getDateFinEncheres())) {
+	        throw new IllegalStateException("L'enchère n'est pas encore terminée.");
+	    }
+
+	    Utilisateur gagnant = derniereEnchere.getUtilisateur();
+
+	    article.setEtatVente("Terminé");
+
+	    int montantEnchere = derniereEnchere.getMontantEnchere();
+	    gagnant.setCredit(gagnant.getCredit() - montantEnchere);
+	    utilisateurDAO.update(gagnant);
+
+	    articleService.updateArticle(article);
+
+	    return article;
+	}
+
+	@Override
+	public boolean validerEnchereUnique(long noUtilisateur, long noArticle) {
+		boolean enchereUtilisateurExiste = enchereDAO.enchereUnique(noUtilisateur, noArticle);
+		
+		return !enchereUtilisateurExiste;
+	}
+
 }
+

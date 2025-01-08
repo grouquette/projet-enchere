@@ -31,6 +31,12 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	private static final String DELETE_BY_PSEUDO = "DELETE FROM UTILISATEURS WHERE pseudo = :pseudo";
 	
+	private static final String UPDATE_GAGNANT = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, " +
+            "telephone = :telephone, rue = :rue, code_postal = :codePostal, ville = :ville, " +
+            "mot_de_passe = :motDePasse, credit = :credit, administrateur = :administrateur " +
+            "WHERE no_utilisateur = :noUtilisateur";
+
+	
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	public UtilisateurDAOImpl(NamedParameterJdbcTemplate jdbcTemplate) {
@@ -126,4 +132,24 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
 		
 	}
+
+	@Override
+	public void update(Utilisateur utilisateur) {
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("pseudo", utilisateur.getPseudo());
+	    params.addValue("nom", utilisateur.getNom());
+	    params.addValue("prenom", utilisateur.getPrenom());
+	    params.addValue("email", utilisateur.getEmail());
+	    params.addValue("telephone", utilisateur.getTelephone());
+	    params.addValue("rue", utilisateur.getRue());
+	    params.addValue("codePostal", utilisateur.getCodePostal());
+	    params.addValue("ville", utilisateur.getVille());
+	    params.addValue("motDePasse", utilisateur.getMotDePasse());
+	    params.addValue("credit", utilisateur.getCredit());
+	    params.addValue("administrateur", utilisateur.isAdministrateur());
+	    params.addValue("noUtilisateur", utilisateur.getNoUtilisateur());
+	    
+	    jdbcTemplate.update(UPDATE_GAGNANT, params);
+	}
+
 }
