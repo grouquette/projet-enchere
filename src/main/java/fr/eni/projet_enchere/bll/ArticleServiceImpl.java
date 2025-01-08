@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.projet_enchere.bo.Article;
-import fr.eni.projet_enchere.bo.Categorie;
-import fr.eni.projet_enchere.bo.Retrait;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.ArticleDAO;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
@@ -66,11 +64,6 @@ public class ArticleServiceImpl implements ArticleService {
 			return "À venir";
 		}
 		return "En cours";
-	}
-	@Override
-	public List<Categorie> consulterCategorie() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

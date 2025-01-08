@@ -1,5 +1,6 @@
 package fr.eni.projet_enchere.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class ArticleController {
 		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
 		article.setUtilisateur(utilisateur);
 		articleService.creerArticle(article);
-			return "view-encheres";
+		return "view-encheres";
 	}
 
 	@GetMapping("/encheres")
@@ -73,6 +74,7 @@ public class ArticleController {
 		} else {
 			articles = contexteService.getAllArticles();
 		}
+		Collections.reverse(articles);
 		List<Categorie> categories = categorieService.findAll();
 		model.addAttribute("categoriesSession", categories);
 		model.addAttribute("articleSession", articles);

@@ -1,31 +1,10 @@
--- Suppression de colonnes--
-
-DROP TABLE RETRAITS;
-
-DROP TABLE ROLES;
-
-DROP TABLE ENCHERES;
-
-DROP TABLE ARTICLES_VENDUS
-
-DROP TABLE UTILISATEURS;
-
-DROP TABLE CATEGORIES;
 
 use [projet-enchere]
 go
 
--- créer une table role pour définir qui est admin ou pas--
-
-CREATE TABLE ROLES(
-ROLE NVARCHAR(50) NOT NULL,
-IS_ADMIN int NOT NULL ,
-PRIMARY KEY ([ROLE],[IS_ADMIN]));
 INSERT INTO [ROLES] ([ROLE],[IS_ADMIN]) VALUES ('ROLE_MEMBRE',0);
 INSERT INTO [ROLES] ([ROLE],[IS_ADMIN]) VALUES ('ROLE_MEMBRE',1);
 INSERT INTO [ROLES] ([ROLE],[IS_ADMIN]) VALUES ('ROLE_ADMIN',1);
-
-
 
 
 -- Email et pseudo uniques pour ne pas avoir plusieurs utilisateurs identiques--
@@ -75,6 +54,23 @@ VALUES
 ('jouets'),
 ('outils'),
 ('téléphones');
+INSERT INTO Categories (libelle)
+VALUES
+('électroménager'),
+('mobilier'),
+('vêtements'),
+('sport'),
+('livres'),
+('musique'),
+('jeux vidéo'),
+('automobile'),
+('jardinage'),
+('décoration'),
+('bijoux'),
+('photographie'),
+('santé'),
+('voyages');
+
 
 -- Insertion de données dans articles--
 
@@ -84,6 +80,31 @@ VALUES
 ('Cuisine bon appétit 23 accessoires', 'Cuisine contemporaine avec nombreuses fonctionnalités. Module électronique. Four, frigo, évier, machine à espresso. 23 accessoires inclus. Hauteur plan de travail : 48.5cm.', GETDATE(), GETDATE()+5, 2, 2, 3,2),
 ('Perceuse-visseuse sans fil 18V', 'Perceuse visseuse Makita 18V neuve. Modèle DDF453SYE, Moteur brushless sans charbon plus durable et performant, Vendu avec une batterie et chargeur', GETDATE(), GETDATE()+10, 6, 6, 3, 3),
 ('SAMSUNG Galaxy A15 4GB+128GB (Bleu Nuit)', 'Samsung Galaxy A15 4G 4Go de RAM, 128 Go de mémoire, écran 6,5 pouces avec une résolution de 1080 x 1920. Bon état', GETDATE(), GETDATE()+4, 4, 4, 5,4); 
+INSERT INTO Articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)
+VALUES
+-- Électronique
+('Apple iPhone 13 Pro Max 256GB', 'Smartphone Apple avec écran 6,7 pouces, triple caméra 12 MP, et stockage 256 Go. Couleur Graphite.', GETDATE(), GETDATE() + 7, 950, 1200, 2, 1),
+('Écouteurs Bluetooth Sony WH-1000XM4', 'Écouteurs sans fil avec réduction de bruit active, autonomie de 30 heures, couleur noir.', GETDATE(), GETDATE() + 5, 150, 200, 4, 1),
+
+-- Maison et jardin
+('Aspirateur Dyson V15 Detect', 'Aspirateur sans fil Dyson, détecteur laser pour poussières fines, autonomie 60 minutes.', GETDATE(), GETDATE() + 10, 500, 550, 3, 2),
+('Set de jardin en bois acacia', 'Ensemble de table et chaises pour 6 personnes, matériau durable et résistant aux intempéries.', GETDATE(), GETDATE() + 14, 300, 400, 6, 2),
+
+-- Mode et accessoires
+('Montre connectée Garmin Fenix 6 Pro', 'Montre GPS multisports avec musique, navigation et cartographie intégrées.', GETDATE(), GETDATE() + 10, 450, 490, 7, 3),
+('Sac à main cuir Michael Kors', 'Sac à main en cuir noir véritable, modèle classique, poche intérieure zippée.', GETDATE(), GETDATE() + 6, 200, 220, 5, 3),
+
+-- Loisirs
+('Vélo tout terrain Rockrider ST 540', 'VTT 27,5 pouces avec suspension avant, 24 vitesses, cadre en aluminium.', GETDATE(), GETDATE() + 8, 300, 350, 8, 4),
+('Jeu de société Catan', 'Jeu de stratégie pour 3 à 4 joueurs, édition 2025.', GETDATE(), GETDATE() + 4, 30, 40, 2, 4),
+
+-- Produits culturels
+('Livre "Les Misérables" de Victor Hugo', 'Édition collector reliée, couverture cuir, illustrations origine.', GETDATE(), GETDATE() + 12, 25, 35, 1, 5),
+('Vinyle "Thriller" de Michael Jackson', 'Album légendaire en édition originale, 1982.', GETDATE(), GETDATE() + 9, 50, 70, 9, 5),
+
+-- Sport
+('Raquette de tennis Wilson Pro Staff 97', 'Raquette en graphite, utilisée par Roger Federer, poids 315g.', GETDATE(), GETDATE() + 7, 180, 200, 10, 6),
+('Chaussures de course Nike Air Zoom Pegasus', 'Chaussures de running légères et confortables, taille 42.', GETDATE(), GETDATE() + 5, 120, 150, 6, 6);
 
 -- Insertion de données dans Retrait
 
@@ -93,3 +114,21 @@ VALUES
 (2, '25, rue des sapins', '49000', 'Angers'),
 (3, '230, allée des brumes', '85200', 'La Roche sur Yon'),
 (4, '2 boulevard des chats', '44300', 'Nantes');
+INSERT INTO RETRAITS (no_article, rue, code_postal, ville)
+VALUES
+-- Correspondant aux articles déjà insérés
+(5, '15, avenue de la liberté', '75001', 'Paris'),
+(6, '12, rue des marguerites', '31000', 'Toulouse'),
+(7, '45, impasse des lilas', '13001', 'Marseille'),
+(8, '5, chemin des peupliers', '67000', 'Strasbourg'),
+(9, '33, boulevard des marronniers', '59000', 'Lille'),
+(10, '8, allée des pins', '80000', 'Amiens'),
+(11, '21, rue de la mer', '14000', 'Caen'),
+(12, '19, avenue des fleurs', '69000', 'Lyon'),
+(13, '7, rue des collines', '33000', 'Bordeaux'),
+(14, '23, place des églises', '76000', 'Rouen');
+INSERT INTO RETRAITS (no_article, rue, code_postal, ville)
+VALUES
+-- Correspondant aux articles déjà insérés
+(15, '15, avenue de la liberté', '75001', 'Paris'),
+(16, '12, rue des marguerites', '31000', 'Toulouse'),

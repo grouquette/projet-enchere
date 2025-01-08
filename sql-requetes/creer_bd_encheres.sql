@@ -1,3 +1,17 @@
+-- Suppression de colonnes--
+
+DROP TABLE RETRAITS;
+
+DROP TABLE ROLES;
+
+DROP TABLE ENCHERES;
+
+DROP TABLE ARTICLES_VENDUS
+
+DROP TABLE UTILISATEURS;
+
+DROP TABLE CATEGORIES;
+
 use [projet-enchere]
 go
 
@@ -62,6 +76,12 @@ CREATE TABLE ARTICLES_VENDUS (
     no_utilisateur                INTEGER NOT NULL,
     no_categorie                  INTEGER NOT NULL
 )
+-- créer une table role pour définir qui est admin ou pas--
+
+CREATE TABLE ROLES(
+ROLE NVARCHAR(50) NOT NULL,
+IS_ADMIN int NOT NULL ,
+PRIMARY KEY ([ROLE],[IS_ADMIN]));
 
 ALTER TABLE ARTICLES_VENDUS ADD constraint articles_vendus_pk PRIMARY KEY (no_article)
 

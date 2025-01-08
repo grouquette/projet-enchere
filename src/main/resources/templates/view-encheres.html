@@ -24,16 +24,18 @@
     </form>
 	</div>
 	
-	<div th:each="article : ${articleSession}">
-			<form th:action="@{/encheres}" method="post">
-				<input type="hidden" name="nomArticle" th:value="${article.nomArticle}" />
-				<button type="submit">
-					<h2 th:text="${article.nomArticle}"></h2>
-					<p><strong>Prix de vente:</strong> <span th:text="${article.prixVente}"></span></p>
-					<p><strong>Date de fin:</strong> <span th:text="${article.dateFinEncheres}"></span></p>
-					<p><strong>Utilisateur:</strong> <span th:text="${article.utilisateurId}"></span></p>
-				</button>
-			</form>
-		</div>
+	<div class="articles-container">
+	<div th:each="article : ${articleSession}" class="article-card">
+		<form th:action="@{/encheres}" method="post">
+			<input type="hidden" name="nomArticle" th:value="${article.nomArticle}" />
+			<button type="submit">
+				<h2 th:text="${article.nomArticle}"></h2>
+				<p><strong>Prix de vente:</strong> <span th:text="${article.prixVente}"></span></p>
+				<p><strong>Date de fin:</strong> <span th:text="${article.dateFinEncheres}"></span></p>
+				<p><strong>Utilisateur:</strong> <span th:text="${article.utilisateurId}"></span></p>
+			</button>
+		</form>
+	</div>
+	</div>
 </body>
 </html>

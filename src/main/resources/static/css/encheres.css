@@ -40,6 +40,48 @@
 	color: #d1e7fd;
 }
 
+/* Conteneur des articles */
+.articles-container {
+	display: flex;
+	flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+	gap: 20px; /* Espacement entre les articles */
+	justify-content: center; /* Centrer les articles horizontalement */
+	margin: 20px auto; /* Marges pour espacer du reste du contenu */
+	padding: 10px; /* Ajouter un peu d'espacement autour */
+}
+
+/* Carte individuelle de chaque article */
+.article-card {
+	border: 1px solid #ddd; /* Bordure légère */
+	border-radius: 5px; /* Coins arrondis */
+	padding: 15px; /* Espacement interne */
+	width: 250px; /* Largeur fixe pour chaque article */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	/* Ombre pour effet de relief */
+	text-align: center; /* Centrer le contenu */
+	background-color: #f9f9f9; /* Couleur de fond légère */
+}
+
+/* Bouton dans la carte */
+.article-card button {
+	background: none; /* Pas de fond */
+	border: none; /* Pas de bordure */
+	text-align: inherit; /* Garde l'alignement */
+	cursor: pointer; /* Curseur pointer */
+	width: 100%; /* Prend toute la largeur de la carte */
+	padding: 10px 0; /* Espacement interne */
+}
+
+.article-card h2 {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+.article-card p {
+	font-size: 0.9em;
+	margin: 5px 0;
+}
+
 button {
 	all: unset; /* Réinitialise tous les styles par défaut du navigateur */
 	display: inline-block; /* Redéfinir le comportement */
