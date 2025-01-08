@@ -30,6 +30,7 @@ public class EnchereServiceImpl implements EnchereService {
 
 	@Override
 	public void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere) {
+		boolean valide = validerEnchereUnique(utilisateur.getNoUtilisateur(), articleAEncherir.getNoArticle());
 		if (etatVente(articleAEncherir).equals("En cours") && montantEnchere >= articleAEncherir.getMiseAPrix()
 				&& utilisateur.getCredit() >= montantEnchere
 				&& montantEnchere > getMaximumMontantEnchere(articleAEncherir.getNoArticle())) {
@@ -38,7 +39,12 @@ public class EnchereServiceImpl implements EnchereService {
 			}
 			Enchere enchere = new Enchere(LocalDateTime.now(), montantEnchere, articleAEncherir, utilisateur);
 			utilisateur.getEncheres().add(enchere);
-			enchereDAO.creerEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
+			if (valide) {
+				enchereDAO.creerEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
+			}else {
+				enchereDAO.updateEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
+			}
+			
 		} else {
 			// Gérer les cas où l'enchère ne peut pas être créée
 		}
@@ -75,5 +81,12 @@ public class EnchereServiceImpl implements EnchereService {
 	@Override
 	public Utilisateur getUtilisateurParNom(String username) {
 		return utilisateurDAO.findByPseudo(username);
+	}
+
+	@Override
+	public boolean validerEnchereUnique(long noUtilisateur, long noArticle) {
+		boolean enchereUtilisateurExiste = enchereDAO.enchereUnique(noUtilisateur, noArticle);
+		
+		return !enchereUtilisateurExiste;
 	}
 }

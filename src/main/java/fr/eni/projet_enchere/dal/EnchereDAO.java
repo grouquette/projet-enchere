@@ -15,4 +15,8 @@ public interface EnchereDAO {
 	Enchere findLastEnchereByArticleId(long noArticle);
 
 	Enchere findLastEnchereByArticleName(String nomArticle);
+	
+	void updateEnchere(Enchere enchere, long noArticle, long utilisateurId);
+	
+	boolean enchereUnique(long noUtilisateur, long noArticle);
 }

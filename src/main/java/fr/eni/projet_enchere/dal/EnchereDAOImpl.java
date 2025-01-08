@@ -28,7 +28,10 @@ public class EnchereDAOImpl implements EnchereDAO {
 		    "WHERE a.nom_article = :nomArticle " +
 		    "ORDER BY e.date_enchere DESC";
 
+	private static final String COUNT_ENCHERE_UTILISATEUR = "SELECT COUNT(*) FROM ENCHERES WHERE no_utilisateur = :noUtilisateur AND no_article = :noArticle";
 
+	private static final String UPDATE_ENCHERE_UTILISATEUR = "UPDATE ENCHERES SET date_enchere = :dateEnchere, montant_enchere =  :montantEnchere "
+			+ "WHERE no_utilisateur = :noUtilisateur AND no_article = :noArticle";
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -75,4 +78,26 @@ public class EnchereDAOImpl implements EnchereDAO {
 	            new BeanPropertyRowMapper<>(Enchere.class));
 	    return result.isEmpty() ? null : result.get(0); // Retourne null si aucune enchère trouvée
 	}
+
+	@Override
+	public void updateEnchere(Enchere enchere, long noArticle, long utilisateurId) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("dateEnchere", enchere.getDateEnchere());
+		params.addValue("montantEnchere", enchere.getMontantEnchere());
+		params.addValue("noArticle", noArticle);
+		params.addValue("noUtilisateur", utilisateurId);
+		jdbcTemplate.update(UPDATE_ENCHERE_UTILISATEUR, params);
+		
+	}
+	
+	@Override
+	public boolean enchereUnique(long noUtilisateur, long noArticle) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("noUtilisateur", noUtilisateur);
+		map.addValue("noArticle", noArticle);
+		int nbEnchere = jdbcTemplate.queryForObject(COUNT_ENCHERE_UTILISATEUR, map, Integer.class);
+		return nbEnchere > 0 ? true : false;
+	}
+
+	
 }
