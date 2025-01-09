@@ -52,7 +52,13 @@ public class ArticleController {
 	@PreAuthorize("isAuthenticated()")
 	public String creerArticleForm(Model model, Authentication authentication) {
 		Article article = new Article();
-		article.setLieuRetrait(new Retrait()); // Initialisation de lieuRetrait
+		String username = authentication.getName();
+		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
+		Retrait retrait  = new Retrait();
+		retrait.setRue(utilisateur.getRue());
+		retrait.setCode_postal(utilisateur.getCodePostal());
+		retrait.setVille(utilisateur.getVille());
+		article.setLieuRetrait(retrait); // Initialisation de lieuRetrait
 		model.addAttribute("article", article);
 		model.addAttribute("categories", categorieService.findAll());
 		return "view-article-creation";
@@ -168,9 +174,12 @@ public class ArticleController {
 
 
 	@PostMapping("/encheres")
+	@PreAuthorize("isAuthenticated()")
 	public String afficherDetailArticle(@RequestParam("nomArticle") String nomArticle, Model model) {
+		// On récupère toutes les données de l'article et de son vendeur
 		Article a = this.articleService.consulterArticleParNom(nomArticle);
-		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(nomArticle); // Charge la dernière //
+		// On récupère toutes les données de la dernière enchère et de l'encherisseur
+ 		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(nomArticle); // Charge la dernière //
 																							// enchère
 		model.addAttribute("article", a);
 		model.addAttribute("derniereEnchere", derniereEnchere);
@@ -180,10 +189,21 @@ public class ArticleController {
 
 	@GetMapping("/article/details")
 	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
-		Article a = this.articleService.consulterArticleParId(id);
-		model.addAttribute("article", a);
-		model.addAttribute("enchere", new Enchere(null, 0, a, null)); // Ajouter un objet enchère vide
-		return "view-detail-vente";
+	    Article a = this.articleService.consulterArticleParId(id);
+	    if (a == null) {
+	        return "redirect:/error"; // S'assurer que l'article est trouvé
+	    }
+	    model.addAttribute("article", a);
+	    
+	    Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(id);
+	    if (derniereEnchere != null) {
+	        model.addAttribute("derniereEnchere", derniereEnchere);
+	    } else {
+	        model.addAttribute("message", "Aucune enchère pour cet article.");
+	    }
+	    model.addAttribute("enchere", new Enchere(null, 0, a, null));
+	    
+	    return "view-detail-vente";
 	}
 
 	@ModelAttribute("articleSession")

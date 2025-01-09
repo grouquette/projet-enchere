@@ -102,13 +102,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public void supprimerUtilisateur(String pseudo) {
-		utilisateurDAO.supprimer(pseudo);
+	public void supprimerUtilisateur(long noUtilisateur) {
+		utilisateurDAO.supprimer(noUtilisateur);
 	}
 
 	@Override
 	public Article mettreEnVente(Article article) {
 		articleService.add(article);
 		return article;
+	}
+
+	@Override
+	public Utilisateur getUtilisateurParNom(String username) {
+	    return utilisateurDAO.findByPseudo(username);
 	}
 }

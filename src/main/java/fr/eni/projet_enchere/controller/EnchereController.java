@@ -1,6 +1,7 @@
 package fr.eni.projet_enchere.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.projet_enchere.bll.ArticleService;
 import fr.eni.projet_enchere.bll.EnchereService;
+import fr.eni.projet_enchere.bll.UtilisateurService;
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
@@ -23,6 +25,8 @@ public class EnchereController {
 	private EnchereService enchereService;
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private UtilisateurService utilisateurService;
 
 
 	public EnchereController(EnchereService enchereService, ArticleService articleService) {
@@ -62,4 +66,5 @@ public class EnchereController {
 		model.addAttribute("montantGagnant", derniereEnchere.getMontantEnchere());
 		return "view-detail-vente-gagne";
 	}
+
 }

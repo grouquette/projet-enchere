@@ -22,9 +22,9 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleDAO articleDAO;
 	@Autowired
-	private EnchereDAO enchereDAO;
-	@Autowired
 	private UtilisateurDAO utilisateurDAO;
+	@Autowired
+	private EnchereDAO enchereDAO;
 
 	public ArticleServiceImpl(ArticleDAO articleDAO) {
 		this.articleDAO = articleDAO;

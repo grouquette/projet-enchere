@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Détail Vente</title>
-	<link rel="stylesheet" href="/css/encheres.css" />
-	<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+    <meta charset="UTF-8">
+    <title>Détail Vente</title>
+    <link rel="stylesheet" href="/css/encheres.css" />
+    <link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
-	<div th:replace="~{fragments/fragments-entete::entete}"></div>
-	<form th:action="@{/creerEnchere}" method="post" th:object="${enchere}" class="form-row">
-		<h2>Détail vente</h2>
-			<input type="hidden" name="articleId" th:value="${article.noArticle}" />
-			<ul>
-				<div class="form-container">Nom : <span th:text="${article.nomArticle}"></span></div>
-				<div class="form-container">Description : <span th:text="${article.description}"></span></div>
-				<div class="form-container">Categorie : <span th:text="${article.categorie}"></span></div>				
-				<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Utilisateur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
-				<div class="form-container">Mise à prix : <span th:text="${article.miseAPrix}"></span></div>
-				<div class="form-container">Fin de l'enchère : <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></div>
-				<div class="form-container">Retrait : <span th:text="${article.lieuRetrait}"></span></div>
-				<div class="form-container2">
-					<div class="form-row">
-						<div class="form-container">
-							<label for="vendeur">Vendeur : </label>
-							<!-- Lien vers la page profil de l'utilisateur -->
-							<a th:href="@{'/profil/' + ${article.utilisateur.noUtilisateur}}" th:text="${article.utilisateur.pseudo}"></a>
-						</div>
-						<div class="form-container"><label for="montantEnchere">Ma proposition :</label></div>
-   						<input type="number" id="montantEnchere" th:field="*{montantEnchere}" min="0" step="1" placeholder="Entrez un prix">
-					</div>
-					<button type="submit" class="btn go">Enchérir</button>
-				</div>
-			</ul>
-	</form>
+    <div th:replace="~{fragments/fragments-entete::entete}"></div>
+    <form th:action="@{/creerEnchere}" method="post" th:object="${enchere}" class="form-row">
+        <h2>Détail vente</h2>
+        <input type="hidden" name="articleId" th:value="${article.noArticle}" />
+        <ul>
+            <div class="form-container">Nom : <span th:text="${article.nomArticle}"></span></div>
+            <div class="form-container">Description : <span th:text="${article.description}"></span></div>
+            <div class="form-container">Categorie : <span th:text="${article.categorie}"></span></div>              
+			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Utilisateur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
+            <div class="form-container">Mise à prix : <span th:text="${article.miseAPrix}"></span></div>
+            <div class="form-container">Fin de l'enchère : <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></div>
+            <div class="form-container">Retrait : <span th:text="${article.lieuRetrait}"></span></div>
+            <div class="form-container2">
+                <div class="form-row">
+                    <div class="form-container">
+                        <label for="vendeur">Vendeur : </label>
+                        <a th:href="@{'/profil/' + ${article.utilisateur.noUtilisateur}}" th:text="${article.utilisateur.pseudo}"></a>
+                    </div>
+                    <div class="form-container"><label for="montantEnchere">Ma proposition :</label></div>
+                    <input type="number" id="montantEnchere" th:field="*{montantEnchere}" min="0" step="1" placeholder="Entrez un prix">
+                </div>
+                <button type="submit" class="btn go">Enchérir</button>
+            </div>
+        </ul>
+    </form>
 </body>
 </html>

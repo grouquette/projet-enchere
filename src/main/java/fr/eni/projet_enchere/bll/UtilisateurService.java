@@ -19,7 +19,9 @@ public interface UtilisateurService {
 
 	void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException;
 	
-	void supprimerUtilisateur(String pseudo);
+	void supprimerUtilisateur(long noUtilisateur);
+
+	Utilisateur getUtilisateurParNom(String username);
 
 	List<Enchere> add(Enchere enchere);
 
