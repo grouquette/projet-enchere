@@ -21,13 +21,11 @@ public interface EnchereService {
 	Enchere getDerniereEncherePourArticle(String nomArticle);
 
 	Utilisateur getUtilisateurParNom(String username);
-<<<<<<< HEAD
-=======
-	
+
 	Article gagnerEnchere(long noArticle);
 	
 	boolean validerEnchereUnique(long noUtilisateur, long noArticle);
->>>>>>> e12361954a53091a83160e0211072f2632bbaf57
+
 
 
 }
