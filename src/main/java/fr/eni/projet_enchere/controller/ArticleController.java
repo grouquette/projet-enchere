@@ -79,12 +79,7 @@ public class ArticleController {
 			@RequestParam(value = "noCategorie", required = false) Long noCategorie, // Ajout de cette ligne
 			Model model) {
 		List<Article> articles;
-		// Recherche combinée par nom et catégorie
-	    if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
-	        articles = contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie);
-	    } 
-	    // Recherche par nom uniquement
-	    else if (nomArticle != null && !nomArticle.isEmpty()) {
+		if (nomArticle != null && !nomArticle.isEmpty()) {
 			articles = contexteService.consulterArticleParNom(nomArticle);
 		} else if (noCategorie != null) {
 			articles = contexteService.consulterArticleParCategorie(noCategorie); // Ajout de cette méthode
@@ -112,11 +107,23 @@ public class ArticleController {
 		
 	@GetMapping("/article/details")
 	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
-		Article a = this.articleService.consulterArticleParId(id);
-		model.addAttribute("article", a);
-		model.addAttribute("enchere", new Enchere(null, 0, a, null)); // Ajouter un objet enchère vide
-		return "view-detail-vente";
+	    Article a = this.articleService.consulterArticleParId(id);
+	    if (a == null) {
+	        return "redirect:/error"; // S'assurer que l'article est trouvé
+	    }
+	    model.addAttribute("article", a);
+	    
+	    Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(id);
+	    if (derniereEnchere != null) {
+	        model.addAttribute("derniereEnchere", derniereEnchere);
+	    } else {
+	        model.addAttribute("message", "Aucune enchère pour cet article.");
+	    }
+	    model.addAttribute("enchere", new Enchere(null, 0, a, null));
+	    
+	    return "view-detail-vente";
 	}
+
 
 	@ModelAttribute("articleSession")
 	public List<Article> chargerArticlesEnSession() {

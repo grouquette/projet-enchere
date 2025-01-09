@@ -35,7 +35,7 @@
 				<input type="hidden" name="nomArticle" th:value="${article.nomArticle}" />
 				<button type="submit">
 				<h2 th:text="${article.nomArticle}"></h2>
-				<p><strong>Prix de vente:</strong> <span th:text="${article.prixVente}"></span></p>
+				<p><strong>Prix :</strong> <span th:text="${article.prixVente}"></span></p>
 				<p><strong>Date de fin:</strong> <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></p>
 				<p><strong>Utilisateur:</strong> <span th:text="${article.utilisateurId}"></span></p>
 				</button>

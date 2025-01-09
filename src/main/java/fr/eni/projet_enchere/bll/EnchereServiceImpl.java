@@ -91,12 +91,5 @@ public class EnchereServiceImpl implements EnchereService {
 		
 		return !enchereUtilisateurExiste;
 	}
-
-	@Override
-	public Article gagnerEnchere(long noArticle) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
 
