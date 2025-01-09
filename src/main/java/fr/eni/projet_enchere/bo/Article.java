@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -22,8 +24,10 @@ public class Article {
 	private String description;
 	@NotNull(message = "La date de début d'enchère est obligatoire")
 	@FutureOrPresent(message = "Le date du début d'enchère ne peut pas être antérieure à aujourd'hui")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dateDebutEncheres;
 	@NotNull(message = "La date de fin d'enchère est obligatoire")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dateFinEncheres;
 	@NotNull(message = "La mise à prix est obligatoire")
 	@PositiveOrZero(message = "La mise à prix ne peut pas être négative")

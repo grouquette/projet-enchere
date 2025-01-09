@@ -70,12 +70,57 @@ public class ArticleServiceImpl implements ArticleService {
 		return "En cours";
 	}
 	
-	
+	@Override
+	@Transactional
+	public Article gagnerArticle(long noArticle) {
+	    // Récupérer la dernière enchère
+	    Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
+	    if (derniereEnchere == null) {
+	        return null;
+	    }
+
+	    Article article = derniereEnchere.getArticle();
+	    
+	    // Vérifier si l'enchère est terminée
+	    if (LocalDateTime.now().isBefore(article.getDateFinEncheres())) {
+	        throw new IllegalStateException("L'enchère n'est pas encore terminée.");
+	    }
+
+	    // Vérifier si l'article n'est pas déjà marqué comme terminé
+	    if ("Terminé".equals(article.getEtatVente())) {
+	        throw new IllegalStateException("Cette vente est déjà terminée.");
+	    }
+
+	    Utilisateur gagnant = derniereEnchere.getUtilisateur();
+	    
+	    // Mettre à jour l'état de l'article
+	    article.setEtatVente("Terminé");
+	    article.setPrixVente(derniereEnchere.getMontantEnchere());
+	    
+	    // Mise à jour de l'article
+	    updateArticle(article);
+	    
+	    return article;
+	}
+
 	@Override
 	@Transactional
 	public void updateArticle(Article article) {
+	    // Vérifier si l'article existe
 	    Article existingArticle = articleDAO.read(article.getNoArticle());
-	    
+	    if (existingArticle == null) {
+	        throw new IllegalArgumentException("Article non trouvé");
+	    }
+
+	    // Vérifier les dates
+	    if (article.getDateDebutEncheres() != null && 
+	        article.getDateFinEncheres() != null && 
+	        article.getDateDebutEncheres().isAfter(article.getDateFinEncheres())) {
+	        throw new IllegalArgumentException(
+	            "La date de fin doit être postérieure à la date de début");
+	    }
+
+	    // Mise à jour des champs
 	    existingArticle.setNomArticle(article.getNomArticle());
 	    existingArticle.setDescription(article.getDescription());
 	    existingArticle.setDateDebutEncheres(article.getDateDebutEncheres());
@@ -84,35 +129,14 @@ public class ArticleServiceImpl implements ArticleService {
 	    existingArticle.setPrixVente(article.getPrixVente());
 	    existingArticle.setUtilisateur(article.getUtilisateur());
 	    existingArticle.setCategorie(article.getCategorie());
-	    
-	    articleDAO.update(existingArticle);
-	}
-	
-	@Override
-	@Transactional
-	public Article gagnerArticle(long noArticle) {
-	    Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
-	    
-	    if (derniereEnchere == null) {
-	        return null; 
+	    existingArticle.setEtatVente(article.getEtatVente());
+
+	    // Sauvegarder les modif
+	    try {
+	        articleDAO.update(existingArticle);
+	    } catch (Exception e) {
+	        throw new RuntimeException("Erreur lors de la mise à jour de l'article", e);
 	    }
-
-	    Article article = derniereEnchere.getArticle();
-	    if (LocalDateTime.now().isBefore(article.getDateFinEncheres())) {
-	        throw new IllegalStateException("L'enchère n'est pas encore terminée.");
-	    }
-
-	    Utilisateur gagnant = derniereEnchere.getUtilisateur();
-
-	    article.setEtatVente("Terminé");
-
-	    int montantEnchere = derniereEnchere.getMontantEnchere();
-	    gagnant.setCredit(gagnant.getCredit() - montantEnchere);
-	    utilisateurDAO.update(gagnant);
-
-	    updateArticle(article);
-
-	    return article;
 	}
 
 }

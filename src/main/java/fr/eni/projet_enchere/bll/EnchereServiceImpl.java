@@ -21,8 +21,6 @@ public class EnchereServiceImpl implements EnchereService {
 	private EnchereDAO enchereDAO;
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
-	@Autowired
-	private ArticleService articleService;
 	@Override
 	public List<Enchere> add(Enchere enchere) {
 		encheres.add(enchere);
