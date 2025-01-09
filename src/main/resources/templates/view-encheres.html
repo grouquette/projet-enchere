@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Les objets sont nos amis</title>
 	<link rel="stylesheet" href="/css/encheres.css" />
 	<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
@@ -27,16 +27,16 @@
 				</div>		
 				<div class="form-container" sec:authorize="isAuthenticated()" >
     				<div class="form-row">
-        				<label> <input  type="checkbox" class="checkbox-round" name="achats" /> Achats </label>
-        				<label> <input type="checkbox" class="checkbox-square" name="encheresOuvertes" /> enchères ouvertes </label>
-        				<label> <input type="checkbox" class="checkbox-square" name="mesEncheresEnCours" /> mes enchères en cours </label>
-        				<label> <input type="checkbox" class="checkbox-square" name="mesEncheresRemportees" /> mes enchères remportées </label>
+        				<label> <input  type="checkbox" class="checkbox-round checkbox-group" name="achats" /> Achats </label>
+        				<label> <input type="checkbox" class="checkbox-square checkbox-group" name="encheresOuvertes" /> enchères ouvertes </label>
+        				<label> <input type="checkbox" class="checkbox-square checkbox-group" name="mesEncheresEnCours" /> mes enchères en cours </label>
+        				<label> <input type="checkbox" class="checkbox-square checkbox-group" name="mesEncheresRemportees" /> mes enchères remportées </label>
 					</div>
 					<div class="form-row">
-        				<label> <input type="checkbox" class="checkbox-round" name="mesVentes" /> Lister mes ventes </label>
-        				<label> <input type="checkbox" class="checkbox-square" name="mesVentesEnCours" /> mes ventes en cours </label>
-        				<label> <input type="checkbox" class="checkbox-square" name="ventesNonDebutees" /> ventes non débutées </label>
-        				<label> <input type="checkbox" class="checkbox-square" name="ventesTerminees" /> ventes terminées </label>
+        				<label> <input type="checkbox" class="checkbox-round checkbox-group" name="mesVentes" /> Lister mes ventes </label>
+        				<label> <input type="checkbox" class="checkbox-square checkbox-group" name="mesVentesEnCours" /> mes ventes en cours </label>
+        				<label> <input type="checkbox" class="checkbox-square checkbox-group" name="ventesNonDebutees" /> ventes non débutées </label>
+        				<label> <input type="checkbox" class="checkbox-square checkbox-group" name="ventesTerminees" /> ventes terminées </label>
 					</div>
 				</div>
 			</div>
@@ -60,7 +60,8 @@
 	</div>
 	<!-- -->
 	<th:block sec:authorize="isAuthenticated()">
-        <script th:src="@{/js/checkbox.js}"></script>  <!-- Votre script ici -->
+        <script th:src="@{/js/checkbox.js}"></script>
+        <script th:src="@{/js/refreshBack.js}"></script>
     </th:block>
 </body>
 </html>
