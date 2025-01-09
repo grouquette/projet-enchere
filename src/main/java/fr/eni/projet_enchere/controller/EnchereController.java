@@ -41,8 +41,7 @@ public class EnchereController {
 		enchere.setUtilisateur(utilisateur);
 		// Enregistrer l'enchère
 		enchereService.add(enchere);
-		enchereService.creerEnchere(utilisateur, article, enchere.getMontantEnchere(), articleId,
-				utilisateur.getNoUtilisateur());
+		enchereService.creerEnchere(utilisateur, article, enchere.getMontantEnchere());
 		// Redirection vers les détails de l'article
 		return "redirect:/article/details?articleId=" + articleId;
 	}

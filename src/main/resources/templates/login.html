@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Connection</title>
-<link rel="stylesheet" href="/css/encheres.css" />
-<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+	<meta charset="UTF-8">
+	<title>Connection</title>
+	<link rel="stylesheet" href="/css/encheres.css" />
+	<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
 	<form th:action="@{/login}" method="post">
-		<h1>Connection</h1>
-		<ul th:if="${param.error}" class="no-bullets">
-			<li>Erreur de saisie</li>
-		</ul>
+		<h2>Connection</h2>
 		<div class="form-container">
 			<label for="idPseudo">Pseudo</label> <input type="text" id="username" name="username"/>
 		</div>
 		<div class="form-container">
-			<label for="idMotDePasse">Mot de passe</label> <input type="password"
-				name="password" />
+			<label for="idMotDePasse">Mot de passe</label> <input type="password" name="password" />
 		</div>
 		<div class="form-container">
 			<button type="submit" class="btn go">Connection</button>
 			<div>
 				<div>
-					<label for="">Se souvenir de moi</label> <input type="checkbox"
-						name="rememberMe" />
+					<label for="">Se souvenir de moi</label> <input type="checkbox" name="rememberMe" />
 				</div>
 				<a href="/utilisateur">Mot de passe oublié</a>
 			</div>
 		</div>
 		<div class="form-row">
-			<a href="/utilisateur/signin" class="btn go">Créer un
-				compte</a>
+			<a href="/utilisateur/signin" class="btn go flex-center">Créer un compte</a>
 		</div>
 	</form>
-
 </body>
 </html>

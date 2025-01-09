@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Détail Vente</title>
-<link rel="stylesheet" href="/css/encheres.css" />
-<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+	<meta charset="UTF-8">
+	<title>Détail Vente</title>
+	<link rel="stylesheet" href="/css/encheres.css" />
+	<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
-<div th:replace="~{fragments/fragments-entete::entete}"></div>
-<main>
-		<h1>Détail vente</h1>
-		<form th:action="@{/creerEnchere}" method="post"
-		th:object="${enchere}" class="form-container">
-		 <input type="hidden" name="articleId" th:value="${article.noArticle}" />
-		<ul>
-			<div class="form-container">nom : <span th:text="${article.nomArticle}"></span></div>
-			<div class="form-container">description : <span th:text="${article.description}"></span></div>
-			<div class="form-container">dateDebutEncheres : <span th:text="${article.dateDebutEncheres}"></span></div>
-			<div class="form-container">dateFinEncheres : <span th:text="${article.dateFinEncheres}"></span></div>
-			<div class="form-container">miseAPrix : <span th:text="${article.miseAPrix}"></span></div>
-			<div class="form-container">prixVente : <span th:text="${article.prixVente}"></span></div>
-			<div class="form-container">etatVente : <span th:text="${article.etatVente}"></span></div>
-			<div class="form-container">lieuRetrait : <span th:text="${article.lieuRetrait}"></span></div>
-			<div class="form-container">categorie : <span th:text="${article.categorie}"></span></div>
-			<div class="form-container">utilisateur : <span th:text="${article.utilisateur}"></span></div>
-			<div class="form-container">utilisateurId : <span th:text="${article.utilisateurId}"></span></div>
-			<div class="form-container">Dernière enchère : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Utilisateur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
-
-			<div class="form-row">
-				<label for="montantEnchere">Ma proposition :</label>
-   				<input type="number" id="montantEnchere" th:field="*{montantEnchere}" min="0" step="1" placeholder="Entrez un prix">
-				<button type="submit" class="btn go">Enchérir</button>
-			</div>
-		</ul>
-		</form>
-</main>  
+	<div th:replace="~{fragments/fragments-entete::entete}"></div>
+	<form th:action="@{/creerEnchere}" method="post" th:object="${enchere}" class="form-row">
+		<h2>Détail vente</h2>
+			<input type="hidden" name="articleId" th:value="${article.noArticle}" />
+			<ul>
+				<div class="form-container">nom : <span th:text="${article.nomArticle}"></span></div>
+				<div class="form-container">description : <span th:text="${article.description}"></span></div>
+				<div class="form-container">categorie : <span th:text="${article.categorie}"></span></div>				
+				<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Utilisateur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>			
+				<div class="form-container">Mise à prix : <span th:text="${article.miseAPrix}"></span></div>
+				<div class="form-container">Retrait : <span th:text="${article.lieuRetrait}"></span></div>
+				<div class="form-container2">
+					<div class="form-row">
+						<div class="form-container">
+							<label for="vendeur">Vendeur : </label>
+							<!-- Lien vers la page profil de l'utilisateur -->
+							<a th:href="@{'/profil/' + ${article.utilisateur.noUtilisateur}}" th:text="${article.utilisateur.pseudo}"></a>
+						</div>
+						<div class="form-container"><label for="montantEnchere">Ma proposition :</label></div>
+   						<input type="number" id="montantEnchere" th:field="*{montantEnchere}" min="0" step="1" placeholder="Entrez un prix">
+					</div>
+					<button type="submit" class="btn go">Enchérir</button>
+				</div>
+			</ul>
+	</form>
 </body>
 </html>

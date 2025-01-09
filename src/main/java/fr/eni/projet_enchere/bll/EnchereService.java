@@ -12,8 +12,7 @@ public interface EnchereService {
 	
 	String etatVente(Article article);
 	
-	void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere, long noArticle,
-			long utilisateurId);
+	void creerEnchere(Utilisateur utilisateur, Article articleAEncherir, int montantEnchere);
 
 	int getMaximumMontantEnchere(long noArticle);
 	
@@ -22,6 +21,13 @@ public interface EnchereService {
 	Enchere getDerniereEncherePourArticle(String nomArticle);
 
 	Utilisateur getUtilisateurParNom(String username);
+<<<<<<< HEAD
+=======
+	
+	Article gagnerEnchere(long noArticle);
+	
+	boolean validerEnchereUnique(long noUtilisateur, long noArticle);
+>>>>>>> e12361954a53091a83160e0211072f2632bbaf57
 
 
 }

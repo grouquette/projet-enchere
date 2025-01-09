@@ -79,7 +79,12 @@ public class ArticleController {
 			@RequestParam(value = "noCategorie", required = false) Long noCategorie, // Ajout de cette ligne
 			Model model) {
 		List<Article> articles;
-		if (nomArticle != null && !nomArticle.isEmpty()) {
+		// Recherche combinée par nom et catégorie
+	    if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+	        articles = contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie);
+	    } 
+	    // Recherche par nom uniquement
+	    else if (nomArticle != null && !nomArticle.isEmpty()) {
 			articles = contexteService.consulterArticleParNom(nomArticle);
 		} else if (noCategorie != null) {
 			articles = contexteService.consulterArticleParCategorie(noCategorie); // Ajout de cette méthode

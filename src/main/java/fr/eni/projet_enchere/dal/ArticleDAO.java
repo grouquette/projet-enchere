@@ -21,6 +21,8 @@ public interface ArticleDAO {
 
 	void update(Article existingArticle);
 
+	List<Article> findByNomAndCategorie(String nomArticle, Long noCategorie);
+
 	
 	
 }

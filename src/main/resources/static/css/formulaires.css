@@ -24,10 +24,28 @@ form h1 {
 /* Conteneur principal du formulaire */
 .form-container {
 	display: grid;
-	grid-template-columns: 1fr 2fr;
-	/* Deux colonnes : 1 pour le label et 2 pour le champ */
+	grid-template-columns: 2fr 2fr; /* Deux colonnes */
 	grid-gap: 15px 20px;
-	align-items: center;
+	align-items: start; /* Aligne les éléments au début verticalement */
+	justify-items: start;
+	/* Aligne les éléments au début horizontalement */
+	margin-top: 10px; /* Espacement vertical entre les éléments */
+}
+
+.form-container2 {
+	display: grid;
+	grid-template-columns: 4fr 3fr; /* Deux colonnes */
+	grid-gap: 15px 20px;
+	align-items: start; /* Aligne les éléments au début verticalement */
+	justify-items: start;
+	/* Aligne les éléments au début horizontalement */
+}
+
+/* Alignement des textes */
+.form-container, .form-row {
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	color: #555; /* Uniformiser la couleur du texte */
 }
 
 .no-bullets {
@@ -46,9 +64,9 @@ form h1 {
 /* Étiquettes des champs */
 .form-row label {
 	font-weight: bold;
-	color: #555;
-	text-align: right;
-	padding-right: 10px; /* Espacement entre le label et le champ */
+	white-space: nowrap; /* Empêche les retours automatiques à la ligne */
+	overflow: hidden; /* Coupe le texte qui dépasse, si nécessaire */
+	text-overflow: ellipsis; /* Ajoute "..." si le texte est trop long */
 }
 
 /* Champs de saisie */

@@ -8,6 +8,6 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home() {
-		return "redirect:/encheres"; // Remplacez "ma-page" par le nom de votre fichier HTML (sans l'extension .html)
+		return "redirect:/encheres";
 	}
 }

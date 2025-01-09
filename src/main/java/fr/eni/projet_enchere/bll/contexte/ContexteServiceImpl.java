@@ -40,4 +40,9 @@ public class ContexteServiceImpl implements ContexteService {
 	public List<Article> consulterArticleParCategorie(Long noCategorie) {
 		return articleDAO.findByCategory(noCategorie);
 	}
+
+	@Override
+	public List<Article> consulterArticleParNomEtCategorie(String nomArticle, Long noCategorie) {
+		return articleDAO.findByNomAndCategorie(nomArticle, noCategorie);
+	}
 }
