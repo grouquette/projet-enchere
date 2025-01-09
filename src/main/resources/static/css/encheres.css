@@ -21,7 +21,7 @@
 }
 
 .navbar .logo img {
-    margin-right: 10px; /* Ajoute un espace entre l'image et le texte */
+	margin-right: 10px; /* Ajoute un espace entre l'image et le texte */
 }
 
 .navbar ul {
@@ -44,6 +44,15 @@
 
 .navbar ul li a:hover {
 	color: #d1e7fd;
+}
+/* Bouton Hamburger */
+.navbar .hamburger {
+	display: none; /* Caché par défaut */
+	background: none;
+	border: none;
+	color: #fff;
+	font-size: 24px;
+	cursor: pointer;
 }
 
 /* Conteneur des articles */
@@ -141,9 +150,57 @@ button {
 	text-decoration: none;
 }
 
+.btn-upload {
+	background-color: ButtonFace; /* Couleur bleu */
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s ease;
+}
+
+.btn-upload:hover {
+	background-color: #0056b3; /* Couleur bleu plus sombre au survol */
+}
+
+.upload-label {
+	cursor: pointer;
+	display: inline-block;
+}
+
 .flex-center {
-    display: flex;              /* Active Flexbox */
-    justify-content: center;    /* Centre le contenu horizontalement */
-    align-items: center;        /* Centre le contenu verticalement */
-    text-align: center;         /* Assure que le texte est bien centré */
+	display: flex; /* Active Flexbox */
+	justify-content: center; /* Centre le contenu horizontalement */
+	align-items: center; /* Centre le contenu verticalement */
+	text-align: center; /* Assure que le texte est bien centré */
+}
+
+/* Petits écrans (768px ou moins) */
+@media screen and (max-width: 768px) {
+	.navbar .menu {
+		display: none; /* Masquer le menu par défaut */
+		flex-direction: column; /* Empiler les liens */
+		background-color: #333;
+		position: absolute;
+		top: 60px;
+		right: 0;
+		width: 200px;
+		border-radius: 4px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+		overflow: hidden;
+	}
+	.navbar .menu.active {
+		display: flex; /* Afficher le menu quand actif */
+	}
+	.navbar .menu li {
+		text-align: right;
+		margin: 0;
+		border-bottom: 1px solid #444;
+	}
+	.navbar .menu li:last-child {
+		border-bottom: none;
+	}
+	.navbar .hamburger {
+		display: block; /* Afficher le hamburger */
+	}
 }

@@ -17,7 +17,7 @@ import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
-	
+
 	private List<Article> articles;
 	@Autowired
 	private ArticleDAO articleDAO;
@@ -66,6 +66,11 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	public List<Article> findByEnchere(long noUtilisateur) {
+		return articleDAO.findByEnchere(noUtilisateur);
+	}
+
+	@Override
 	public Utilisateur getUtilisateurParNom(String username) {
 		return utilisateurDAO.findByPseudo(username);
 
@@ -82,6 +87,11 @@ public class ArticleServiceImpl implements ArticleService {
 		return "En cours";
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	@Transactional
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
 	public Article gagnerArticle(long noArticle) {
 		// Récupérer la dernière enchère
 		Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);

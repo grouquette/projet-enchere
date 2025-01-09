@@ -23,9 +23,9 @@ public class EnchereDAOImpl implements EnchereDAO {
 			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article INNER JOIN UTILISATEURS u on e.no_utilisateur = u.no_utilisateur "
 			+ "WHERE a.nom_article = :nomArticle " + "ORDER BY e.date_enchere DESC";
 	private static final String COUNT_ENCHERE_UTILISATEUR = "SELECT COUNT(*) FROM ENCHERES WHERE no_utilisateur = :noUtilisateur AND no_article = :noArticle";
-
 	private static final String UPDATE_ENCHERE_UTILISATEUR = "UPDATE ENCHERES SET date_enchere = :dateEnchere, montant_enchere =  :montantEnchere "
 			+ "WHERE no_utilisateur = :noUtilisateur AND no_article = :noArticle";
+	private static final String FIND_BY_UTILISATEUR_ID = "SELECT * FROM Encheres WHERE no_utilisateur = :noUtilisateur";
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -61,7 +61,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 		params.addValue("noArticle", noArticle);
 		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_ID, params,
 				new BeanPropertyRowMapper<>(Enchere.class));
-		return result.isEmpty() ? null : result.get(0); 
+		return result.isEmpty() ? null : result.get(0);
 	}
 
 	@Override
@@ -81,9 +81,9 @@ public class EnchereDAOImpl implements EnchereDAO {
 		params.addValue("noArticle", noArticle);
 		params.addValue("noUtilisateur", utilisateurId);
 		jdbcTemplate.update(UPDATE_ENCHERE_UTILISATEUR, params);
-		
+
 	}
-	
+
 	@Override
 	public boolean enchereUnique(long noUtilisateur, long noArticle) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
@@ -93,5 +93,10 @@ public class EnchereDAOImpl implements EnchereDAO {
 		return nbEnchere > 0 ? true : false;
 	}
 
-	
+	@Override
+	public List<Enchere> findByUtilisateur(long noUtilisateur) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("noUtilisateur", noUtilisateur);
+		return jdbcTemplate.query(FIND_BY_UTILISATEUR_ID, params, new BeanPropertyRowMapper<>(Enchere.class));
+	}
 }

@@ -1,27 +1,38 @@
 package fr.eni.projet_enchere.bll;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
 import fr.eni.projet_enchere.exception.BusinessException;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
+	private List<Enchere> encheres = new ArrayList<>();
+	@Autowired
 	private UtilisateurDAO utilisateurDAO;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
 	private ArticleService articleService;
 
 	public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO, ArticleService articleService) {
 		this.utilisateurDAO = utilisateurDAO;
 		this.articleService = articleService;
 	}
-
+	@Override
+	public List<Enchere> add(Enchere enchere) {
+		encheres.add(enchere);
+		return encheres;
+	}
 	@Override
 	@Transactional
 	public Utilisateur creerUtilisateur(Utilisateur utilisateur) throws BusinessException {

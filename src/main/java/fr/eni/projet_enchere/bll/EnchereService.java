@@ -25,6 +25,11 @@ public interface EnchereService {
 	boolean validerEnchereUnique(long noUtilisateur, long noArticle);
 
 	Article gagnerEnchere(long noArticle);
+<<<<<<< HEAD
 
+=======
+	
+	public List<Enchere> findEnchereByUtilisateur(long noUtilisateur);
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
 
 }

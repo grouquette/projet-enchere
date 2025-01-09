@@ -55,7 +55,13 @@ public class ArticleController {
 	@PreAuthorize("isAuthenticated()")
 	public String creerArticleForm(Model model, Authentication authentication) {
 		Article article = new Article();
-		article.setLieuRetrait(new Retrait()); // Initialisation de lieuRetrait
+		String username = authentication.getName();
+		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
+		Retrait retrait  = new Retrait();
+		retrait.setRue(utilisateur.getRue());
+		retrait.setCode_postal(utilisateur.getCodePostal());
+		retrait.setVille(utilisateur.getVille());
+		article.setLieuRetrait(retrait); // Initialisation de lieuRetrait
 		model.addAttribute("article", article);
 		model.addAttribute("categories", categorieService.findAll());
 		return "view-article-creation";
@@ -79,6 +85,7 @@ public class ArticleController {
 
 	@GetMapping("/encheres")
 	public String afficherListeArticles(@RequestParam(value = "nomArticle", required = false) String nomArticle,
+<<<<<<< HEAD
 			@RequestParam(value = "noCategorie", required = false) Long noCategorie,
 			@RequestParam(value = "mesVentes", required = false) Boolean mesVentes, Authentication authentication,
 			Model model) {
@@ -145,9 +152,101 @@ public class ArticleController {
 		model.addAttribute("mesVentes", mesVentes);
 
 		return "view-encheres";
+=======
+	        @RequestParam(value = "noCategorie", required = false) Long noCategorie,
+	        @RequestParam(value = "mesVentes", required = false) Boolean mesVentes,
+	        @RequestParam(value = "mesVentesEnCours", required = false) Boolean mesVentesEnCours,
+	        @RequestParam(value = "ventesNonDebutees", required = false) Boolean ventesNonDebutees,
+	        @RequestParam(value = "ventesTerminees", required = false) Boolean ventesTerminees,
+	        @RequestParam(value = "mesEncheresEnCours", required = false) Boolean mesEncheresEnCours,
+	        Authentication authentication, Model model) {
+	    List<Article> articles = new ArrayList<>(); // Liste vide par défaut
+	    // Vérification si l'utilisateur est authentifié
+	    if (authentication != null && authentication.isAuthenticated()) {
+	        String username = authentication.getName();
+	        Utilisateur utilisateur = enchereService.getUtilisateurParNom(username);
+	        if (utilisateur != null) {
+	            if (mesEncheresEnCours != null && mesEncheresEnCours) {
+	                // Appel de la méthode dans le DAO pour récupérer les articles associés aux enchères de l'utilisateur
+	                articles = articleService.findByEnchere(utilisateur.getNoUtilisateur());
+	            }
+	            // Condition pour les ventes de l'utilisateur
+	            else if (mesVentes != null && mesVentes) {
+	                // Récupérer les articles associés à l'utilisateur
+	                articles = Optional.ofNullable(articleService.getArticlesParUtilisateur(utilisateur))
+	                        .orElse(new ArrayList<>());
+
+	                // Filtrer les articles en fonction des états de vente demandés
+	                if (mesVentesEnCours != null && mesVentesEnCours) {
+	                    // Filtrer les articles en cours
+	                    articles.removeIf(article -> !enchereService.etatVente(article).equals("En cours"));
+	                } 
+	                else if (ventesNonDebutees != null && ventesNonDebutees) {
+	                    // Filtrer les articles dont la vente n'a pas encore commencé
+	                    articles.removeIf(article -> !enchereService.etatVente(article).equals("À venir"));
+	                } 
+	                else if (ventesTerminees != null && ventesTerminees) {
+	                    // Filtrer les articles dont la vente est terminée
+	                    articles.removeIf(article -> !enchereService.etatVente(article).equals("Terminée"));
+	                } 
+	                else {
+	                    
+	                }
+	            }
+	            // Recherche par nom et catégorie
+	            else if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+	                articles = Optional
+	                        .ofNullable(contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie))
+	                        .orElse(new ArrayList<>());
+	            }
+	            // Recherche par nom uniquement
+	            else if (nomArticle != null && !nomArticle.isEmpty()) {
+	                articles = Optional.ofNullable(contexteService.consulterArticleParNom(nomArticle))
+	                        .orElse(new ArrayList<>());
+	            }
+	            // Recherche par catégorie uniquement
+	            else if (noCategorie != null) {
+	                articles = Optional.ofNullable(contexteService.consulterArticleParCategorie(noCategorie))
+	                        .orElse(new ArrayList<>());
+	            }
+	            // Tous les articles
+	            else {
+	                articles = Optional.ofNullable(contexteService.getAllArticles()).orElse(new ArrayList<>());
+	            }
+	        }
+	    } else {
+	        // Si l'utilisateur n'est pas authentifié
+	        if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+	            articles = Optional
+	                    .ofNullable(contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie))
+	                    .orElse(new ArrayList<>());
+	        } else if (nomArticle != null && !nomArticle.isEmpty()) {
+	            articles = Optional.ofNullable(contexteService.consulterArticleParNom(nomArticle))
+	                    .orElse(new ArrayList<>());
+	        } else if (noCategorie != null) {
+	            articles = Optional.ofNullable(contexteService.consulterArticleParCategorie(noCategorie))
+	                    .orElse(new ArrayList<>());
+	        } else {
+	            articles = Optional.ofNullable(contexteService.getAllArticles()).orElse(new ArrayList<>());
+	        }
+	    }
+	    // Inverser la liste des articles
+	    Collections.reverse(articles);
+	    // Ajouter les catégories et les articles au modèle
+	    List<Categorie> categories = categorieService.findAll();
+	    model.addAttribute("categoriesSession", categories);
+	    model.addAttribute("articleSession", articles);
+	    model.addAttribute("nomArticle", nomArticle);
+	    model.addAttribute("noCategorie", noCategorie);
+	    model.addAttribute("mesVentes", mesVentes);
+	    model.addAttribute("mesEncheresEnCours", mesEncheresEnCours);
+	    return "view-encheres";
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
 	}
 
+
 	@PostMapping("/encheres")
+	@PreAuthorize("isAuthenticated()")
 	public String afficherDetailArticle(@RequestParam("nomArticle") String nomArticle, Model model) {
 		// On récupère toutes les données de l'article et de son vendeur
 		Article a = this.articleService.consulterArticleParNom(nomArticle);

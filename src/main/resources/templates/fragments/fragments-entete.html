@@ -1,15 +1,23 @@
-
 <nav class="navbar" th:fragment="entete">
-	<a href="/" class="logo"><img th:src="@{/img/logoEnchere2.webp}" alt="Logo ENI-Encheres" />ENI-Encheres</a>
+    <a href="/" class="logo">
+        <img th:src="@{/img/logoEnchere2.webp}" alt="Logo Les objets sont nos amis" />
+        Les objets sont nos amis
+    </a>
 
-	<ul>
-	<div>
-	</div>
-		<li><a th:href="@{/encheres}">Enchères</a></li>
-		<li><a sec:authorize="isAuthenticated()" th:href="@{/article/creer}">Vendre un article</a></li>
-		<li><a sec:authorize="isAuthenticated()" th:href="@{/utilisateur}">Mon profil</a></li>
-		<li><a sec:authorize="!isAuthenticated()" th:href="@{/utilisateur/signin}">S'inscrire</a></li>
-		<li><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Se connecter</a></li>
-		<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a></li>
-		</ul>
-</nav> 
+    <!-- Bouton Hamburger -->
+    <button class="hamburger" aria-label="Toggle navigation">
+        ☰
+    </button>
+
+    <ul class="menu">
+        <li><a th:href="@{/encheres}">Enchères</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/article/creer}">Vendre un article</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/utilisateur}">Mon profil</a></li>
+        <li><a sec:authorize="!isAuthenticated()" th:href="@{/utilisateur/signin}">S'inscrire</a></li>
+        <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Se connecter</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a></li>
+    </ul>
+</nav>
+
+<!-- Lien vers le fichier JavaScript -->
+<script src="/js/navbar.js"></script>

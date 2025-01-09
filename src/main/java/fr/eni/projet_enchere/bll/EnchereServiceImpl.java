@@ -39,15 +39,15 @@ public class EnchereServiceImpl implements EnchereService {
 			if (utilisateur.getEncheres() == null) {
 				utilisateur.setEncheres(new ArrayList<>()); // Initialiser la liste d'enchères si elle est null
 			}
-			
+
 			Enchere enchere = new Enchere(LocalDateTime.now(), montantEnchere, articleAEncherir, utilisateur);
 			utilisateur.getEncheres().add(enchere);
 			if (valide) {
 				enchereDAO.creerEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
-			}else {
+			} else {
 				enchereDAO.updateEnchere(enchere, articleAEncherir.getNoArticle(), utilisateur.getNoUtilisateur());
 			}
-			
+
 		} else {
 			// Gérer les cas où l'enchère ne peut pas être créée
 
@@ -87,11 +87,10 @@ public class EnchereServiceImpl implements EnchereService {
 		return utilisateurDAO.findByPseudo(username);
 	}
 
-
 	@Override
 	public boolean validerEnchereUnique(long noUtilisateur, long noArticle) {
 		boolean enchereUtilisateurExiste = enchereDAO.enchereUnique(noUtilisateur, noArticle);
-		
+
 		return !enchereUtilisateurExiste;
 	}
 	
@@ -120,5 +119,11 @@ public class EnchereServiceImpl implements EnchereService {
 
 	    return article;
 	}
-}
+<<<<<<< HEAD
+=======
 
+	public List<Enchere> findEnchereByUtilisateur(long noUtilisateur) {
+		return enchereDAO.findByUtilisateur(noUtilisateur);
+	}
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
+}

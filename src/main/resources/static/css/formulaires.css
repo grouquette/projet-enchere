@@ -161,8 +161,32 @@ input:focus, textarea:focus, select:focus {
 		grid-template-columns: 1fr;
 		/* En dessous de 768px, une seule colonne */
 	}
+	.form-container2 {
+		grid-template-columns: 1fr;
+		/* En dessous de 768px, une seule colonne */
+	}
+	.form-container3 {
+		grid-template-columns: 1fr;
+		/* En dessous de 768px, une seule colonne */
+	}
 	.form-row label {
 		text-align: left;
 		font-size: 0.9em;
+	}
+	/* Styles par défaut (Mobile-first) */
+	.checkbox-group {
+		display: flex;
+		flex-direction: column; /* Une ligne par option sur mobile */
+		gap: 10px; /* Espacement entre les options */
+	}
+	.checkbox-group label {
+		display: flex;
+		align-items: center;
+		font-size: 14px; /* Taille du texte réduite pour mobile */
+		gap: 5px; /* Espacement entre la checkbox et le label */
+	}
+	.checkbox-group input[type="checkbox"] {
+		width: 10px; /* Réduire la taille de la checkbox */
+		height: 10px;
 	}
 }

@@ -26,4 +26,6 @@ public interface ArticleDAO {
 
 	List<Article> findByUtilisateur(Utilisateur utilisateur);
 
+	List<Article> findByEnchere(Long noUtilisateur);
+
 }
