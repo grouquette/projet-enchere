@@ -193,7 +193,7 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "pseudo : " + pseudo ;
+		return pseudo ;
 	}
 
 	@Override
