@@ -100,4 +100,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		articleService.add(article);
 		return article;
 	}
+
+	@Override
+	public Utilisateur getUtilisateurParNom(String username) {
+	    return utilisateurDAO.findByPseudo(username);
+	}
 }

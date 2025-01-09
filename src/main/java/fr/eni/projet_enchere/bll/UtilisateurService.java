@@ -18,5 +18,7 @@ public interface UtilisateurService {
 	
 	void supprimerUtilisateur(long noUtilisateur);
 
+	Utilisateur getUtilisateurParNom(String username);
+
 
 }

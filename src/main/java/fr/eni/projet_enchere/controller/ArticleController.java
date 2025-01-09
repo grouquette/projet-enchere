@@ -85,6 +85,13 @@ public class ArticleController {
 			@RequestParam(value = "mesVentes", required = false) Boolean mesVentes,
 			Authentication authentication, // Authentication
 			Model model) {
+<<<<<<< HEAD
+		List<Article> articles;
+		if (nomArticle != null && !nomArticle.isEmpty()) {
+			articles = contexteService.consulterArticleParNom(nomArticle);
+		} else if (noCategorie != null) {
+			articles = contexteService.consulterArticleParCategorie(noCategorie); // Ajout de cette méthode
+=======
 		// Initialisation de la variable articles pour éviter l'erreur de compilation
 		List<Article> articles = new ArrayList<>(); // Liste vide par défaut
 		// Vérification si l'utilisateur est authentifié
@@ -107,6 +114,7 @@ public class ArticleController {
 			} else {
 				articles = contexteService.getAllArticles();
 			}
+>>>>>>> 142a9e3ef693f0e48fd82ceac0988add2697a5f7
 		} else {
 			// Si l'utilisateur n'est pas authentifié, on peut afficher les articles sans
 			// filtrage par utilisateur
@@ -148,10 +156,21 @@ public class ArticleController {
 
 	@GetMapping("/article/details")
 	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
-		Article a = this.articleService.consulterArticleParId(id);
-		model.addAttribute("article", a);
-		model.addAttribute("enchere", new Enchere(null, 0, a, null)); // Ajouter un objet enchère vide
-		return "view-detail-vente";
+	    Article a = this.articleService.consulterArticleParId(id);
+	    if (a == null) {
+	        return "redirect:/error"; // S'assurer que l'article est trouvé
+	    }
+	    model.addAttribute("article", a);
+	    
+	    Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(id);
+	    if (derniereEnchere != null) {
+	        model.addAttribute("derniereEnchere", derniereEnchere);
+	    } else {
+	        model.addAttribute("message", "Aucune enchère pour cet article.");
+	    }
+	    model.addAttribute("enchere", new Enchere(null, 0, a, null));
+	    
+	    return "view-detail-vente";
 	}
 
 	@ModelAttribute("articleSession")

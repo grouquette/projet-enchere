@@ -12,7 +12,6 @@ import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.ArticleDAO;
-import fr.eni.projet_enchere.dal.EnchereDAO;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
 @Service
@@ -21,8 +20,6 @@ public class ArticleServiceImpl implements ArticleService {
 	private List<Article> articles;
 	@Autowired
 	private ArticleDAO articleDAO;
-	@Autowired
-	private EnchereDAO enchereDAO;
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
 
@@ -84,6 +81,25 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	@Transactional
+<<<<<<< HEAD
+	public void updateArticle(Article article) {
+	    Article existingArticle = articleDAO.read(article.getNoArticle());
+	    
+	    existingArticle.setNomArticle(article.getNomArticle());
+	    existingArticle.setDescription(article.getDescription());
+	    existingArticle.setDateDebutEncheres(article.getDateDebutEncheres());
+	    existingArticle.setDateFinEncheres(article.getDateFinEncheres());
+	    existingArticle.setMiseAPrix(article.getMiseAPrix());
+	    existingArticle.setPrixVente(article.getPrixVente());
+	    existingArticle.setUtilisateur(article.getUtilisateur());
+	    existingArticle.setCategorie(article.getCategorie());
+	    
+	    articleDAO.update(existingArticle);
+	}
+
+
+
+=======
 	public Article gagnerArticle(long noArticle) {
 		// Récupérer la dernière enchère
 		Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
@@ -138,4 +154,5 @@ public class ArticleServiceImpl implements ArticleService {
 			throw new RuntimeException("Erreur lors de la mise à jour de l'article", e);
 		}
 	}
+>>>>>>> 142a9e3ef693f0e48fd82ceac0988add2697a5f7
 }
