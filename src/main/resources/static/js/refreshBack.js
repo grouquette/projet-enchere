@@ -3,6 +3,3 @@
 window.addEventListener('popstate', () => {
     location.reload(); // Recharger l'état
 });
-/**
- * 
- */

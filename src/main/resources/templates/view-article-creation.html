@@ -35,9 +35,10 @@
                 </select>
             </div>
             <div class="form-container">
-    			<label for="image-upload" class="upload-label">Télécharger une image</label>
-    			<button type="button" class="btn-upload">Upload</button>
-    			<input type="file" id="image-upload" name="image" accept="image/*" th:field="*{image}" style="display: none;">
+			    <label for="image-upload" class="upload-label">Télécharger une image</label>
+			    <button type="button" class="btn-upload" id="trigger-upload">Choisir une image</button>
+			    <input type="file" id="image-upload" name="image" accept="image/*" th:field="*{image}" style="display: none;">
+			    <p id="file-name" class="file-name">Aucun fichier sélectionné</p>
 			</div>
             <div class="form-container">
                 <label for="miseAPrix">Mise à prix :</label>
@@ -72,5 +73,6 @@
             <a href="/encheres" class="btn cncl flex-center">Annuler</a>
         </div>
     </form>
+    <script th:src="@{/js/upload.js}"></script>
 </body>
 </html>
