@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
@@ -21,6 +22,8 @@ public class EnchereServiceImpl implements EnchereService {
 	private EnchereDAO enchereDAO;
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
+	@Autowired
+	private ArticleService articleService;
 	@Override
 	public List<Enchere> add(Enchere enchere) {
 		encheres.add(enchere);
@@ -91,5 +94,36 @@ public class EnchereServiceImpl implements EnchereService {
 		
 		return !enchereUtilisateurExiste;
 	}
+	
+	@Override
+	@Transactional
+	public Article gagnerEnchere(long noArticle) {
+	    Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
+	    
+	    if (derniereEnchere == null) {
+	        return null; 
+	    }
+
+	    Article article = derniereEnchere.getArticle();
+	    if (LocalDateTime.now().isBefore(article.getDateFinEncheres())) {
+	        throw new IllegalStateException("L'enchère n'est pas encore terminée.");
+	    }
+
+	    Utilisateur gagnant = derniereEnchere.getUtilisateur();
+
+	    article.setEtatVente("Terminé");
+
+	    int montantEnchere = derniereEnchere.getMontantEnchere();
+	    gagnant.setCredit(gagnant.getCredit() - montantEnchere);
+	    utilisateurDAO.update(gagnant);
+
+	    articleService.updateArticle(article);
+
+	    enchereDAO.updateEnchere(derniereEnchere, noArticle, gagnant.getNoUtilisateur());
+
+	    return article;
+	}
+
+
 }
 

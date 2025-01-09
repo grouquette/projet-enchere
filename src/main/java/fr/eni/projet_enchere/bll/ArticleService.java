@@ -16,7 +16,6 @@ public interface ArticleService {
 	Utilisateur getUtilisateurParNom(String username);
 	String etatVente(Article article);
 	void updateArticle(Article article);
-	Article gagnerArticle(long noArticle);
 	
 }
 
