@@ -24,6 +24,7 @@ public class EnchereController {
 	@Autowired
 	private ArticleService articleService;
 
+
 	public EnchereController(EnchereService enchereService, ArticleService articleService) {
 		this.enchereService = enchereService;
 		this.articleService = articleService;

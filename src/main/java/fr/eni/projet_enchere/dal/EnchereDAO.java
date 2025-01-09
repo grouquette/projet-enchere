@@ -19,4 +19,7 @@ public interface EnchereDAO {
 	void updateEnchere(Enchere enchere, long noArticle, long utilisateurId);
 	
 	boolean enchereUnique(long noUtilisateur, long noArticle);
+
+	List<Enchere> findByUtilisateur(long noUtilisateur);
+	
 }

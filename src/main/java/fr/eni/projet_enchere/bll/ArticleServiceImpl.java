@@ -17,7 +17,7 @@ import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
-	
+
 	private List<Article> articles;
 	@Autowired
 	private ArticleDAO articleDAO;
@@ -63,6 +63,11 @@ public class ArticleServiceImpl implements ArticleService {
 
 	public List<Article> getArticlesParUtilisateur(Utilisateur utilisateur) {
 		return articleDAO.findByUtilisateur(utilisateur);
+	}
+
+	@Override
+	public List<Article> findByEnchere(long noUtilisateur) {
+		return articleDAO.findByEnchere(noUtilisateur);
 	}
 
 	@Override

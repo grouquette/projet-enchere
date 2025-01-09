@@ -25,9 +25,9 @@
     					<option th:each="c : ${categoriesSession}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
 					</select>
 				</div>		
-				<div class="form-container">
+				<div class="form-container" sec:authorize="isAuthenticated()" >
     				<div class="form-row">
-        				<label> <input type="checkbox" class="checkbox-round" name="achats" /> Achats </label>
+        				<label> <input  type="checkbox" class="checkbox-round" name="achats" /> Achats </label>
         				<label> <input type="checkbox" class="checkbox-square" name="encheresOuvertes" /> enchères ouvertes </label>
         				<label> <input type="checkbox" class="checkbox-square" name="mesEncheresEnCours" /> mes enchères en cours </label>
         				<label> <input type="checkbox" class="checkbox-square" name="mesEncheresRemportees" /> mes enchères remportées </label>
@@ -58,5 +58,6 @@
 			</form>
 		</div>
 	</div>
+	<script src="/js/checkbox.js"></script>
 </body>
 </html>

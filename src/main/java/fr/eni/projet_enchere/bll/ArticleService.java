@@ -7,23 +7,25 @@ import fr.eni.projet_enchere.bo.Utilisateur;
 
 public interface ArticleService {
 
+	Article creerArticle(Article article);
+
 	void remove(Article article);
 
 	List<Article> add(Article articleAVendre);
 
 	Article consulterArticleParId(long id);
 
-	Article creerArticle(Article article);
-
 	Article consulterArticleParNom(String nomArticle);
 
+	List<Article> getArticlesParUtilisateur(Utilisateur utilisateur);
+	
 	Utilisateur getUtilisateurParNom(String username);
 
 	String etatVente(Article article);
 
 	void updateArticle(Article article);
 
-	List<Article> getArticlesParUtilisateur(Utilisateur utilisateur);
-
 	Article gagnerArticle(long noArticle);
+
+	List<Article> findByEnchere(long noUtilisateur);
 }

@@ -1,6 +1,9 @@
 package fr.eni.projet_enchere.bll;
 
+import java.util.List;
+
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.exception.BusinessException;
 
@@ -17,6 +20,8 @@ public interface UtilisateurService {
 	void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException;
 	
 	void supprimerUtilisateur(String pseudo);
+
+	List<Enchere> add(Enchere enchere);
 
 
 }
