@@ -18,8 +18,8 @@ public class EnchereDAOImpl implements EnchereDAO {
 			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article "
 			+ "WHERE e.no_article = :noArticle " + "ORDER BY e.date_enchere DESC";
 
-	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_NAME = "SELECT TOP 1 e.*, a.nom_article "
-			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article "
+	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_NAME = "SELECT TOP 1 e.*, a.nom_article, u.pseudo "
+			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article INNER JOIN UTILISATEURS u on e.no_utilisateur = u.no_utilisateur "
 			+ "WHERE a.nom_article = :nomArticle " + "ORDER BY e.date_enchere DESC";
 	private static final String COUNT_ENCHERE_UTILISATEUR = "SELECT COUNT(*) FROM ENCHERES WHERE no_utilisateur = :noUtilisateur AND no_article = :noArticle";
 

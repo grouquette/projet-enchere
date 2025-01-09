@@ -24,6 +24,8 @@ public interface EnchereService {
 	
 	boolean validerEnchereUnique(long noUtilisateur, long noArticle);
 
+	Article gagnerEnchere(long noArticle);
+
 
 
 }

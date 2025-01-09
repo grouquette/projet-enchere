@@ -117,8 +117,8 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/supprimer")
-	public String supprimerCompte(@ModelAttribute Utilisateur utilisateur) {
-		utilisateurService.supprimerUtilisateur(utilisateur.getPseudo());
+	public String supprimerCompte(@ModelAttribute("utilisateurConnecte") Utilisateur utilisateurConnecte) {
+		utilisateurService.supprimerUtilisateur(utilisateurConnecte.getNoUtilisateur());
 		return "redirect:/logout";
 	}
 

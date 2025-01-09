@@ -91,8 +91,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public void supprimerUtilisateur(String pseudo) {
-		utilisateurDAO.supprimer(pseudo);
+	public void supprimerUtilisateur(long noUtilisateur) {
+		utilisateurDAO.supprimer(noUtilisateur);
 	}
 
 	@Override

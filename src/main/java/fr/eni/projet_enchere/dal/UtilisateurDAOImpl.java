@@ -27,7 +27,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
 	private static final String COUNT_EMAIL = "SELECT COUNT(*) FROM UTILISATEURS WHERE email = :email" ;
 
-	private static final String DELETE_BY_PSEUDO = "DELETE FROM UTILISATEURS WHERE pseudo = :pseudo";
+	private static final String DELETE_ENCHERE_BY_ID = "DELETE FROM ENCHERES WHERE no_utilisateur = :noUtilisateur";
+	private static final String DELETE_USER_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = :noUtilisateur";
 	
 	private static final String UPDATE_GAGNANT = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, " +
             "telephone = :telephone, rue = :rue, code_postal = :codePostal, ville = :ville, " +
@@ -123,10 +124,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		return nbEmail > 0 ? true : false;
 	}
 
-	public void supprimer(String pseudo) {
+	public void supprimer(long noUtilisateur) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
-		map.addValue("pseudo", pseudo);
-		this.jdbcTemplate.update(DELETE_BY_PSEUDO, map);
+		map.addValue("noUtilisateur", noUtilisateur);
+		this.jdbcTemplate.update(DELETE_ENCHERE_BY_ID, map);
+		this.jdbcTemplate.update(DELETE_USER_BY_ID, map);
 	
 		
 	}
