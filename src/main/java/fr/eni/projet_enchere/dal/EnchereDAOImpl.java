@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.projet_enchere.bo.Enchere;
+import fr.eni.projet_enchere.dal.rowmapper.EncheresRowMapper2;
 
 @Repository
 public class EnchereDAOImpl implements EnchereDAO {
@@ -18,8 +19,8 @@ public class EnchereDAOImpl implements EnchereDAO {
 			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article "
 			+ "WHERE e.no_article = :noArticle " + "ORDER BY e.date_enchere DESC";
 
-	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_NAME = "SELECT TOP 1 e.*, a.nom_article "
-			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article "
+	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_NAME = "SELECT TOP 1 e.*, a.nom_article, u.pseudo "
+			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article INNER JOIN UTILISATEURS u on e.no_utilisateur = u.no_utilisateur "
 			+ "WHERE a.nom_article = :nomArticle " + "ORDER BY e.date_enchere DESC";
 	private static final String COUNT_ENCHERE_UTILISATEUR = "SELECT COUNT(*) FROM ENCHERES WHERE no_utilisateur = :noUtilisateur AND no_article = :noArticle";
 
@@ -68,7 +69,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("nomArticle", nomArticle);
 		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_NAME, params,
-				new BeanPropertyRowMapper<>(Enchere.class));
+				new EncheresRowMapper2());
 		return result.isEmpty() ? null : result.get(0);
 	}
 

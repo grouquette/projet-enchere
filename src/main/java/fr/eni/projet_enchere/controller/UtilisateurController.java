@@ -1,5 +1,6 @@
 package fr.eni.projet_enchere.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -24,6 +25,7 @@ import jakarta.validation.Valid;
 @SessionAttributes("utilisateurConnecte")
 public class UtilisateurController {
 
+	@Autowired
 	private UtilisateurService utilisateurService;
 
 	public UtilisateurController(UtilisateurService utilisateurService) {
@@ -117,8 +119,8 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/supprimer")
-	public String supprimerCompte(@ModelAttribute Utilisateur utilisateur) {
-		utilisateurService.supprimerUtilisateur(utilisateur.getPseudo());
+	public String supprimerCompte(@ModelAttribute("utilisateurConnecte") Utilisateur utilisateurConnecte) {
+		utilisateurService.supprimerUtilisateur(utilisateurConnecte.getNoUtilisateur());
 		return "redirect:/logout";
 	}
 

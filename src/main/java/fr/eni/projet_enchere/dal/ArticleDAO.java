@@ -3,6 +3,7 @@ package fr.eni.projet_enchere.dal;
 import java.util.List;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Utilisateur;
 
 
 public interface ArticleDAO {
@@ -23,6 +24,6 @@ public interface ArticleDAO {
 
 	List<Article> findByNomAndCategorie(String nomArticle, Long noCategorie);
 
-	
-	
+	List<Article> findByUtilisateur(Utilisateur utilisateur);
+
 }

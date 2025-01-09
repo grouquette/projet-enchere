@@ -10,19 +10,35 @@
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
     <form th:action="@{/encheres}" method="get">
     	<h2>Liste des enchères</h2>
-		<label for="nomArticle">Filtres : </label>
+    	<div class="form-container">
+			<label for="nomArticle">Filtres : </label>
+		</div>
 		<div class="form-container">		
 			<div class="form-row">
         		<div class="form-row">	
         			<input id="nomArticle" name="nomArticle" type="text" th:value="${nomArticle}" />
         		</div>
-        		<div class="form-container">
+        		<div class="form-container3">
          			<label for="noCategorie">Catégorie :</label> 
 					<select id="noCategorie" name="noCategorie">
 						<option value="" th:text="'Toutes catégories'">Toutes catégories</option>
     					<option th:each="c : ${categoriesSession}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
 					</select>
 				</div>		
+				<div class="form-container">
+    				<div class="form-row">
+        				<label> <input type="checkbox" class="checkbox-round" name="achats" /> Achats </label>
+        				<label> <input type="checkbox" class="checkbox-square" name="encheresOuvertes" /> enchères ouvertes </label>
+        				<label> <input type="checkbox" class="checkbox-square" name="mesEncheresEnCours" /> mes enchères en cours </label>
+        				<label> <input type="checkbox" class="checkbox-square" name="mesEncheresRemportees" /> mes enchères remportées </label>
+					</div>
+					<div class="form-row">
+        				<label> <input type="checkbox" class="checkbox-round" name="mesVentes" /> Lister mes ventes </label>
+        				<label> <input type="checkbox" class="checkbox-square" name="mesVentesEnCours" /> mes ventes en cours </label>
+        				<label> <input type="checkbox" class="checkbox-square" name="ventesNonDebutees" /> ventes non débutées </label>
+        				<label> <input type="checkbox" class="checkbox-square" name="ventesTerminees" /> ventes terminées </label>
+					</div>
+				</div>
 			</div>
 			<div class="form-row">
         		<button type="submit" class="btn go">Rechercher</button>

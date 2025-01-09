@@ -11,7 +11,6 @@
     <form action="/article/creer" method="post" th:object="${article}">
     	<h2>Nouvelle vente</h2>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-
         <!-- Section d'erreur globale -->
         <div th:if="${#fields.hasErrors('*')}">
             <h2>Veuillez vérifier vos données</h2>

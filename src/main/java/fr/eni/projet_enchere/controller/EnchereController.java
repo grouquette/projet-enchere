@@ -50,6 +50,7 @@ public class EnchereController {
 		return "redirect:/article/details?articleId=" + articleId;
 	}
 
+<<<<<<< HEAD
 	@GetMapping("/gagnerEnchere")
 	@PreAuthorize("isAuthenticated()")
 	public String gagnerEnchere(@RequestParam("articleId") long articleId, Authentication authentication, Model model) {
@@ -72,4 +73,21 @@ public class EnchereController {
 	}
 
 
+=======
+	@GetMapping("/gagnerArticle")
+	public String gagnerArticle(@RequestParam("articleId") long articleId, Model model) {
+		Article article = articleService.consulterArticleParId(articleId);
+		if (article == null) {
+			return "redirect:/error";
+		}
+		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(articleId);
+		if (derniereEnchere == null) {
+			return "redirect:/error";
+		}
+		model.addAttribute("article", article);
+		model.addAttribute("gagnant", derniereEnchere.getUtilisateur());
+		model.addAttribute("montantGagnant", derniereEnchere.getMontantEnchere());
+		return "view-detail-vente-gagne";
+	}
+>>>>>>> 142a9e3ef693f0e48fd82ceac0988add2697a5f7
 }

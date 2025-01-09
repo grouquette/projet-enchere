@@ -39,10 +39,21 @@ form h1 {
 	align-items: start; /* Aligne les éléments au début verticalement */
 	justify-items: start;
 	/* Aligne les éléments au début horizontalement */
+	margin-top: 10px; /* Espacement vertical entre les éléments */
+}
+
+.form-container3 {
+	display: grid;
+	grid-template-columns: 2fr 4fr; /* Deux colonnes */
+	grid-gap: 15px 20px;
+	align-items: start; /* Aligne les éléments au début verticalement */
+	justify-items: start;
+	/* Aligne les éléments au début horizontalement */
+	margin-top: 10px; /* Espacement vertical entre les éléments */
 }
 
 /* Alignement des textes */
-.form-container, .form-row {
+.form-container, .form-container2, .form-container3, .form-row {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
 	color: #555; /* Uniformiser la couleur du texte */
@@ -90,6 +101,44 @@ input:focus, textarea:focus, select:focus {
 	border-color: #007BFF;
 	outline: none;
 	box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+/* Style pour la checkbox ronde */
+.form-container .checkbox-round {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #000;
+	border-radius: 50%; /* Rond */
+	outline: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	padding: 0; /* Supprime le padding imposé */
+	font-size: initial; /* Réinitialise la taille */
+	box-sizing: content-box; /* Change la gestion des dimensions */
+}
+
+.form-container .checkbox-round:checked {
+	background-color: #007bff;
+}
+
+/* Style pour la checkbox carrée */
+.form-container .checkbox-square {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #000;
+	outline: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	padding: 0; /* Supprime le padding imposé */
+	font-size: initial; /* Réinitialise la taille */
+	box-sizing: content-box; /* Change la gestion des dimensions */
+}
+
+.form-container .checkbox-square:checked {
+	background-color: #28a745;
 }
 
 .popup-error {

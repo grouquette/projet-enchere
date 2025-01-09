@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Vendeur</title>
+    <link rel="stylesheet" href="/css/encheres.css" />
+    <link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+</head>
+<body>
+    <div th:replace="~{fragments/fragments-entete::entete}"></div>
+    <form class="form-row">
+        <ul>
+            <div class="form-container">Pseudo : <span th:text="${utilisateurVendeur.pseudo}"></span></div>
+            <div class="form-container">Nom : <span th:text="${utilisateurVendeur.nom}"></span></div>
+            <div class="form-container">Prénom : <span th:text="${utilisateurVendeur.prenom}"></span></div>
+            <div class="form-container">Email : <span th:text="${utilisateurVendeur.email}"></span></div>
+            <div class="form-container">Téléphone : <span th:text="${utilisateurVendeur.telephone}"></span></div>
+            <div class="form-container">Rue : <span th:text="${utilisateurVendeur.rue}"></span></div>
+            <div class="form-container">Code postal : <span th:text="${utilisateurVendeur.codePostal}"></span></div>
+            <div class="form-container">Ville : <span th:text="${utilisateurVendeur.ville}"></span></div>
+        </ul>
+    </form>
+</body>
+</html>
