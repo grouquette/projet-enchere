@@ -41,6 +41,7 @@ public class Article {
 	private Categorie categorie;
 	private Utilisateur utilisateur;
 	private long utilisateurId;
+	private String image;
 	
 	@AssertTrue(message = "La date de fin doit être postérieure à la date de début")
     public boolean isDateFinEncheresValid() {
@@ -236,5 +237,11 @@ public class Article {
 				&& miseAPrix == other.miseAPrix && Objects.equals(nomArticle, other.nomArticle)
 				&& prixVente == other.prixVente && Objects.equals(utilisateur, other.utilisateur)
 				&& utilisateurId == other.utilisateurId;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
