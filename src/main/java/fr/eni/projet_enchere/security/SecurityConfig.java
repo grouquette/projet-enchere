@@ -29,7 +29,7 @@ public class SecurityConfig {
 				new ClearSiteDataHeaderWriter(Directive.ALL));
 		http.authorizeHttpRequests((authorize) -> authorize
 				.requestMatchers("/css/**").permitAll()
-				.requestMatchers("/images/**").permitAll()
+				.requestMatchers("/img/**").permitAll()
 				.requestMatchers("/login").permitAll()
 				.requestMatchers("/utilisateur/signin").permitAll()
 				.requestMatchers("/encheres").permitAll()
