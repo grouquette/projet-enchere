@@ -85,13 +85,6 @@ public class ArticleController {
 			@RequestParam(value = "mesVentes", required = false) Boolean mesVentes,
 			Authentication authentication, // Authentication
 			Model model) {
-<<<<<<< HEAD
-		List<Article> articles;
-		if (nomArticle != null && !nomArticle.isEmpty()) {
-			articles = contexteService.consulterArticleParNom(nomArticle);
-		} else if (noCategorie != null) {
-			articles = contexteService.consulterArticleParCategorie(noCategorie); // Ajout de cette méthode
-=======
 		// Initialisation de la variable articles pour éviter l'erreur de compilation
 		List<Article> articles = new ArrayList<>(); // Liste vide par défaut
 		// Vérification si l'utilisateur est authentifié
@@ -114,7 +107,6 @@ public class ArticleController {
 			} else {
 				articles = contexteService.getAllArticles();
 			}
->>>>>>> 142a9e3ef693f0e48fd82ceac0988add2697a5f7
 		} else {
 			// Si l'utilisateur n'est pas authentifié, on peut afficher les articles sans
 			// filtrage par utilisateur

@@ -50,30 +50,6 @@ public class EnchereController {
 		return "redirect:/article/details?articleId=" + articleId;
 	}
 
-<<<<<<< HEAD
-	@GetMapping("/gagnerEnchere")
-	@PreAuthorize("isAuthenticated()")
-	public String gagnerEnchere(@RequestParam("articleId") long articleId, Authentication authentication, Model model) {
-	    // Récupérer l'utilisateur authentifié
-	    String username = authentication.getName();
-	    Utilisateur utilisateur = utilisateurService.getUtilisateurParNom(username);
-	    
-	    // Gagne l'enchère
-	    Article articleGagne = enchereService.gagnerEnchere(articleId);
-	    if (articleGagne == null) {
-	        return "redirect:/error";
-	    }
-	    
-	    // Ajouter les informations nécessaires au modèle
-	    model.addAttribute("article", articleGagne);
-	    model.addAttribute("gagnant", utilisateur);
-	    model.addAttribute("montantGagnant", enchereService.getDerniereEncherePourArticle(articleId).getMontantEnchere());
-
-	    return "view-detail-vente-gagne?articleId=" + articleId;
-	}
-
-
-=======
 	@GetMapping("/gagnerArticle")
 	public String gagnerArticle(@RequestParam("articleId") long articleId, Model model) {
 		Article article = articleService.consulterArticleParId(articleId);
@@ -89,5 +65,5 @@ public class EnchereController {
 		model.addAttribute("montantGagnant", derniereEnchere.getMontantEnchere());
 		return "view-detail-vente-gagne";
 	}
->>>>>>> 142a9e3ef693f0e48fd82ceac0988add2697a5f7
+
 }
