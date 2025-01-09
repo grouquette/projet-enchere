@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.projet_enchere.bo.Enchere;
+import fr.eni.projet_enchere.dal.rowmapper.EncheresRowMapper2;
 
 @Repository
 public class EnchereDAOImpl implements EnchereDAO {
@@ -68,7 +69,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("nomArticle", nomArticle);
 		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_NAME, params,
-				new BeanPropertyRowMapper<>(Enchere.class));
+				new EncheresRowMapper2());
 		return result.isEmpty() ? null : result.get(0);
 	}
 

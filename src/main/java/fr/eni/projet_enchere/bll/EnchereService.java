@@ -27,5 +27,4 @@ public interface EnchereService {
 	Article gagnerEnchere(long noArticle);
 
 
-
 }
