@@ -1,32 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Détail Vente</title>
-<link rel="stylesheet" href="/css/encheres.css" />
-<link rel="stylesheet" th:href="@{/css/formulaires.css}" />
+    <meta charset="UTF-8">
+    <title>Detail vente remporté</title>
+    <link rel="stylesheet" href="/css/encheres.css" />
+    <link rel="stylesheet" th:href="@{/css/formulaires.css}" />
 </head>
 <body>
-<div th:replace="~{fragments/fragments-entete::entete}"></div>
-<main>
-		<h1>Vous avez remporté la vente</h1>
-		<form th:action="@{/creerEnchere}" method="post"
-		th:object="${enchere}" class="form-container">
-		 <input type="hidden" name="articleId" th:value="${article.noArticle}" />
-		<ul>
-			<div class="form-container">Nom : <span th:text="${article.nomArticle}"></span></div>
-			<div class="form-container">Description : <span th:text="${article.description}"></span></div>
-			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Utilisateur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
-			<div class="form-container">Mise à Prix : <span th:text="${article.miseAPrix}"></span></div>
-			<div class="form-container">Retrait : <span th:text="${article.lieuRetrait}"></span></div>
-			<div class="form-container">Vendeur : <span th:text="${article.utilisateur}"></span></div>
-			<div class="form-container">Tel : <span th:text="${utilisateur.telephone}"></span></div>
-			
+    <div th:replace="~{fragments/fragments-entete::entete}"></div>
+    
+    <main class="container">
+        <div th:if="${success}" class="alert alert-success" role="alert">
+            <span th:text="${success}"></span>
+        </div>
+        
+        <div th:if="${error}" class="alert alert-danger" role="alert">
+            <span th:text="${error}"></span>
+        </div>
 
+        <h1>Vous avez remporté la vente</h1>
 
-			</div>
-		</ul>
-		</form>
-</main>  
+        <div class="article-details form-container">
+            <h2>Détails de l'article</h2>
+            
+            <input type="hidden" name="articleId" th:value="${article.noArticle}" />
+            
+            <div class="detail-row">
+                <label>Article :</label>
+                <span th:text="${article.nomArticle}"></span>
+            </div>
+            
+            <div class="detail-row">
+                <label>Description :</label>
+                <span th:text="${article.description}"></span>
+            </div>
+            
+            <div class="detail-row">
+                <label>Meilleure offre :</label>
+                <span th:text="${derniereEnchere != null ? derniereEnchere.montantEnchere + ' points' : 'Non disponible'}"></span>
+            </div>
+            
+            <div class="detail-row">
+                <label>Mise à prix :</label>
+                <span th:text="${article.miseAPrix + ' points'}"></span>
+            </div>
+
+            <div class="detail-row">
+                <label>Retrait :</label>
+                <span th:text="${article.lieuRetrait != null ? article.lieuRetrait : 'Non spécifié'}"></span>
+            </div>
+
+            <div class="detail-row">
+                <label>Vendeur :</label>
+                <span th:text="${article.utilisateur.pseudo}"></span>
+            </div>
+            
+            <div class="detail-row" th:if="${article.utilisateur.telephone}">
+                <label>Tel :</label>
+                <span th:text="${article.utilisateur.telephone}"></span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a th:href="@{/encheres}" class="btn btn-primary">Back</a>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/fragments-footer::footer}"></div>
 </body>
 </html>
