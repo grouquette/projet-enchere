@@ -12,6 +12,7 @@ import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.ArticleDAO;
+import fr.eni.projet_enchere.dal.EnchereDAO;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
 @Service
@@ -22,6 +23,8 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleDAO articleDAO;
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
+	@Autowired
+	private EnchereDAO enchereDAO;
 
 	public ArticleServiceImpl(ArticleDAO articleDAO) {
 		this.articleDAO = articleDAO;

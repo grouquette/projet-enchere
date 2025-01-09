@@ -134,6 +134,7 @@ public class ArticleController {
 	}
 
 	@PostMapping("/encheres")
+	@PreAuthorize("isAuthenticated()")
 	public String afficherDetailArticle(@RequestParam("nomArticle") String nomArticle, Model model) {
 		// On récupère toutes les données de l'article et de son vendeur
 		Article a = this.articleService.consulterArticleParNom(nomArticle);
