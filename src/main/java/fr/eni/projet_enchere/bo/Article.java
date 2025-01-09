@@ -41,7 +41,6 @@ public class Article {
 	private Categorie categorie;
 	private Utilisateur utilisateur;
 	private long utilisateurId;
-
 	
 	@AssertTrue(message = "La date de fin doit être postérieure à la date de début")
     public boolean isDateFinEncheresValid() {
@@ -78,8 +77,8 @@ public class Article {
 		this.lieuRetrait = lieuRetrait;
 		this.encheres = encheres;
 		this.categorie = categorie;
-		this.utilisateur = utilisateur;
 		this.utilisateurId = utilisateurId;
+		this.utilisateur = utilisateur;
 	}
 
 	public Article(String nomArticle, String description, Categorie categorie, LocalDateTime dateDebutEncheres,

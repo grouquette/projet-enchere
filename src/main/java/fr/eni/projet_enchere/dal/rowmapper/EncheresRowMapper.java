@@ -3,6 +3,7 @@ package fr.eni.projet_enchere.dal.rowmapper;
 import org.springframework.jdbc.core.RowMapper;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Utilisateur;
 
 public class EncheresRowMapper implements RowMapper<Article> {
 
@@ -18,24 +19,11 @@ public class EncheresRowMapper implements RowMapper<Article> {
 		article.setPrixVente(rs.getInt("prix_vente"));
 		article.setUtilisateurId(rs.getInt("no_utilisateur"));
 
-//		// Association utilisateur
-//		Utilisateur utilisateur = new Utilisateur();
-//		utilisateur.setNoUtilisateur(rs.getLong("no_utilisateur"));
-//		utilisateur.setPseudo(rs.getString("pseudo"));
-//		article.setUtilisateur(utilisateur);
-
-//		// Association catégorie
-//		Categorie categorie = new Categorie();
-//		categorie.setNoCategorie(rs.getShort("no_categorie"));
-//		categorie.setLibelle(rs.getString("libelle"));
-//		article.setCategorie(categorie);
-//
-//		// Association retrait
-//		Retrait retrait = new Retrait();
-//		retrait.setRue(rs.getString("rue"));
-//		retrait.setCode_postal(rs.getString("code_postal"));
-//		retrait.setVille(rs.getString("ville"));
-//		article.setLieuRetrait(retrait);
+		// Association utilisateur
+		Utilisateur utilisateur = new Utilisateur();
+		utilisateur.setNoUtilisateur(rs.getLong("no_utilisateur"));
+		utilisateur.setPseudo(rs.getString("pseudo"));
+		article.setUtilisateur(utilisateur);
 
 		return article;
 
