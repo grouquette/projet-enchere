@@ -75,29 +75,55 @@ public class ArticleController {
 
 	@GetMapping("/encheres")
 	public String afficherListeArticles(
-			@RequestParam(value = "nomArticle", required = false) String nomArticle,
-			@RequestParam(value = "noCategorie", required = false) Long noCategorie, // Ajout de cette ligne
-			Model model) {
-		List<Article> articles;
-		// Recherche combinée par nom et catégorie
-	    if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
-	        articles = contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie);
-	    } 
-	    // Recherche par nom uniquement
-	    else if (nomArticle != null && !nomArticle.isEmpty()) {
-			articles = contexteService.consulterArticleParNom(nomArticle);
-		} else if (noCategorie != null) {
-			articles = contexteService.consulterArticleParCategorie(noCategorie); // Ajout de cette méthode
-		} else {
-			articles = contexteService.getAllArticles();
-		}
-		Collections.reverse(articles);
-		List<Categorie> categories = categorieService.findAll();
-		model.addAttribute("categoriesSession", categories);
-		model.addAttribute("articleSession", articles);
-		model.addAttribute("nomArticle", nomArticle); // Pour pré-remplir le champ de recherche
-		model.addAttribute("noCategorie", noCategorie); // Pour pré-remplir la sélection de la catégorie
-		return "view-encheres";
+	        @RequestParam(value = "nomArticle", required = false) String nomArticle,
+	        @RequestParam(value = "noCategorie", required = false) Long noCategorie,
+	        @RequestParam(value = "mesVentesEnCours", required = false) Boolean mesVentesEnCours,
+	        Authentication authentication, // Authentication
+	        Model model) {
+	    // Initialisation de la variable articles pour éviter l'erreur de compilation
+	    List<Article> articles = new ArrayList<>(); // Liste vide par défaut
+	    // Vérification si l'utilisateur est authentifié
+	    if (authentication != null && authentication.isAuthenticated()) {
+	        String username = authentication.getName();
+	        Utilisateur utilisateur = enchereService.getUtilisateurParNom(username);
+	        // Recherche combinée par nom et catégorie
+	        if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+	            articles = contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie);
+	        // Recherche par nom uniquement
+	        } else if (nomArticle != null && !nomArticle.isEmpty()) {
+	            articles = contexteService.consulterArticleParNom(nomArticle);
+	        // Recherche par catégorie uniquement
+	        } else if (noCategorie != null) {
+	            articles = contexteService.consulterArticleParCategorie(noCategorie); 
+	        // Recherche mes ventes uniquement
+	        } else if (mesVentesEnCours != null && mesVentesEnCours) {
+	            articles = articleService.getArticlesParUtilisateur(utilisateur); // Récupérer les articles de l'utilisateur connecté
+	        } else {
+	            articles = contexteService.getAllArticles();
+	        }
+	    } else {
+	        // Si l'utilisateur n'est pas authentifié, on peut afficher les articles sans filtrage par utilisateur
+	        if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+	            articles = contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie);
+	        } else if (nomArticle != null && !nomArticle.isEmpty()) {
+	            articles = contexteService.consulterArticleParNom(nomArticle);
+	        } else if (noCategorie != null) {
+	            articles = contexteService.consulterArticleParCategorie(noCategorie);
+	        } else {
+	            articles = contexteService.getAllArticles();
+	        }
+	    }
+	    // Inverser la liste des articles
+	    Collections.reverse(articles);
+	    // Récupérer la liste des catégories
+	    List<Categorie> categories = categorieService.findAll();
+	    // Ajouter les attributs au modèle
+	    model.addAttribute("categoriesSession", categories);
+	    model.addAttribute("articleSession", articles);
+	    model.addAttribute("nomArticle", nomArticle);
+	    model.addAttribute("noCategorie", noCategorie);
+	    model.addAttribute("mesVentesEnCours", mesVentesEnCours); // Garder la case "Mes Ventes" cochée
+	    return "view-encheres";
 	}
 
 	@PostMapping("/encheres")
