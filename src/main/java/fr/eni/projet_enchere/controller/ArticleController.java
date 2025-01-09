@@ -76,7 +76,7 @@ public class ArticleController {
 	@GetMapping("/encheres")
 	public String afficherListeArticles(@RequestParam(value = "nomArticle", required = false) String nomArticle,
 			@RequestParam(value = "noCategorie", required = false) Long noCategorie,
-			@RequestParam(value = "mesVentesEnCours", required = false) Boolean mesVentesEnCours,
+			@RequestParam(value = "mesVentes", required = false) Boolean mesVentes,
 			Authentication authentication, // Authentication
 			Model model) {
 		// Initialisation de la variable articles pour éviter l'erreur de compilation
@@ -95,7 +95,7 @@ public class ArticleController {
 			} else if (noCategorie != null) {
 				articles = contexteService.consulterArticleParCategorie(noCategorie);
 				// Recherche mes ventes uniquement
-			} else if (mesVentesEnCours != null && mesVentesEnCours) {
+			} else if (mesVentes != null && mesVentes) {
 				articles = articleService.getArticlesParUtilisateur(utilisateur); // Récupérer les articles de
 																					// l'utilisateur connecté
 			} else {
@@ -123,7 +123,7 @@ public class ArticleController {
 		model.addAttribute("articleSession", articles);
 		model.addAttribute("nomArticle", nomArticle);
 		model.addAttribute("noCategorie", noCategorie);
-		model.addAttribute("mesVentesEnCours", mesVentesEnCours); // Garder la case "Mes Ventes" cochée
+		model.addAttribute("mesVentes", mesVentes); // Garder la case "Mes Ventes" cochée
 		return "view-encheres";
 	}
 
@@ -154,21 +154,5 @@ public class ArticleController {
 	@ModelAttribute("categoriesSession")
 	public List<Categorie> chargerCategorieEnSession() {
 		return this.categorieService.consulterCategorie();
-	}
-
-	@GetMapping("/gagnerArticle")
-	public String gagnerArticle(@RequestParam("articleId") long articleId, Model model) {
-		Article article = articleService.consulterArticleParId(articleId);
-		if (article == null) {
-			return "redirect:/error";
-		}
-		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(articleId);
-		if (derniereEnchere == null) {
-			return "redirect:/error";
-		}
-		model.addAttribute("article", article);
-		model.addAttribute("gagnant", derniereEnchere.getUtilisateur());
-		model.addAttribute("montantGagnant", derniereEnchere.getMontantEnchere());
-		return "view-detail-vente-gagne";
 	}
 }
