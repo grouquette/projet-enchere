@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.ArticleDAO;
+import fr.eni.projet_enchere.dal.EnchereDAO;
 import fr.eni.projet_enchere.dal.UtilisateurDAO;
 
 @Service
@@ -18,6 +20,8 @@ public class ArticleServiceImpl implements ArticleService {
 	private List<Article> articles;
 	@Autowired
 	private ArticleDAO articleDAO;
+	@Autowired
+	private EnchereDAO enchereDAO;
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
 	public ArticleServiceImpl(ArticleDAO articleDAO) {
@@ -66,6 +70,7 @@ public class ArticleServiceImpl implements ArticleService {
 		return "En cours";
 	}
 	
+	
 	@Override
 	@Transactional
 	public void updateArticle(Article article) {
@@ -82,6 +87,32 @@ public class ArticleServiceImpl implements ArticleService {
 	    
 	    articleDAO.update(existingArticle);
 	}
+	
+	@Override
+	@Transactional
+	public Article gagnerArticle(long noArticle) {
+	    Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
+	    
+	    if (derniereEnchere == null) {
+	        return null; 
+	    }
 
+	    Article article = derniereEnchere.getArticle();
+	    if (LocalDateTime.now().isBefore(article.getDateFinEncheres())) {
+	        throw new IllegalStateException("L'enchère n'est pas encore terminée.");
+	    }
+
+	    Utilisateur gagnant = derniereEnchere.getUtilisateur();
+
+	    article.setEtatVente("Terminé");
+
+	    int montantEnchere = derniereEnchere.getMontantEnchere();
+	    gagnant.setCredit(gagnant.getCredit() - montantEnchere);
+	    utilisateurDAO.update(gagnant);
+
+	    updateArticle(article);
+
+	    return article;
+	}
 
 }

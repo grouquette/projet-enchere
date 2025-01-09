@@ -47,20 +47,5 @@ public class EnchereController {
 		return "redirect:/article/details?articleId=" + articleId;
 	}
 
-	@GetMapping("/gagnerEnchere")
-	public String gagnerEnchere(@RequestParam("articleId") long articleId, Model model) {
-		Article article = articleService.consulterArticleParId(articleId);
-		if (article == null) {
-			return "redirect:/error";
-		}
-		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(articleId);
-		if (derniereEnchere == null) {
-			return "redirect:/error";
-		}
-		model.addAttribute("article", article);
-		model.addAttribute("gagnant", derniereEnchere.getUtilisateur());
-		model.addAttribute("montantGagnant", derniereEnchere.getMontantEnchere());
-		return "view-detail-vente-gagne";
-	}
 
 }

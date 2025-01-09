@@ -23,7 +23,5 @@ public interface EnchereService {
 
 	Utilisateur getUtilisateurParNom(String username);
 
-	Article gagnerEnchere(long noArticle);
-
 
 }

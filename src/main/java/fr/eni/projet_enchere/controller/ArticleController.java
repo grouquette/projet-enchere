@@ -122,4 +122,20 @@ public class ArticleController {
 	public List<Categorie> chargerCategorieEnSession() {
 		return this.categorieService.consulterCategorie();
 	}
+	
+	@GetMapping("/gagnerArticle")
+	public String gagnerArticle(@RequestParam("articleId") long articleId, Model model) {
+		Article article = articleService.consulterArticleParId(articleId);
+		if (article == null) {
+			return "redirect:/error";
+		}
+		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(articleId);
+		if (derniereEnchere == null) {
+			return "redirect:/error";
+		}
+		model.addAttribute("article", article);
+		model.addAttribute("gagnant", derniereEnchere.getUtilisateur());
+		model.addAttribute("montantGagnant", derniereEnchere.getMontantEnchere());
+		return "view-detail-vente-gagne";
+	}
 }
