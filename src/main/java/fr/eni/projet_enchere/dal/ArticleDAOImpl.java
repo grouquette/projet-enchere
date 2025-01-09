@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.projet_enchere.bo.Article;
+import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.rowmapper.ArticleRowMapper;
 import fr.eni.projet_enchere.dal.rowmapper.EncheresRowMapper;
 
@@ -135,10 +136,22 @@ public class ArticleDAOImpl implements ArticleDAO {
 	    MapSqlParameterSource params = new MapSqlParameterSource();
 	    params.addValue("nomArticle", "%" + nomArticle + "%"); // Permet une recherche partielle sur le nom
 	    params.addValue("noCategorie", noCategorie);
-
 	    return jdbcTemplate.query(FIND_BY_NAME_AND_CATEGORY, params, new ArticleRowMapper());
-
 	}
 
+	@Override
+	public List<Article> findByUtilisateur(Utilisateur utilisateur) {
+	    String sql = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, " +
+	                 "a.prix_initial, a.prix_vente, a.no_utilisateur, a.no_categorie, c.libelle, u.pseudo, r.rue, r.code_postal, r.ville " +
+	                 "FROM Articles_vendus a " +
+	                 "INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur " +
+	                 "INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie " +
+	                 "INNER JOIN RETRAITS r ON a.no_article = r.no_article " +
+	                 "WHERE a.no_utilisateur = :noUtilisateur";
+	    
+	    MapSqlParameterSource params = new MapSqlParameterSource();
+	    params.addValue("noUtilisateur", utilisateur.getNoUtilisateur()); // On filtre par le numéro d'utilisateur
+	    return jdbcTemplate.query(sql, params, new ArticleRowMapper()); // Retourner la liste des articles
+	}
 
 }

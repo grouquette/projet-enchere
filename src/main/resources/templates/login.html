@@ -10,11 +10,13 @@
 	<div th:replace="~{fragments/fragments-entete::entete}"></div>
 	<form th:action="@{/login}" method="post">
 		<h2>Connection</h2>
-		<div class="form-container">
-			<label for="idPseudo">Pseudo</label> <input type="text" id="username" name="username"/>
-		</div>
-		<div class="form-container">
-			<label for="idMotDePasse">Mot de passe</label> <input type="password" name="password" />
+		<div class="form-row">
+			<div class="form-container">
+				<label for="idPseudo">Pseudo</label> <input type="text" id="username" name="username"/>
+			</div>
+			<div class="form-container">
+				<label for="idMotDePasse">Mot de passe</label> <input type="password" name="password" />
+			</div>
 		</div>
 		<div class="form-container">
 			<button type="submit" class="btn go">Connection</button>

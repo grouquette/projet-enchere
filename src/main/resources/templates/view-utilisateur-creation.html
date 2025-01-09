@@ -16,7 +16,8 @@
 				<li th:each="e : ${#fields.globalErrors()}" th:text="${e}"></li>
 			</ul>
 		</div>
-		<div class="form-container">
+		
+		<div class="form-container form-row">
 			<div class="form-container">
 				<label for="idPseudo">Pseudo : </label> <input id="idPseudo" type="text" th:field="*{pseudo}" />
 				<div th:replace="~{fragments/fragment-error::frag-error('pseudo')}"></div>
@@ -54,11 +55,12 @@
 				<div th:replace="~{fragments/fragment-error::frag-error('motDePasse')}"></div>
 			</div>
 			<div class="form-container">
-	    		<label for="idConfirmMotDePasse">Confirmer le mot de passe :</label>
+	    		<label for="idConfirmMotDePasse">Confirmation :</label>
 	   			<input id="idConfirmMotDePasse" type="password" th:field="*{motDePasseConfirme}" />
 	    		<div th:replace="~{fragments/fragment-error::frag-error('motDePasseConfirme')}"></div>
 			</div>
 		</div>
+		
 		<div class="form-row">
 			<div class="form-container">
 				<button type="submit" class="btn go">Creer</button>

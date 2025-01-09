@@ -16,6 +16,6 @@ public interface ArticleService {
 	Utilisateur getUtilisateurParNom(String username);
 	String etatVente(Article article);
 	void updateArticle(Article article);
-	
+	List<Article> getArticlesParUtilisateur(Utilisateur utilisateur);
 }
 

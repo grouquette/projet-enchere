@@ -20,41 +20,52 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleDAO articleDAO;
 	@Autowired
 	private UtilisateurDAO utilisateurDAO;
+
 	public ArticleServiceImpl(ArticleDAO articleDAO) {
 		this.articleDAO = articleDAO;
 		this.articles = new ArrayList<>();
 	}
+
 	@Override
 	@Transactional
-	public Article creerArticle(Article article){
-		
+	public Article creerArticle(Article article) {
+
 		articleDAO.creerArticle(article);
 		// Mettre à jour l'état de vente
 		return article;
 	}
+
 	public void remove(Article articleARetirer) {
 		articles.remove(articleARetirer);
 	}
+
 	@Override
 	public List<Article> add(Article articleAVendre) {
 		articles.add(articleAVendre);
 		return articles;
 	}
+
 	public Article consulterArticleParId(long id) {
 		Article article = articleDAO.read(id);
 		return article;
 	}
+
 	@Override
 	public Article consulterArticleParNom(String nomArticle) {
 		Article article = articleDAO.readByName(nomArticle);
 		return article;
 	}
+
+	public List<Article> getArticlesParUtilisateur(Utilisateur utilisateur) {
+		return articleDAO.findByUtilisateur(utilisateur);
+	}
+
 	@Override
 	public Utilisateur getUtilisateurParNom(String username) {
 		return utilisateurDAO.findByPseudo(username);
 
 	}
-	
+
 	@Override
 	public String etatVente(Article articleAEncherir) {
 		if (articleAEncherir.getDateFinEncheres().isBefore(LocalDateTime.now())) {
@@ -65,23 +76,21 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return "En cours";
 	}
-	
+
 	@Override
 	@Transactional
 	public void updateArticle(Article article) {
-	    Article existingArticle = articleDAO.read(article.getNoArticle());
-	    
-	    existingArticle.setNomArticle(article.getNomArticle());
-	    existingArticle.setDescription(article.getDescription());
-	    existingArticle.setDateDebutEncheres(article.getDateDebutEncheres());
-	    existingArticle.setDateFinEncheres(article.getDateFinEncheres());
-	    existingArticle.setMiseAPrix(article.getMiseAPrix());
-	    existingArticle.setPrixVente(article.getPrixVente());
-	    existingArticle.setUtilisateur(article.getUtilisateur());
-	    existingArticle.setCategorie(article.getCategorie());
-	    
-	    articleDAO.update(existingArticle);
+		Article existingArticle = articleDAO.read(article.getNoArticle());
+
+		existingArticle.setNomArticle(article.getNomArticle());
+		existingArticle.setDescription(article.getDescription());
+		existingArticle.setDateDebutEncheres(article.getDateDebutEncheres());
+		existingArticle.setDateFinEncheres(article.getDateFinEncheres());
+		existingArticle.setMiseAPrix(article.getMiseAPrix());
+		existingArticle.setPrixVente(article.getPrixVente());
+		existingArticle.setUtilisateur(article.getUtilisateur());
+		existingArticle.setCategorie(article.getCategorie());
+
+		articleDAO.update(existingArticle);
 	}
-
-
 }
