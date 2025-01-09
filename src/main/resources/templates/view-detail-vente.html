@@ -15,7 +15,7 @@
             <div class="form-container">Nom : <span th:text="${article.nomArticle}"></span></div>
             <div class="form-container">Description : <span th:text="${article.description}"></span></div>
             <div class="form-container">Categorie : <span th:text="${article.categorie}"></span></div>              
-			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Utilisateur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
+			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Enchérisseur: ' + derniereEnchere.utilisateur.pseudo : 'Aucune enchère'}"></span></div>
             <div class="form-container">Mise à prix : <span th:text="${article.miseAPrix}"></span></div>
             <div class="form-container">Fin de l'enchère : <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></div>
             <div class="form-container">Retrait : <span th:text="${article.lieuRetrait}"></span></div>
