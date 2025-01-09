@@ -58,6 +58,9 @@
 			</form>
 		</div>
 	</div>
-	<script src="/js/checkbox.js"></script>
+	<!-- -->
+	<th:block sec:authorize="isAuthenticated()">
+        <script th:src="@{/js/checkbox.js}"></script>  <!-- Votre script ici -->
+    </th:block>
 </body>
 </html>
