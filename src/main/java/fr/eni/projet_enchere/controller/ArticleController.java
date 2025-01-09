@@ -51,7 +51,13 @@ public class ArticleController {
 	@PreAuthorize("isAuthenticated()")
 	public String creerArticleForm(Model model, Authentication authentication) {
 		Article article = new Article();
-		article.setLieuRetrait(new Retrait()); // Initialisation de lieuRetrait
+		String username = authentication.getName();
+		Utilisateur utilisateur = articleService.getUtilisateurParNom(username);
+		Retrait retrait  = new Retrait();
+		retrait.setRue(utilisateur.getRue());
+		retrait.setCode_postal(utilisateur.getCodePostal());
+		retrait.setVille(utilisateur.getVille());
+		article.setLieuRetrait(retrait); // Initialisation de lieuRetrait
 		model.addAttribute("article", article);
 		model.addAttribute("categories", categorieService.findAll());
 		return "view-article-creation";
