@@ -14,7 +14,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
-
 public class Article {
 
 	private long noArticle;
@@ -42,26 +41,26 @@ public class Article {
 	private Utilisateur utilisateur;
 	private long utilisateurId;
 
-	
 	@AssertTrue(message = "La date de fin doit être postérieure à la date de début")
-    public boolean isDateFinEncheresValid() {
-        if (dateDebutEncheres == null || dateFinEncheres == null) {
-            return true; // La validation @NotNull s'occupera de ce cas
-        }
-        return dateFinEncheres.isAfter(dateDebutEncheres);
-    }
+	public boolean isDateFinEncheresValid() {
+		if (dateDebutEncheres == null || dateFinEncheres == null) {
+			return true; // La validation @NotNull s'occupera de ce cas
+		}
+		return dateFinEncheres.isAfter(dateDebutEncheres);
+	}
+
 	public Article() {
 	}
 
 	@AssertTrue(message = "Le prix de vente ne peut pas être inférieur à la mise à prix")
-    private boolean isPrixVenteValid() {
-        // Si le prix de vente est 0, cela signifie qu'il n'y a pas encore eu de vente
-        if (prixVente == 0) {
-            return true;
-        }
-        return prixVente >= miseAPrix;
-    }
-	
+	private boolean isPrixVenteValid() {
+		// Si le prix de vente est 0, cela signifie qu'il n'y a pas encore eu de vente
+		if (prixVente == 0) {
+			return true;
+		}
+		return prixVente >= miseAPrix;
+	}
+
 	public Article(long noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait,
 			List<Enchere> encheres, Categorie categorie, Utilisateur utilisateur, long utilisateurId,

@@ -117,13 +117,8 @@ public class EnchereServiceImpl implements EnchereService {
 	    gagnant.setCredit(gagnant.getCredit() - montantEnchere);
 	    utilisateurDAO.update(gagnant);
 
-	    articleService.updateArticle(article);
-
-	    enchereDAO.updateEnchere(derniereEnchere, noArticle, gagnant.getNoUtilisateur());
 
 	    return article;
 	}
-
-
 }
 

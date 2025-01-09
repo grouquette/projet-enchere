@@ -25,10 +25,6 @@ public interface EnchereService {
 	boolean validerEnchereUnique(long noUtilisateur, long noArticle);
 
 	Article gagnerEnchere(long noArticle);
-<<<<<<< HEAD
-
-=======
->>>>>>> 142a9e3ef693f0e48fd82ceac0988add2697a5f7
 
 
 }

@@ -47,13 +47,13 @@
     </form>
 	<div class="articles-container">
 		<div th:each="article : ${articleSession}" class="article-card">
-			<form th:action="@{/encheres}" method="post">
+			<form th:action="@{/encheres}" method="post" th:object="${enchere}">
 				<input type="hidden" name="nomArticle" th:value="${article.nomArticle}" />
 				<button type="submit">
 				<h2 th:text="${article.nomArticle}"></h2>
-				<p><strong>Prix :</strong> <span th:text="${article.prixVente}"></span></p>
+				<p><strong>Prix :</strong><span th:text="${article.montantEnchere != null ? article.montantEnchere : 'Non disponible'}"></span></p>
 				<p><strong>Date de fin:</strong> <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></p>
-				<p><strong>Utilisateur:</strong> <span th:text="${article.utilisateurId}"></span></p>
+				<p><strong>Utilisateur:</strong> <span th:text="${article.pseudo != null ? article.pseudo : 'Non disponible'}"></span></p>
 				</button>
 			</form>
 		</div>
