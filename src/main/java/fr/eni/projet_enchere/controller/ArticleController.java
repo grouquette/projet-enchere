@@ -1,5 +1,6 @@
 package fr.eni.projet_enchere.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +27,8 @@ import fr.eni.projet_enchere.bo.Categorie;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Retrait;
 import fr.eni.projet_enchere.bo.Utilisateur;
+import fr.eni.projet_enchere.dal.ArticleDAO;
+import fr.eni.projet_enchere.dtos.ArticleDTO;
 import jakarta.validation.Valid;
 
 @Controller
@@ -82,6 +85,74 @@ public class ArticleController {
 
 	@GetMapping("/encheres")
 	public String afficherListeArticles(@RequestParam(value = "nomArticle", required = false) String nomArticle,
+<<<<<<< HEAD
+			@RequestParam(value = "noCategorie", required = false) Long noCategorie,
+			@RequestParam(value = "mesVentes", required = false) Boolean mesVentes, Authentication authentication,
+			Model model) {
+
+		List<Article> articles = new ArrayList<>();
+
+		if (authentication != null && authentication.isAuthenticated()) {
+			String username = authentication.getName();
+			Utilisateur utilisateur = enchereService.getUtilisateurParNom(username);
+
+			if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+				articles = contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie);
+			} else if (nomArticle != null && !nomArticle.isEmpty()) {
+				articles = contexteService.consulterArticleParNom(nomArticle);
+			} else if (noCategorie != null) {
+				articles = contexteService.consulterArticleParCategorie(noCategorie);
+			} else if (mesVentes != null && mesVentes) {
+				articles = articleService.getArticlesParUtilisateur(utilisateur);
+			} else {
+				articles = contexteService.getAllArticles();
+			}
+
+		} else {
+			if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+				articles = contexteService.consulterArticleParNomEtCategorie(nomArticle, noCategorie);
+			} else if (nomArticle != null && !nomArticle.isEmpty()) {
+				articles = contexteService.consulterArticleParNom(nomArticle);
+			} else if (noCategorie != null) {
+				articles = contexteService.consulterArticleParCategorie(noCategorie);
+			} else {
+				articles = contexteService.getAllArticles();
+			}
+		}
+
+		List<ArticleDTO> articleDTOs = new ArrayList<>();
+		for (Article article : articles) {
+			Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(article.getNoArticle());
+			Integer montantEnchere = null;
+			String pseudo= null;
+			if (derniereEnchere != null) {
+				montantEnchere = derniereEnchere.getMontantEnchere();
+				if (derniereEnchere.getUtilisateur() != null) {
+					pseudo = derniereEnchere.getUtilisateur().getPseudo();
+				}
+			}
+			
+			ArticleDTO articleDTO = new ArticleDTO(
+					article.getDateDebutEncheres(), 
+					article.getNomArticle(),
+					montantEnchere,
+					pseudo
+					);
+			articleDTOs.add(articleDTO);
+		}
+
+		Collections.reverse(articles);
+
+		List<Categorie> categories = categorieService.findAll();
+
+		model.addAttribute("categoriesSession", categories);
+		model.addAttribute("articleSession", articleDTOs);
+		model.addAttribute("nomArticle", nomArticle);
+		model.addAttribute("noCategorie", noCategorie);
+		model.addAttribute("mesVentes", mesVentes);
+
+		return "view-encheres";
+=======
 	        @RequestParam(value = "noCategorie", required = false) Long noCategorie,
 	        @RequestParam(value = "mesVentes", required = false) Boolean mesVentes,
 	        @RequestParam(value = "mesVentesEnCours", required = false) Boolean mesVentesEnCours,
@@ -170,6 +241,7 @@ public class ArticleController {
 	    model.addAttribute("mesVentes", mesVentes);
 	    model.addAttribute("mesEncheresEnCours", mesEncheresEnCours);
 	    return "view-encheres";
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
 	}
 
 
@@ -179,7 +251,7 @@ public class ArticleController {
 		// On récupère toutes les données de l'article et de son vendeur
 		Article a = this.articleService.consulterArticleParNom(nomArticle);
 		// On récupère toutes les données de la dernière enchère et de l'encherisseur
- 		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(nomArticle); // Charge la dernière //
+		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(nomArticle); // Charge la dernière //
 																							// enchère
 		model.addAttribute("article", a);
 		model.addAttribute("derniereEnchere", derniereEnchere);
@@ -189,21 +261,21 @@ public class ArticleController {
 
 	@GetMapping("/article/details")
 	public String afficherUnArticle(@RequestParam("articleId") long id, Model model) {
-	    Article a = this.articleService.consulterArticleParId(id);
-	    if (a == null) {
-	        return "redirect:/error"; // S'assurer que l'article est trouvé
-	    }
-	    model.addAttribute("article", a);
-	    
-	    Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(id);
-	    if (derniereEnchere != null) {
-	        model.addAttribute("derniereEnchere", derniereEnchere);
-	    } else {
-	        model.addAttribute("message", "Aucune enchère pour cet article.");
-	    }
-	    model.addAttribute("enchere", new Enchere(null, 0, a, null));
-	    
-	    return "view-detail-vente";
+		Article a = this.articleService.consulterArticleParId(id);
+		if (a == null) {
+			return "redirect:/error"; // S'assurer que l'article est trouvé
+		}
+		model.addAttribute("article", a);
+
+		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(id);
+		if (derniereEnchere != null) {
+			model.addAttribute("derniereEnchere", derniereEnchere);
+		} else {
+			model.addAttribute("message", "Aucune enchère pour cet article.");
+		}
+		model.addAttribute("enchere", new Enchere(null, 0, a, null));
+
+		return "view-detail-vente";
 	}
 
 	@ModelAttribute("articleSession")

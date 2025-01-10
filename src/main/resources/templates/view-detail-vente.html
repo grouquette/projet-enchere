@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détail Vente</title>
     <link rel="stylesheet" href="/css/encheres.css" />
     <link rel="stylesheet" th:href="@{/css/formulaires.css}" />
@@ -15,7 +15,11 @@
             <div class="form-container">Nom : <span th:text="${article.nomArticle}"></span></div>
             <div class="form-container">Description : <span th:text="${article.description}"></span></div>
             <div class="form-container">Categorie : <span th:text="${article.categorie}"></span></div>              
-			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Utilisateur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
+<<<<<<< HEAD
+			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? derniereEnchere.montantEnchere  + ' points ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
+=======
+			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Enchérisseur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
             <div class="form-container">Mise à prix : <span th:text="${article.miseAPrix}"></span></div>
             <div class="form-container">Fin de l'enchère : <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></div>
             <div class="form-container">Retrait : <span th:text="${article.lieuRetrait}"></span></div>

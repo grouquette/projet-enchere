@@ -87,8 +87,11 @@ public class ArticleServiceImpl implements ArticleService {
 		return "En cours";
 	}
 
+<<<<<<< HEAD
+=======
 	@Override
 	@Transactional
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
 	public Article gagnerArticle(long noArticle) {
 		// Récupérer la dernière enchère
 		Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);

@@ -1,4 +1,9 @@
 
+
+use [projet-enchere]
+go
+
+
 -- Suppression de colonnes--
 
 DROP TABLE RETRAITS;
@@ -13,8 +18,7 @@ DROP TABLE UTILISATEURS;
 
 DROP TABLE CATEGORIES;
 
-use [projet-enchere]
-go
+
 
 -- Script de création de la base de données ENCHERES
 --   type :      SQL Server 2012

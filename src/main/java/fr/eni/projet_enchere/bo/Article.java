@@ -14,7 +14,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
-
 public class Article {
 
 	private long noArticle;
@@ -41,27 +40,32 @@ public class Article {
 	private Categorie categorie;
 	private Utilisateur utilisateur;
 	private long utilisateurId;
+<<<<<<< HEAD
 
+=======
+	private String image;
 	
+>>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
 	@AssertTrue(message = "La date de fin doit être postérieure à la date de début")
-    public boolean isDateFinEncheresValid() {
-        if (dateDebutEncheres == null || dateFinEncheres == null) {
-            return true; // La validation @NotNull s'occupera de ce cas
-        }
-        return dateFinEncheres.isAfter(dateDebutEncheres);
-    }
+	public boolean isDateFinEncheresValid() {
+		if (dateDebutEncheres == null || dateFinEncheres == null) {
+			return true; // La validation @NotNull s'occupera de ce cas
+		}
+		return dateFinEncheres.isAfter(dateDebutEncheres);
+	}
+
 	public Article() {
 	}
 
 	@AssertTrue(message = "Le prix de vente ne peut pas être inférieur à la mise à prix")
-    private boolean isPrixVenteValid() {
-        // Si le prix de vente est 0, cela signifie qu'il n'y a pas encore eu de vente
-        if (prixVente == 0) {
-            return true;
-        }
-        return prixVente >= miseAPrix;
-    }
-	
+	private boolean isPrixVenteValid() {
+		// Si le prix de vente est 0, cela signifie qu'il n'y a pas encore eu de vente
+		if (prixVente == 0) {
+			return true;
+		}
+		return prixVente >= miseAPrix;
+	}
+
 	public Article(long noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait,
 			List<Enchere> encheres, Categorie categorie, Utilisateur utilisateur, long utilisateurId,
@@ -78,8 +82,8 @@ public class Article {
 		this.lieuRetrait = lieuRetrait;
 		this.encheres = encheres;
 		this.categorie = categorie;
-		this.utilisateur = utilisateur;
 		this.utilisateurId = utilisateurId;
+		this.utilisateur = utilisateur;
 	}
 
 	public Article(String nomArticle, String description, Categorie categorie, LocalDateTime dateDebutEncheres,
@@ -237,5 +241,11 @@ public class Article {
 				&& miseAPrix == other.miseAPrix && Objects.equals(nomArticle, other.nomArticle)
 				&& prixVente == other.prixVente && Objects.equals(utilisateur, other.utilisateur)
 				&& utilisateurId == other.utilisateurId;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
