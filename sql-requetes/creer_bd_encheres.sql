@@ -1,3 +1,4 @@
+
 -- Suppression de colonnes--
 
 DROP TABLE RETRAITS;
