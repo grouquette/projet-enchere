@@ -93,37 +93,8 @@ public class EnchereServiceImpl implements EnchereService {
 
 		return !enchereUtilisateurExiste;
 	}
-	
-	@Override
-	@Transactional
-	public Article gagnerEnchere(long noArticle) {
-	    Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
-	    
-	    if (derniereEnchere == null) {
-	        return null; 
-	    }
-
-	    Article article = derniereEnchere.getArticle();
-	    if (LocalDateTime.now().isBefore(article.getDateFinEncheres())) {
-	        throw new IllegalStateException("L'enchère n'est pas encore terminée.");
-	    }
-
-	    Utilisateur gagnant = derniereEnchere.getUtilisateur();
-
-	    article.setEtatVente("Terminé");
-
-	    int montantEnchere = derniereEnchere.getMontantEnchere();
-	    gagnant.setCredit(gagnant.getCredit() - montantEnchere);
-	    utilisateurDAO.update(gagnant);
-
-
-	    return article;
-	}
-<<<<<<< HEAD
-=======
 
 	public List<Enchere> findEnchereByUtilisateur(long noUtilisateur) {
 		return enchereDAO.findByUtilisateur(noUtilisateur);
 	}
->>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
 }

@@ -47,19 +47,15 @@
     </form>
 	<div class="articles-container">
 		<div th:each="article : ${articleSession}" class="article-card">
-			<form th:action="@{/encheres}" method="post" th:object="${enchere}">
+			<form th:action="@{/encheres}" method="post">
 				<input type="hidden" name="nomArticle" th:value="${article.nomArticle}" />
 				<button type="submit">
 				<h2 th:text="${article.nomArticle}"></h2>
-<<<<<<< HEAD
-				<p><strong>Prix :</strong><span th:text="${article.montantEnchere != null ? article.montantEnchere : 'Non disponible'}"></span></p>
-				<p><strong>Date de fin:</strong> <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></p>
-				<p><strong>Utilisateur:</strong> <span th:text="${article.pseudo != null ? article.pseudo : 'Non disponible'}"></span></p>
-=======
-				<p><strong>Prix :</strong> <span th:text="${article.prixVente}"></span></p>
-				<p><strong>Date de fin :</strong> <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></p>
+				<p><strong>Prix :</strong> <span th:text="${article.currentMaximumEnchere}"></span></p>
+				<p><strong>Mise à prix :</strong> <span th:text="${article.miseAPrix}"></span></p>
+				<p><strong>Date de fin :</strong> <span th:text="${#temporals.format(article.dateFinEncheres, 'dd/MM/yyyy HH:mm')}"></span></p>
 				<p><strong>Vendeur :</strong> <span th:text="${article.utilisateur?.pseudo ?: 'Non renseigné'}"></span></p>
->>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
+				<span th:text="${article.enchereIsClosed ? 'CLOS' : ''}"></span>
 				</button>
 			</form>
 		</div>

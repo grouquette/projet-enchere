@@ -25,7 +25,5 @@ public interface ArticleService {
 
 	void updateArticle(Article article);
 
-	Article gagnerArticle(long noArticle);
-
 	List<Article> findByEnchere(long noUtilisateur);
 }

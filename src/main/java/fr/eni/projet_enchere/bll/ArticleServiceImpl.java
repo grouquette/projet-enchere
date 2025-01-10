@@ -87,35 +87,6 @@ public class ArticleServiceImpl implements ArticleService {
 		return "En cours";
 	}
 
-<<<<<<< HEAD
-=======
-	@Override
-	@Transactional
->>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
-	public Article gagnerArticle(long noArticle) {
-		// Récupérer la dernière enchère
-		Enchere derniereEnchere = enchereDAO.findLastEnchereByArticleId(noArticle);
-		if (derniereEnchere == null) {
-			return null;
-		}
-		Article article = derniereEnchere.getArticle();
-		// Vérifier si l'enchère est terminée
-		if (LocalDateTime.now().isBefore(article.getDateFinEncheres())) {
-			throw new IllegalStateException("L'enchère n'est pas encore terminée.");
-		}
-		// Vérifier si l'article n'est pas déjà marqué comme terminé
-		if ("Terminé".equals(article.getEtatVente())) {
-			throw new IllegalStateException("Cette vente est déjà terminée.");
-		}
-//		Utilisateur gagnant = derniereEnchere.getUtilisateur();
-		// Mettre à jour l'état de l'article
-		article.setEtatVente("Terminé");
-		article.setPrixVente(derniereEnchere.getMontantEnchere());
-		// Mise à jour de l'article
-		updateArticle(article);
-		return article;
-	}
-
 	@Override
 	@Transactional
 	public void updateArticle(Article article) {

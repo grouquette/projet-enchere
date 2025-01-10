@@ -18,7 +18,7 @@ import fr.eni.projet_enchere.bo.Utilisateur;
 
 @Controller
 @SessionAttributes("encheresSession")
-public class EnchereController {
+public class  EnchereController {
 	@Autowired
 	private EnchereService enchereService;
 	@Autowired
@@ -44,22 +44,6 @@ public class EnchereController {
 		enchereService.creerEnchere(utilisateur, article, enchere.getMontantEnchere());
 		// Redirection vers les détails de l'article
 		return "redirect:/article/details?articleId=" + articleId;
-	}
-
-	@GetMapping("/gagnerArticle")
-	public String gagnerEnchere(@RequestParam("articleId") long articleId, Model model) {
-		Article article = articleService.consulterArticleParId(articleId);
-		if (article == null) {
-			return "redirect:/error";
-		}
-		Enchere derniereEnchere = enchereService.getDerniereEncherePourArticle(articleId);
-		if (derniereEnchere == null) {
-			return "redirect:/error";
-		}
-		model.addAttribute("article", article);
-		model.addAttribute("gagnant", derniereEnchere.getUtilisateur());
-		model.addAttribute("montantGagnant", derniereEnchere.getMontantEnchere());
-		return "view-detail-vente-gagne";
 	}
 
 }

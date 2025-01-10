@@ -8,15 +8,16 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.projet_enchere.bo.Enchere;
-import fr.eni.projet_enchere.dal.rowmapper.EncheresRowMapper2;
+import fr.eni.projet_enchere.dal.rowmapper.EnchereRowMapper;
 
 @Repository
 public class EnchereDAOImpl implements EnchereDAO {
 	private static final String INSERT_ENCHERE = "INSERT INTO Encheres (date_enchere, montant_enchere, no_article, no_utilisateur) VALUES (:dateEnchere, :montantEnchere, :noArticle, :utilisateurId)";
 	private static final String FIND_ALL_ENCHERE = "SELECT * FROM Encheres";
 	private static final String FIND_BY_ARTICLE_ID = "SELECT * FROM Encheres WHERE no_article = :noArticle";
-	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_ID = "SELECT TOP 1 e.*, a.nom_article "
+	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_ID = "SELECT TOP 1 e.*, a.nom_article, u.pseudo "
 			+ "FROM Encheres e " + "INNER JOIN Articles_vendus a ON e.no_article = a.no_article "
+			+ "INNER JOIN UTILISATEURS u on e.no_utilisateur = u.no_utilisateur "
 			+ "WHERE e.no_article = :noArticle " + "ORDER BY e.date_enchere DESC";
 
 	private static final String FIND_LAST_ENCHERE_BY_ARTICLE_NAME = "SELECT TOP 1 e.*, a.nom_article, u.pseudo "
@@ -59,8 +60,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 	public Enchere findLastEnchereByArticleId(long noArticle) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("noArticle", noArticle);
-		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_ID, params,
-				new BeanPropertyRowMapper<>(Enchere.class));
+		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_ID, params, new EnchereRowMapper());
 		return result.isEmpty() ? null : result.get(0);
 	}
 
@@ -68,8 +68,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 	public Enchere findLastEnchereByArticleName(String nomArticle) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("nomArticle", nomArticle);
-		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_NAME, params,
-				new EncheresRowMapper2());
+		List<Enchere> result = jdbcTemplate.query(FIND_LAST_ENCHERE_BY_ARTICLE_NAME, params, new EnchereRowMapper());
 		return result.isEmpty() ? null : result.get(0);
 	}
 

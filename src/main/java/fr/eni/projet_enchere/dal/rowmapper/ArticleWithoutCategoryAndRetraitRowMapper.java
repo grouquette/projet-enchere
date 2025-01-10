@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Utilisateur;
 
-public class EncheresRowMapper implements RowMapper<Article> {
+public class ArticleWithoutCategoryAndRetraitRowMapper implements RowMapper<Article> {
 
 	@Override
 	public Article mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {

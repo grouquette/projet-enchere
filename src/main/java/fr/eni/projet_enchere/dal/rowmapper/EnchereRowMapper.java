@@ -8,7 +8,7 @@ import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Enchere;
 import fr.eni.projet_enchere.bo.Utilisateur;
 
-public class EncheresRowMapper2 implements RowMapper<Enchere> {
+public class EnchereRowMapper implements RowMapper<Enchere> {
 
 	@Override
 	public Enchere mapRow(ResultSet rs, int rowNum) throws java.sql.SQLException {

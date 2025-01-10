@@ -7,14 +7,14 @@ public class Enchere {
 
 	private long idEnchere;
 	private LocalDateTime dateEnchere;
-	private Integer montantEnchere;
+	private int montantEnchere;
 	private Article article; // Association avec un article
 	private Utilisateur utilisateur; // Association avec un utilisateur
 
 	public Enchere() {
 	}
 
-	public Enchere(LocalDateTime dateEnchere, Integer montantEnchere, Article article, Utilisateur utilisateur) {
+	public Enchere(LocalDateTime dateEnchere, int montantEnchere, Article article, Utilisateur utilisateur) {
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.article = article;
@@ -33,7 +33,7 @@ public class Enchere {
 		return montantEnchere;
 	}
 
-	public void setMontantEnchere(Integer montantEnchere) {
+	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
 

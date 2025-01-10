@@ -11,17 +11,21 @@
     <form th:action="@{/creerEnchere}" method="post" th:object="${enchere}" class="form-row">
         <h2>Détail vente</h2>
         <input type="hidden" name="articleId" th:value="${article.noArticle}" />
+        <div th:if="${article.enchereIsClosed}" >
+            <div th:if="${article.currentUserIsWinner}">
+                <p>Félicitations ! Vous êtes le gagnant de cette enchère.</p>
+            </div>
+            <div th:unless="${article.currentUserIsWinner}">
+                <p>Désolé, vous n'avez pas remporté cette enchère.</p>
+            </div>
+        </div>
         <ul>
             <div class="form-container">Nom : <span th:text="${article.nomArticle}"></span></div>
             <div class="form-container">Description : <span th:text="${article.description}"></span></div>
             <div class="form-container">Categorie : <span th:text="${article.categorie}"></span></div>              
-<<<<<<< HEAD
-			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? derniereEnchere.montantEnchere  + ' points ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
-=======
 			<div class="form-container">Meilleure offre : <span th:text="${derniereEnchere != null ? 'Montant: ' + derniereEnchere.montantEnchere + ', Enchérisseur: ' + derniereEnchere.utilisateur : 'Aucune enchère'}"></span></div>
->>>>>>> 525ee45adae527f223351be1cc849f49adb1ed76
             <div class="form-container">Mise à prix : <span th:text="${article.miseAPrix}"></span></div>
-            <div class="form-container">Fin de l'enchère : <span th:text="${#temporals.format(article.dateDebutEncheres, 'dd/MM/yyyy HH:mm')}"></span></div>
+            <div class="form-container">Fin de l'enchère : <span th:text="${#temporals.format(article.dateFinEncheres, 'dd/MM/yyyy HH:mm')}"></span></div>
             <div class="form-container">Retrait : <span th:text="${article.lieuRetrait}"></span></div>
             <div class="form-container2">
                 <div class="form-row">
@@ -32,7 +36,7 @@
                     <div class="form-container"><label for="montantEnchere">Ma proposition :</label></div>
                     <input type="number" id="montantEnchere" th:field="*{montantEnchere}" min="0" step="1" placeholder="Entrez un prix">
                 </div>
-                <button type="submit" class="btn go">Enchérir</button>
+                <button type="submit" class="btn go" th:text="${article.enchereIsClosed ? 'Enchère close' : 'Enchérir'}"></button>
             </div>
         </ul>
     </form>

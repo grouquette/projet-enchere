@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import fr.eni.projet_enchere.bo.Article;
 import fr.eni.projet_enchere.bo.Utilisateur;
 import fr.eni.projet_enchere.dal.rowmapper.ArticleRowMapper;
-import fr.eni.projet_enchere.dal.rowmapper.EncheresRowMapper;
+import fr.eni.projet_enchere.dal.rowmapper.ArticleWithoutCategoryAndRetraitRowMapper;
 
 @Repository
 public class ArticleDAOImpl implements ArticleDAO {
@@ -91,7 +91,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public List<Article> findAll() {
-		return jdbcTemplate.query(FIND_ALL_ARTICLE, new EncheresRowMapper());
+		return jdbcTemplate.query(FIND_ALL_ARTICLE, new ArticleWithoutCategoryAndRetraitRowMapper());
 	}
 
 	@Override
